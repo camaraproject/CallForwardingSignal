@@ -1,3 +1,5 @@
 | Org                    | Name                                                |
 | -----------------------| ----------------------------------------------------|
-| §company§ | $name§ |
+| TIM | Fabrizio Moggio |
+| Orange | Ludovic Robert |
+| China Unicom | F. Yang |
