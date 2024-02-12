@@ -20,8 +20,8 @@ Repository to describe, develop, document and test the Call Forwarding Signal AP
 
 ## Meetings
 * Meetings are held virtually
-* Schedule: Tuesday 15h-16 CET, every two weeks (next one TBD)
-* Meeting link: tbd
+* Schedule: Tuesday 15h-16 CET, every two weeks (next one: 5th of March)
+* Meeting link: https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZWZhMzljYzItNzQ4Yy00NGM4LThhMzktZTQ0MDg3ODI3MDg4%40thread.v2/0?context=%7b%22Tid%22%3a%226815f468-021c-48f2-a6b2-d65c8e979dfb%22%2c%22Oid%22%3a%22bfbe4cda-8a8b-4cda-89e2-7326520e45b3%22%7d
 
 ## Contributorship and mailing list
 * To subscribe / unsubscribe to the mailing list of this Sub Project and thus be / resign as Contributor please visit <https://lists.camaraproject.org/g/sp-cfs>.
