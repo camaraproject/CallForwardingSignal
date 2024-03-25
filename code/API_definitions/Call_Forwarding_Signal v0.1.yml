@@ -15,20 +15,27 @@ info:
     ## 2. Quick Start
     TBD
     
-    Before starting to use the TI API, the developer needs to know about the below specified details:
+    Before starting to use the Call Forwarding API, the developer needs to know about the below specified details:
    
     **Base-Url**
     The RESTful CFS API endpoint, for example [**https://tim-api.developer.tim.it/callforwardingsignal**](https://tim-api.developer.tim.it/callforwardingsignal)
    
-    **Authentication**
-    Configure security access keys such as OAuth 2.0 client credentials to be used by Client applications which will invoke the CFS API.
    
     **phoneNumber**
-    This is the end user phone number. THe CFS API verifyes if a call forwarding service is active on this phone number
+    This is the end user phone number. The CFS API verifies if a call forwarding service is active on this phone number.
   
-    ## 3. Authentication and Authorization
-    The CFS API makes use of the client credentials grant which is applicable for server to server use cases involving trusted partners or clients without any protected user data involved.
-    In this method the CFS API invoker client is registered as a confidential client with an authorization grant type of client\_credentials.
+    ## Authorization and authentication
+
+    CAMARA guidelines defines a set of authorization flows which can grant API clients access to the API functionality, 
+    as outlined in the document [CAMARA-API-access-and-user-consent.md](https://github.com/camaraproject/IdentityAndConsentManagement/blob/main/documentation/CAMARA-API-access-and-user-consent.md). 
+    Which specific authorization flows are to be used will be determined during onboarding process, happening between the API Client and the 
+    Telco Operator exposing the API, taking into account the declared purpose for accessing the API, while also being subject to the prevailing legal 
+    framework dictated by local legislation.
+
+    It is important to remark that in cases where personal user data is processed by the API, and users can exercise their rights through mechanisms suc
+     as opt-in and/or opt-out, the use of 3-legged access tokens becomes mandatory. 
+     This measure ensures that the API remains in strict compliance with user privacy preferences and regulatory obligations, 
+     upholding the principles of transparency and user-centric data control.
     
     ## 4. API Documentation
     ## 4.1 Details
@@ -43,13 +50,7 @@ externalDocs:
   description: Product documentation at Camara
   url: https://github.com/camaraproject/CallForwardingSignal
   
-  
-############################################################################
-#                                     Security                             #
-############################################################################
-security:
-  - oAuth2:
-      - 'call-forwarding:call-forwardings:read'
+
 
 ############################################################################
 #                                     Servers                              #
@@ -72,6 +73,9 @@ servers:
 paths:
   /subscribers/{subscriberId}/call-forwardings:
     get:
+      security:
+        - openId:
+          - call-forwarding:read
       parameters:
         - in: path 
           name: subscriberId
@@ -105,14 +109,9 @@ paths:
 
 components:
   securitySchemes:
-    oAuth2:    
-      type: oauth2
-      description: This API uses OAuth 2 [More info](https://api.example.com/docs/auth)
-      flows:        
-        clientCredentials:
-          tokenUrl: 'https://example.com/oauth/token'
-          scopes:
-            'call-forwarding:call-forwardings:read': Grant read-only call-forwardings data
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
 
 
  #######################################################
