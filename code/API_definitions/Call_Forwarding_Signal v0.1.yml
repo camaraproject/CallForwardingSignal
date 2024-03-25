@@ -71,22 +71,21 @@ servers:
 #                                     Paths                                #
 ############################################################################
 paths:
-  /subscribers/{subscriberId}/call-forwardings:
-    get:
+  /call-forwardings:
+    post:
+      tags:
+        - Call Forwarding information retrieval
       security:
         - openId:
           - call-forwarding:read
-      parameters:
-        - in: path 
-          name: subscriberId
-          schema:
-            $ref: "#/components/schemas/PhoneNumber"
-          description: phone number on which checking if a call forwarding service is active
-          required: true
-      tags:
-        - Call Forwarding API GET Operation
-      summary: provides the information if a call forwarding service is active on the provided phone number (phoneNumber)
-      operationId: getCallForwarding
+      description: Retrieve the information about call forwarding service active on a phone number     
+      operationId: retriveCallForwarding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhoneNumber'
+        required: true
       responses:
         '200':
           description: OK. 
