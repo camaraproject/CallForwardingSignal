@@ -86,7 +86,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestPhoneNumber'
+              $ref: '#/components/schemas/CreateCallForwardings'
         required: true
       responses:
         '200':
@@ -149,7 +149,7 @@ components:
  #  REQUEST
  #######################################################    
 
-    RequestPhoneNumber:
+    CreateCallForwardings:
       type: object
       properties:
         phoneNumber:
