@@ -79,26 +79,31 @@ paths:
         - openId:
           - call-forwarding:read
       description: Retrieve the information about call forwarding service active on a phone number     
-      operationId: retriveCallForwarding
+      operationId: retrieveCallForwarding
+      parameters:
+        - $ref: '#/components/parameters/x-correlator'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PhoneNumber'
+              $ref: '#/components/schemas/RequestPhoneNumber'
         required: true
       responses:
         '200':
           description: OK. 
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CallForwardings'
         '404':
-          $ref: '#/components/responses/ResNotFound'
+          $ref: '#/components/responses/Generic404'
         '500':
-          $ref: '#/components/responses/GenericError'
+          $ref: '#/components/responses/Generic500'
         '504':
-          $ref: '#/components/responses/BackendConnTimeout'
+          $ref: '#/components/responses/Generic504'
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
@@ -112,6 +117,19 @@ components:
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
 
+  parameters:
+    x-correlator:
+      name: x-correlator
+      in: header
+      description: Correlation id for the different services
+      schema:
+        type: string
+        
+  headers:
+    x-correlator:
+      description: Correlation id for the different services
+      schema:
+        type: string
 
  #######################################################
  #  RESOURCES
@@ -128,8 +146,19 @@ components:
 
 
  #######################################################
- #  TYPES
+ #  REQUEST
  #######################################################    
+
+    RequestPhoneNumber:
+      type: object
+      properties:
+        phoneNumber:
+          $ref: "#/components/schemas/PhoneNumber"
+
+
+ #######################################################
+ #  TYPES
+ #######################################################   
 
     PhoneNumber:
      description: A public identifier addressing a telephone subscription. In mobile networks it corresponds to the MSISDN (Mobile Station International Subscriber Directory Number). In order to be globally unique it has to be formatted in international format, according to E.164 standard, prefixed with '+'.
@@ -137,26 +166,22 @@ components:
      pattern: '^\+[1-9][0-9]{4,14}$'
      example: "+123456789"
     
-    
+
 
  ######################################################
  #  RESPONSES
  #######################################################            
-    ErrResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: OK
-        message:
-          type: string
-          example: OK
+
     ErrorInfo:
       type: object
       required:
+        - status
         - code
         - message
       properties:
+        status:
+          type: integer
+          description: HTTP status code returned along with this error response
         code:
           type: string
           description: Code given to this error
@@ -164,82 +189,108 @@ components:
           type: string
           description: Detailed error description
   responses:
-    ResNotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrResponse'
-          example:
-            status: ERROR
-            message: Resource not found
-    GenericError:
-      description: An unknow error has occurred
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrResponse'
-          example:
-            status: ERROR
-            message: Generic error
-    BackendConnTimeout:
-      description: Connection timeout towards backend service has occurred
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrResponse'
-          example:
-            status: ERROR
-            message: Backend connection timeout
-    OkDeletionInProgress:
-      description: The resource delation request has been accepted
-      content:
-        application/json:
-          example:
-            status: OK
-            message: Accepted
+
     Generic400:
-      description: Invalid input
+      description: Problem with the client request
+      headers:
+        x-correlator:
+          $ref: '#/components/headers/x-correlator'
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: '#/components/schemas/ErrorInfo'
           example:
-            code: INVALID_INPUT
-            message: "Schema validation failed at  ..."
+            status: 400
+            code: INVALID_ARGUMENT
+            message: Client specified an invalid argument, request body or query param
+
     Generic401:
-      description: Unauthorized
+      description: Authentication problem with the client request
+      headers:
+        x-correlator:
+          $ref: '#/components/headers/x-correlator'
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: '#/components/schemas/ErrorInfo'
           example:
-            code: UNAUTHORIZED
-            message: "Authorization failed: ..."
+            status: 401
+            code: UNAUTHENTICATED
+            message: Request not authenticated due to missing, invalid, or expired credentials
+
     Generic403:
-      description: Forbidden
+      description: Client does not have sufficient permission
+      headers:
+        x-correlator:
+          $ref: '#/components/headers/x-correlator'
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
-          example:
-            code: FORBIDDEN
-            message: "Operation not allowed: ..."
-    SessionNotFound404:
-      description: Session not found
+            $ref: '#/components/schemas/ErrorInfo'
+          examples:
+            PermissionDenied:
+              value:
+                status: 403
+                code: PERMISSION_DENIED
+                message: Client does not have sufficient permissions to perform this action
+            InvalidTokenContext:
+              value:
+                status: 403
+                code: INVALID_TOKEN_CONTEXT
+                message: Phone number cannot be deducted from access token context
+      
+    Generic404:
+      description: The specified resource was not found
+      headers:
+        x-correlator:
+          $ref: '#/components/headers/x-correlator'
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: '#/components/schemas/ErrorInfo'
           example:
-            code: NOT_FOUND
-            message: "Session Id does not exist"
+            status: 404
+            code: CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
+            message: Call forwarding check can't be done because the phone number is unknown
+
+    Generic500:
+      description: Server error
+      headers:
+        x-correlator:
+          $ref: '#/components/headers/x-correlator'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 500
+            code: INTERNAL
+            message: Server error
+         
     Generic503:
-      description: Service unavailable
+      description: Service unavailable. Typically the server is down
+      headers:
+        x-correlator:
+          $ref: '#/components/headers/x-correlator'
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            $ref: '#/components/schemas/ErrorInfo'
           example:
-            code: SERVICE_UNAVALIBLE
-            message: "Service unavailable" 
+            status: 503
+            code: UNAVAILABLE
+            message: Service unavailable
+
+    Generic504:
+      description: Request time exceeded. If it happens repeatedly, consider reducing the request complexity
+      headers:
+        x-correlator:
+          $ref: '#/components/headers/x-correlator'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInfo'
+          example:
+            status: 504
+            code: TIMEOUT
+            message: Request timeout exceeded. Try later
