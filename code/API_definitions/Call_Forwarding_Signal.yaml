@@ -4,7 +4,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.1-wip
+  version: 0.1.2-wip
   description: |
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with an 
@@ -17,7 +17,7 @@ info:
     The CFS API can be invoked to get the status of the Call Forwarding Service
     for a specific phone number.
     ## 2. Quick Start
-    The CFS API is a REST API based on the CreateCallForwardings resource. This
+    The CFS API is a REST API based on the CreateCallForwardingSignal resource. This
     resource is filled during the API invokation, by the API Consumer, with the 
     phone number on which the Call Forwardging Service status must be verified. 
     A responce is provided by the API Producer with an resource, CallForwordings
@@ -96,7 +96,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateCallForwardings'
+              $ref: '#/components/schemas/CreateCallForwardingSignal'
         required: true
       responses:
         '200':
@@ -107,7 +107,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CallForwardings'
+                $ref: '#/components/schemas/CallForwardingSignal'
         '404':
           $ref: '#/components/responses/Generic404'
         '500':
@@ -144,7 +144,7 @@ components:
 #  RESOURCES
 #######################################################
   schemas:
-    CallForwardings:
+    CallForwardingSignal:
       type: object
       properties:
         active:
@@ -153,7 +153,7 @@ components:
 #######################################################
 #  REQUEST
 #######################################################    
-    CreateCallForwardings:
+    CreateCallForwardingSignal:
       type: object
       properties:
         phoneNumber:
