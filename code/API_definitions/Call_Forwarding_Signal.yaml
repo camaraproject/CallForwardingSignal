@@ -17,8 +17,8 @@ info:
     The CFS API can be invoked to get the status of the Call Forwarding Service
     for a specific phone number.
     ## 2. Quick Start
-    The CFS API is a REST API based on the CreateCallForwardingSignal resource. 
-    This resource is filled during the API invokation, by the API Consumer, 
+    The CFS API is a REST API based on the CreateCallForwardingSignal resource.
+    This resource is filled during the API invokation, by the API Consumer,
     with the phone number on which the Call Forwardging Service status must be
     verified.
     A responce is provided by the API Producer with an resource, CallForwordings
@@ -45,7 +45,7 @@ info:
     This Resource contains the status of the Network Call Forarding service for\
     the specified phone number.
     ## 3. Authorization and authentication
-    CAMARA guidelines defines a set of authorization flows which can grant API 
+    CAMARA guidelines defines a set of authorization flows which can grant API
     clients access to the API functionality,
     as outlined in the document [CAMARA-API-access-and-user-consent.md](https:\
     //github.com/camaraproject/IdentityAndConsentManagement/blob/main/\
@@ -59,13 +59,13 @@ info:
     It is important to remark that in cases where personal user data is
     processed by the API, and users can exercise their rights through mechanisms
     such as opt-in and/or opt-out, the use of 3-legged access tokens becomes
-    mandatory. 
+    mandatory.
     This measure ensures that the API remains in strict compliance with user
     privacy preferences and regulatory obligations,
     upholding the principles of transparency and user-centric data control.
     ## 4. API Documentation
     ## 4.1 Details
-    
+
     TBD
     
   license:
@@ -96,9 +96,9 @@ paths:
         - Call Forwarding information retrieval
       security:
         - openId:
-          - call-forwarding-signal:call-forwardings
+          - call-forwarding-signal:call-forwardings:read
       description: Retrieve the information about call forwarding service active
-       on a phone number     
+       on a phone number
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -110,7 +110,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OK. 
+          description: OK.
           headers:
             x-correlator:
               $ref: '#/components/headers/x-correlator'
@@ -130,9 +130,9 @@ paths:
           $ref: "#/components/responses/Generic403"
         "503":
           $ref: "#/components/responses/Generic503"
-#######################################################
-#  COMPONENTS
-#######################################################
+############################################################################
+#                                 Components                               #
+############################################################################
 components:
   securitySchemes:
     openId:
@@ -150,9 +150,9 @@ components:
       description: Correlation id for the different services
       schema:
         type: string
-######################################################
-#  RESOURCES
-#######################################################
+  ############################################################################
+  #                                 Resources                                #
+  ############################################################################
   schemas:
     CallForwardingSignal:
       type: object
@@ -160,29 +160,29 @@ components:
         active:
           type: boolean
           description: Indicates if a call forwarding service is active.
-#######################################################
-#  REQUEST
-#######################################################    
+    ############################################################################
+    #                                 Request                                  #
+    ############################################################################
     CreateCallForwardingSignal:
       type: object
       properties:
         phoneNumber:
           $ref: "#/components/schemas/PhoneNumber"
-#######################################################
-#  TYPES
-#######################################################   
+    ############################################################################
+    #                                 Types                                    #
+    ############################################################################
     PhoneNumber:
-     description: A public identifier addressing a telephone subscription. 
-      In mobile networks it corresponds to the MSISDN (Mobile Station 
+     description: A public identifier addressing a telephone subscription.
+      In mobile networks it corresponds to the MSISDN (Mobile Station
       International Subscriber Directory Number). In order to be globally unique
-      it has to be formatted in international format, according to E.164 
+      it has to be formatted in international format, according to E.164
       standard, prefixed with '+'.
      type: string
      pattern: '^\+[1-9][0-9]{4,14}$'
      example: "+123456789"
-######################################################
-#  RESPONSES
-#######################################################            
+    ############################################################################
+    #                                 Responces                                #
+    ############################################################################
     ErrorInfo:
       type: object
       required:
@@ -226,7 +226,7 @@ components:
           example:
             status: 401
             code: UNAUTHENTICATED
-            message: Request not authenticated due to missing, invalid, or 
+            message: Request not authenticated due to missing, invalid, or
              expired credentials
     Generic403:
       description: Client does not have sufficient permission
