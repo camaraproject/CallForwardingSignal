@@ -5,7 +5,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.3-wip
+  version: 0.1.4-wip
   description: |
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with an
@@ -16,7 +16,13 @@ info:
     Thi service redirects the incoming call to that phone number to an
     alternative destination such a another phone number or a voice mail system.\
     The CFS API can be invoked to get the status of the Call Forwarding Service
-    for a specific phone number.
+    for a specific phone number.\
+    \
+    **Example use cases:**\
+    \
+    [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal/\
+    blob/main/documentation/API_documentation/CFS_UserStory_UseCase-1.md)
+    
     ## 2. Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
     This resource is filled during the API invokation, by the API Consumer,
@@ -66,7 +72,19 @@ info:
     upholding the principles of transparency and user-centric data control.
     ## 4. API Documentation
     ## 4.1 Details
-    TBD
+    The CFS API is invoked by an API Consumer after the Consent Management flow
+    descibed in chapter 3.
+    The API Consumer cretes a resource (CreateCallForwardingSignal) with the
+    "/call-forwardings" POST method. In this resource the phone number 
+    (PhoneNumber) to be checked is provided by the API Consumer.
+    The consent on the usage of the phone number must be provided to the API
+    Consumer by the owner of the phone number via the Consent Management
+    procedure described in chapater 3.
+    The CFS API Producer ...... (TBD - ongoing discussion)
+    ## 4.2 FAQ's
+    (FAQs will be added in a later version of the documentation)
+    ## 4.3 Release Notes
+    First draft for the CFS API.
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
