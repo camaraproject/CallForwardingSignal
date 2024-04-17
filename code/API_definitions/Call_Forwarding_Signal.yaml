@@ -1,25 +1,27 @@
+---
 openapi: 3.0.3
 ############################################################################
 #                                     API info                             #
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.2-wip
+  version: 0.1.3-wip
   description: |
     ## Overview
-    The Call Forwarding Signal (CFS) API provides the API Consumer with an 
+    The Call Forwarding Signal (CFS) API provides the API Consumer with an
     information about the status of the Call Forwading Service on a specific
     phone number.
     ## 1. Introduction
-    The Call Forwarding Service is provided by the Network to a phone number. 
-    Thi service redirects the incoming call to that phone number to an 
+    The Call Forwarding Service is provided by the Network to a phone number.
+    Thi service redirects the incoming call to that phone number to an
     alternative destination such a another phone number or a voice mail system.\
     The CFS API can be invoked to get the status of the Call Forwarding Service
     for a specific phone number.
     ## 2. Quick Start
-    The CFS API is a REST API based on the CreateCallForwardingSignal resource. This
-    resource is filled during the API invokation, by the API Consumer, with the 
-    phone number on which the Call Forwardging Service status must be verified. 
+    The CFS API is a REST API based on the CreateCallForwardingSignal resource.
+    This resource is filled during the API invokation, by the API Consumer,
+    with the phone number on which the Call Forwardging Service status must be
+    verified.
     A responce is provided by the API Producer with an resource, CallForwordings
     , containing a boolean with the status beeing active or not.\
     \
@@ -27,37 +29,44 @@ info:
     about the below specified details:\
     \
     **Base-Url**
-    The RESTful CFS API endpoint, for example 
+    The RESTful CFS API endpoint, for example
     [**https://tim-api.developer.tim.it/callforwardingsignal**](https://tim-api\
     .developer.tim.it/callforwarding\signal)\
     \
     **PhoneNumber**
     This is the end user phone number. The CFS API verifies if a call forwarding
-    service is active on this phone number.
+    service is active on this phone number.\
+    \
+    **CreateCallForwordingSignal**
+    This is the resource the API Consumer uses to define the phone number to \
+    be verified about the status of the Network Call Forarding service.\
+    \
+    **CallForwordingSignal**
+    This is the resource the API Producer provides back to the API Consumer.\
+    This Resource contains the status of the Network Call Forarding service for\
+    the specified phone number.
     ## 3. Authorization and authentication
-    CAMARA guidelines defines a set of authorization flows which can grant API 
-    clients access to the API functionality, 
+    CAMARA guidelines defines a set of authorization flows which can grant API
+    clients access to the API functionality,
     as outlined in the document [CAMARA-API-access-and-user-consent.md](https:\
     //github.com/camaraproject/IdentityAndConsentManagement/blob/main/\
-    documentation/CAMARA-API-access-and-user-consent.md). 
+    documentation/CAMARA-API-access-and-user-consent.md).
     Which specific authorization flows are to be used will be determined during
-    onboarding process, happening between the API Client and the 
+    onboarding process, happening between the API Client and the
     Telco Operator exposing the API, taking into account the declared purpose
-    for accessing the API, while also being subject to the prevailing legal 
+    for accessing the API, while also being subject to the prevailing legal
     framework dictated by local legislation.
     \
-    It is important to remark that in cases where personal user data is 
+    It is important to remark that in cases where personal user data is
     processed by the API, and users can exercise their rights through mechanisms
-    such as opt-in and/or opt-out, the use of 3-legged access tokens becomes 
-    mandatory. 
-    This measure ensures that the API remains in strict compliance with user 
-    privacy preferences and regulatory obligations, 
+    such as opt-in and/or opt-out, the use of 3-legged access tokens becomes
+    mandatory.
+    This measure ensures that the API remains in strict compliance with user
+    privacy preferences and regulatory obligations,
     upholding the principles of transparency and user-centric data control.
     ## 4. API Documentation
     ## 4.1 Details
-    
     TBD
-    
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -74,7 +83,7 @@ servers:
         default: http://localhost:9091
         description: API root
       basePath:
-        default: cfs/v0
+        default: call-forwarding-signal/v0
         description: Base path for the Call Forwarding Signal API
 ############################################################################
 #                                     Paths                                #
@@ -86,9 +95,9 @@ paths:
         - Call Forwarding information retrieval
       security:
         - openId:
-          - call-forwarding:read
+            - 'call-forwarding-signal:call-forwardings:read'
       description: Retrieve the information about call forwarding service active
-       on a phone number     
+       on a phone number
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -100,7 +109,7 @@ paths:
         required: true
       responses:
         '200':
-          description: OK. 
+          description: OK.
           headers:
             x-correlator:
               $ref: '#/components/headers/x-correlator'
@@ -120,9 +129,9 @@ paths:
           $ref: "#/components/responses/Generic403"
         "503":
           $ref: "#/components/responses/Generic503"
-#######################################################
-#  COMPONENTS
-#######################################################
+############################################################################
+#                                 Components                               #
+############################################################################
 components:
   securitySchemes:
     openId:
@@ -140,9 +149,9 @@ components:
       description: Correlation id for the different services
       schema:
         type: string
-######################################################
-#  RESOURCES
-#######################################################
+  ############################################################################
+  #                                 Resources                                #
+  ############################################################################
   schemas:
     CallForwardingSignal:
       type: object
@@ -150,29 +159,29 @@ components:
         active:
           type: boolean
           description: Indicates if a call forwarding service is active.
-#######################################################
-#  REQUEST
-#######################################################    
+    ############################################################################
+    #                                 Request                                  #
+    ############################################################################
     CreateCallForwardingSignal:
       type: object
       properties:
         phoneNumber:
           $ref: "#/components/schemas/PhoneNumber"
-#######################################################
-#  TYPES
-#######################################################   
+    ############################################################################
+    #                                 Types                                    #
+    ############################################################################
     PhoneNumber:
-     description: A public identifier addressing a telephone subscription. 
-      In mobile networks it corresponds to the MSISDN (Mobile Station 
-      International Subscriber Directory Number). In order to be globally unique
-      it has to be formatted in international format, according to E.164 
-      standard, prefixed with '+'.
-     type: string
-     pattern: '^\+[1-9][0-9]{4,14}$'
-     example: "+123456789"
-######################################################
-#  RESPONSES
-#######################################################            
+      description: A public identifier addressing a telephone subscription.
+       In mobile networks it corresponds to the MSISDN (Mobile Station
+       International Subscriber Directory Number). In order to be globally 
+       unique it has to be formatted in international format, according to E.164
+       standard, prefixed with '+'.
+      type: string
+      pattern: '^\+[1-9][0-9]{4,14}$'
+      example: "+123456789"
+    ############################################################################
+    #                                 Responces                                #
+    ############################################################################
     ErrorInfo:
       type: object
       required:
@@ -216,7 +225,7 @@ components:
           example:
             status: 401
             code: UNAUTHENTICATED
-            message: Request not authenticated due to missing, invalid, or 
+            message: Request not authenticated due to missing, invalid, or
              expired credentials
     Generic403:
       description: Client does not have sufficient permission
@@ -294,3 +303,4 @@ components:
             status: 504
             code: TIMEOUT
             message: Request timeout exceeded. Try later
+            
