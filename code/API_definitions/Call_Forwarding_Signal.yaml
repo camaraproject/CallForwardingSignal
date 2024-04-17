@@ -26,9 +26,9 @@ info:
     ## 2. Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
     This resource is filled during the API invokation, by the API Consumer,
-    with the phone number on which the Call Forwardging Service status must be
+    with the phone number on which the Call Forwarding Service status must be
     verified.
-    A responce is provided by the API Producer with an resource, CallForwordings
+    A response is provided by the API Producer with a resource, CallForwardings
     , containing a boolean with the status beeing active or not.\
     \
     Before starting to use the Call Forwarding API, the developer needs to know
@@ -43,13 +43,13 @@ info:
     This is the end user phone number. The CFS API verifies if a call forwarding
     service is active on this phone number.\
     \
-    **CreateCallForwordingSignal**
+    **CreateCallForwardingSignal**
     This is the resource the API Consumer uses to define the phone number to \
-    be verified about the status of the Network Call Forarding service.\
+    be verified about the status of the Network Call Forwarding service.\
     \
-    **CallForwordingSignal**
+    **CallForwardingSignal**
     This is the resource the API Producer provides back to the API Consumer.\
-    This Resource contains the status of the Network Call Forarding service for\
+    This Resource contains the status of the Network Call Forwarding service for\
     the specified phone number.
     ## 3. Authorization and authentication
     CAMARA guidelines defines a set of authorization flows which can grant API
@@ -73,13 +73,13 @@ info:
     ## 4. API Documentation
     ## 4.1 Details
     The CFS API is invoked by an API Consumer after the Consent Management flow
-    descibed in chapter 3.
-    The API Consumer cretes a resource (CreateCallForwardingSignal) with the
+    described in chapter 3.
+    The API Consumer creates a resource (CreateCallForwardingSignal) with the
     "/call-forwardings" POST method. In this resource the phone number 
     (PhoneNumber) to be checked is provided by the API Consumer.
     The consent on the usage of the phone number must be provided to the API
     Consumer by the owner of the phone number via the Consent Management
-    procedure described in chapater 3.
+    procedure described in chapter 3.
     The CFS API Producer ...... (TBD - ongoing discussion)
     ## 4.2 FAQ's
     (FAQs will be added in a later version of the documentation)
