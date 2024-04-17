@@ -1,3 +1,4 @@
+---
 openapi: 3.0.3
 ############################################################################
 #                                     API info                             #
@@ -65,9 +66,7 @@ info:
     upholding the principles of transparency and user-centric data control.
     ## 4. API Documentation
     ## 4.1 Details
-
     TBD
-    
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -96,7 +95,7 @@ paths:
         - Call Forwarding information retrieval
       security:
         - openId:
-          - call-forwarding-signal:call-forwardings:read
+            - 'call-forwarding-signal:call-forwardings:read'
       description: Retrieve the information about call forwarding service active
        on a phone number
       operationId: retrieveCallForwarding
@@ -172,14 +171,14 @@ components:
     #                                 Types                                    #
     ############################################################################
     PhoneNumber:
-     description: A public identifier addressing a telephone subscription.
-      In mobile networks it corresponds to the MSISDN (Mobile Station
-      International Subscriber Directory Number). In order to be globally unique
-      it has to be formatted in international format, according to E.164
-      standard, prefixed with '+'.
-     type: string
-     pattern: '^\+[1-9][0-9]{4,14}$'
-     example: "+123456789"
+      description: A public identifier addressing a telephone subscription.
+       In mobile networks it corresponds to the MSISDN (Mobile Station
+       International Subscriber Directory Number). In order to be globally 
+       unique it has to be formatted in international format, according to E.164
+       standard, prefixed with '+'.
+      type: string
+      pattern: '^\+[1-9][0-9]{4,14}$'
+      example: "+123456789"
     ############################################################################
     #                                 Responces                                #
     ############################################################################
@@ -304,3 +303,4 @@ components:
             status: 504
             code: TIMEOUT
             message: Request timeout exceeded. Try later
+            
