@@ -6,7 +6,7 @@
 |----|----------------------------------|-----------|----------------------------                         
 |  1 |API Spec                          |   Y       | Contributed            |
 |  2 |API Implementation                |   N       | --                     |
-|  3 |API Documentation                 |   Y       | Pending                |
+|  3 |API Documentation                 |   Y       | Contributed                |
 |  4 |User Stories                      |   Y       | Approved               |
 |  5 |API test cases                    |   Y       | Pending                |
 |  6 |Validated by atleast 2 operators  |   Y       | Pending                | 
