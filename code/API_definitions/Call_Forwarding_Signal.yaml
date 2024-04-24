@@ -5,7 +5,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.4-wip
+  version: 0.1.5-wip
   description: |
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with an
@@ -21,8 +21,10 @@ info:
     **Example use cases:**\
     \
     [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal/\
-    blob/main/documentation/API_documentation/CFS_UserStory_UseCase-1.md)
-    
+    blob/main/documentation/API_documentation/CFS_UserStory_UseCase-1.md)\
+    \
+    [**Telecommunication Frauds**](https://github.com/camaraproject/\
+    CallForwardingSignal/discussions/3#discussioncomment-8701847)
     ## 2. Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
     This resource is filled during the API invokation, by the API Consumer,
@@ -44,17 +46,17 @@ info:
     service is active on this phone number.\
     \
     **CreateCallForwardingSignal**
-    This is the resource the API Consumer uses to define the phone number to \
+    This is the resource the API Consumer uses to define the phone number to
     be verified about the status of the Network Call Forwarding service.\
     \
     **CallForwardingSignal**
-    This is the resource the API Producer provides back to the API Consumer.\
-    This Resource contains the status of the Network Call Forwarding service for\
+    This is the resource the API Producer provides back to the API Consumer.
+    This Resource contains the status of the Network Call Forwarding service for
     the specified phone number.
     ## 3. Authorization and authentication
     CAMARA guidelines defines a set of authorization flows which can grant API
-    clients access to the API functionality,
-    as outlined in the document [CAMARA-API-access-and-user-consent.md](https:\
+    clients access to the API functionality, as outlined in the document
+    [CAMARA-API-access-and-user-consent.md](https:\
     //github.com/camaraproject/IdentityAndConsentManagement/blob/main/\
     documentation/CAMARA-API-access-and-user-consent.md).
     Which specific authorization flows are to be used will be determined during
@@ -75,7 +77,7 @@ info:
     The CFS API is invoked by an API Consumer after the Consent Management flow
     described in chapter 3.
     The API Consumer creates a resource (CreateCallForwardingSignal) with the
-    "/call-forwardings" POST method. In this resource the phone number 
+    "/call-forwardings" POST method. In this resource the phone number
     (PhoneNumber) to be checked is provided by the API Consumer.
     The consent on the usage of the phone number must be provided to the API
     Consumer by the owner of the phone number via the Consent Management
@@ -88,6 +90,8 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    email: project-email@sample.com
 externalDocs:
   description: Product documentation at Camara
   url: https://github.com/camaraproject/CallForwardingSignal
@@ -104,6 +108,13 @@ servers:
         default: call-forwarding-signal/v0
         description: Base path for the Call Forwarding Signal API
 ############################################################################
+#                                     Tags                                #
+############################################################################
+tags:
+  - name: Call Forwarding information retrieval
+    description: Reads the configured Call Forwarding settings for the
+     provided phone number (PhoneNumber)
+############################################################################
 #                                     Paths                                #
 ############################################################################
 paths:
@@ -114,8 +125,9 @@ paths:
       security:
         - openId:
             - 'call-forwarding-signal:call-forwardings:read'
-      description: Retrieve the information about call forwarding service active
+      summary: Retrieve the information about call forwarding service active
        on a phone number
+      description: TBD
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -135,6 +147,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CallForwardingSignal'
+        "400":
+          $ref: "#/components/responses/Generic400"
         '404':
           $ref: '#/components/responses/Generic404'
         '500':
@@ -153,6 +167,7 @@ paths:
 components:
   securitySchemes:
     openId:
+      description: to support Consent Management
       type: openIdConnect
       openIdConnectUrl: https://example.com/.well-known/openid-configuration
   parameters:
@@ -172,6 +187,8 @@ components:
   ############################################################################
   schemas:
     CallForwardingSignal:
+      description: resource containing the information about the Call
+       Forwarding Service for the given phone number (PhoneNumber)
       type: object
       properties:
         active:
@@ -181,6 +198,8 @@ components:
     #                                 Request                                  #
     ############################################################################
     CreateCallForwardingSignal:
+      description: resource containing the phone number (PhoneNumber) regarding
+       which the Call Forwarding Service must be checked
       type: object
       properties:
         phoneNumber:
@@ -201,6 +220,7 @@ components:
     #                                 Responces                                #
     ############################################################################
     ErrorInfo:
+      description: error information
       type: object
       required:
         - status
