@@ -5,18 +5,22 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.6-wip
+  version: 0.1.7-wip
   description: |
     ## Overview
-    The Call Forwarding Signal (CFS) API provides the API Consumer with an
+    The Call Forwarding Signal (CFS) API provides the API Consumer with
     information about the status of the Call Forwading Service on a specific
     phone number.
     ## 1. Introduction
-    The Call Forwarding Service is provided by the Network to a phone number.
-    Thi service redirects the incoming call to that phone number to an
-    alternative destination such a another phone number or a voice mail system.\
-    The CFS API can be invoked to get the status of the Call Forwarding Service
-    for a specific phone number.\
+    The Call Forwarding Service is provided by the Network to a phone
+    number. This service redirects the incoming call to that phone number
+    to an alternative destination such another phone number or a voice mail
+    system. There are two main types of call forwarding settings:
+    unconditional and conditional.
+    The CFS API can be invoked to detect if the unconditional
+    call forwarding service is active. The CSF API can also be invoked to
+    get the general status of the Call Forwarding Service (incactive,
+    conditional, unconditional).\
     \
     **Example use cases:**\
     \
@@ -29,9 +33,7 @@ info:
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
     This resource is filled during the API invokation, by the API Consumer,
     with the phone number on which the Call Forwarding Service status must be
-    verified.
-    A response is provided by the API Producer with a resource, CallForwardings
-    , containing a boolean with the status beeing active or not.\
+    verified.\
     \
     Before starting to use the Call Forwarding API, the developer needs to know
     about the below specified details:\
@@ -49,10 +51,21 @@ info:
     This is the resource the API Consumer uses to define the phone number to
     be verified about the status of the Network Call Forwarding service.\
     \
+    **UnconditionalCallForwardingSignal**
+    This is the resource the API Consumer gets back, containing the information
+    about the Unconditional Call Forwarding Service status for the given phone
+    number (PhoneNumber)\
+    \
     **CallForwardingSignal**
-    This is the resource the API Producer provides back to the API Consumer.
-    This Resource contains the status of the Network Call Forwarding service for
-    the specified phone number.
+    This is the resource the API Consumer gets back, containing the information
+    about the general status of the Network Call Forwarding service for the
+    specified phone number.\
+    \
+    The CFS API provides two endpoints fulfilling the following intents:
+    - **unconditional-call-forwardings**: Is the unconditional call fwd service
+    active on a specific phone number?
+    - **call-forwardings**: Provide me the status of the call FWD Service on a
+    specific phone number.
     ## 3. Authorization and authentication
     CAMARA guidelines defines a set of authorization flows which can grant API
     clients access to the API functionality, as outlined in the document
@@ -75,14 +88,18 @@ info:
     ## 4. API Documentation
     ## 4.1 Details
     The CFS API is invoked by an API Consumer after the Consent Management flow
-    described in chapter 3.
-    The API Consumer creates a resource (CreateCallForwardingSignal) with the
-    "/call-forwardings" POST method. In this resource the phone number
-    (PhoneNumber) to be checked is provided by the API Consumer.
-    The consent on the usage of the phone number must be provided to the API
-    Consumer by the owner of the phone number via the Consent Management
-    procedure described in chapter 3.
-    The CFS API Producer ...... (TBD - ongoing discussion)
+    described in chapter 3.\
+    The API Consumer creates a resource (CreateCallForwardingSignal) containing
+    the phone number (PhoneNumber) to be checked.\
+    The API Consumer can request the API Producer for the status of the
+    Unconditional Call Forwarding service using the
+    unconditional-call-forwardings POST method. A boolean, with the information
+    about the activation status of the call forwarding service, will be
+    provided back via the UnconditionalCallForwardingSignal resource.\
+    The API Consumer can also request the API Producer for the generic status of
+    the Call Forwarding service using the call-forwardings POST method. A string
+    with the information of the type of call forwarding service will be provided
+    back via the CallForwardingSignal resource.
     ## 4.2 FAQ's
     (FAQs will be added in a later version of the documentation)
     ## 4.3 Release Notes
@@ -111,13 +128,60 @@ servers:
 #                                     Tags                                #
 ############################################################################
 tags:
+  - name: Unconditional Call Forwarding information retrieval
+    description: Provides information on Unconditional Call Forwarding
+     settings for the provided phone number (PhoneNumber)
   - name: Call Forwarding information retrieval
-    description: Reads the configured Call Forwarding settings for the
-     provided phone number (PhoneNumber)
+    description: Provides information on Call Forwarding settings for the
+     provided phone number (PhoneNumber).
 ############################################################################
 #                                     Paths                                #
 ############################################################################
 paths:
+  /unconditional-call-forwardings:
+    post:
+      tags:
+        - Unconditional Call Forwarding information retrieval
+      security:
+        - openId:
+            - 'call-forwarding-signal:unconditional-call-forwardings:read'
+      summary: Retrieve the information about the status of the
+       unconditional call forwarding service on a phone number (PhoneNumber)
+      description: This endpoint provides information about the status
+       of the unconditional call forwarding, beeing active or not.
+      operationId: retrieveUnconditionalCallForwarding
+      parameters:
+        - $ref: '#/components/parameters/x-correlator'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCallForwardingSignal'
+        required: true
+      responses:
+        '200':
+          description: OK.
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnconditionalCallForwardingSignal'
+        "400":
+          $ref: "#/components/responses/Generic400"
+        '404':
+          $ref: '#/components/responses/Generic404'
+        '500':
+          $ref: '#/components/responses/Generic500'
+        '504':
+          $ref: '#/components/responses/Generic504'
+        "401":
+          $ref: "#/components/responses/Generic401"
+        "403":
+          $ref: "#/components/responses/Generic403"
+        "503":
+          $ref: "#/components/responses/Generic503"
   /call-forwardings:
     post:
       tags:
@@ -125,9 +189,10 @@ paths:
       security:
         - openId:
             - 'call-forwarding-signal:call-forwardings:read'
-      summary: Retrieve the information about call forwarding service active
-       on a phone number
-      description: TBD
+      summary: Retrieve the information about the type of call forwarding
+       service active on a phone number (PhoneNumber)
+      description: This endpoint provides information about wich type of
+       call forwarding service is active
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -186,14 +251,23 @@ components:
   #                                 Resources                                #
   ############################################################################
   schemas:
-    CallForwardingSignal:
-      description: resource containing the information about the Call
-       Forwarding Service for the given phone number (PhoneNumber)
+    UnconditionalCallForwardingSignal:
+      description: resource containing the information about the Unconditional
+       Call Forwarding Service for the given phone number (PhoneNumber)
       type: object
       properties:
         active:
           type: boolean
-          description: Indicates if a call forwarding service is active.
+          description: Indicates if the unconditional call forwarding service
+           is active.
+    CallForwardingSignal:
+      description: resource containing the information about the Call
+       Forwarding Service status for the given phone number (PhoneNumber)
+      type: string
+      enum:
+        - 'inactive'
+        - 'unconditional'
+        - 'conditional'
     ############################################################################
     #                                 Request                                  #
     ############################################################################
