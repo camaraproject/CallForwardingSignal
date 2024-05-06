@@ -5,7 +5,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.5-wip
+  version: 0.1.6-wip
   description: |
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with an
@@ -23,7 +23,7 @@ info:
     [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal/\
     blob/main/documentation/API_documentation/CFS_UserStory_UseCase-1.md)\
     \
-    [**Telecommunication Frauds**](https://github.com/camaraproject/\
+    [**Alert Interception**](https://github.com/camaraproject/\
     CallForwardingSignal/discussions/3#discussioncomment-8701847)
     ## 2. Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
