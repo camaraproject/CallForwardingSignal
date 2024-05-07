@@ -19,7 +19,7 @@ info:
     unconditional and conditional.
     The CFS API can be invoked to detect if the unconditional
     call forwarding service is active. The CSF API can also be invoked to
-    get the general status of the Call Forwarding Service (incactive,
+    get the general status of the Call Forwarding Service (inactive,
     conditional, unconditional).\
     \
     **Example use cases:**\
@@ -64,8 +64,8 @@ info:
     The CFS API provides two endpoints fulfilling the following intents:
     - **unconditional-call-forwardings**: Is the unconditional call fwd service
     active on a specific phone number?
-    - **call-forwardings**: Provide me the status of the call FWD Service on a
-    specific phone number.
+    - **call-forwardings**: Which is the status of the call forwarding for a
+    specific phone number?
     ## 3. Authorization and authentication
     CAMARA guidelines defines a set of authorization flows which can grant API
     clients access to the API functionality, as outlined in the document
