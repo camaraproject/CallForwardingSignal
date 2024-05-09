@@ -116,14 +116,11 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/{basePath}"
+  - url: "{apiRoot}/call-forwarding-signal/vwip"
     variables:
       apiRoot:
         default: http://localhost:9091
-        description: API root
-      basePath:
-        default: call-forwarding-signal/v0
-        description: Base path for the Call Forwarding Signal API
+        description: API root for the Call Forwarding Signal API
 ############################################################################
 #                                     Tags                                #
 ############################################################################
