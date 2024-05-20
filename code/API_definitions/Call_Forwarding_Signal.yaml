@@ -5,7 +5,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.7-wip
+  version: 0.1.8-wip
   description: |
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
@@ -97,9 +97,9 @@ info:
     about the activation status of the call forwarding service, will be
     provided back via the UnconditionalCallForwardingSignal resource.\
     The API Consumer can also request the API Producer for the generic status of
-    the Call Forwarding service using the call-forwardings POST method. A string
-    with the information of the type of call forwarding service will be provided
-    back via the CallForwardingSignal resource.
+    the Call Forwarding service using the call-forwardings POST method. An array 
+    of strings with the information of the type of active call forwarding 
+    services will be provided back via the CallForwardingSignal resource.
     ## 4.2 FAQ's
     (FAQs will be added in a later version of the documentation)
     ## 4.3 Release Notes
@@ -189,7 +189,8 @@ paths:
       summary: Retrieve the information about the type of call forwarding
        service active on a phone number (PhoneNumber)
       description: This endpoint provides information about wich type of
-       call forwarding service is active
+       call forwarding service is active. More than one service can be 
+       active, e.g. conditional and unconditional.
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -258,13 +259,19 @@ components:
           description: Indicates if the unconditional call forwarding service
            is active.
     CallForwardingSignal:
-      description: resource containing the information about the Call
-       Forwarding Service status for the given phone number (PhoneNumber)
-      type: string
-      enum:
-        - 'inactive'
+      description: resource containing the list of the Call
+       Forwarding Services active for the given phone number (PhoneNumber)
+      type: array
+      items:
+        type: string
+        enum:
+          - 'inactive'
+          - 'unconditional'
+          - 'conditional'
+      example:
         - 'unconditional'
         - 'conditional'
+      minItems: 1
     ############################################################################
     #                                 Request                                  #
     ############################################################################
