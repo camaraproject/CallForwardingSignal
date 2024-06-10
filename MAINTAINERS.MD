@@ -1,5 +1,5 @@
-| Org                    | Name                                                |
-| -----------------------| ----------------------------------------------------|
-| TIM | Fabrizio Moggio |
-| Orange | Ludovic Robert |
-| China Unicom | F. Yang |
+| Org                    | Name                    | GitHub Username            |
+| -----------------------| ------------------------|----------------------------|
+| TIM | Fabrizio Moggio | FabrizioMoggio |
+| Orange | Ludovic Robert | bigludo7 |
+| China Unicom | F. Yang | chinaunicomyangfan |
