@@ -5,7 +5,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.1.8-wip
+  version: wip
   description: |
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
