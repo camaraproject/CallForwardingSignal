@@ -1,13 +1,20 @@
-# CFS API Readiness minimum criteria checklist
 
-<br>
+# API Readiness Checklist
 
-| No | Deliverables/Criteria            | Mandatory | Status (Contributed/Approved/Pending/Validated/Partly-Validated)|
-|----|----------------------------------|-----------|----------------------------                         
-|  1 |API Spec                          |   Y       | Contributed            |
-|  2 |API Implementation                |   N       | --                     |
-|  3 |API Documentation                 |   Y       | Contributed                |
-|  4 |User Stories                      |   Y       | Approved               |
-|  5 |API test cases                    |   Y       | Pending                |
-|  6 |Validated by atleast 2 operators  |   Y       | Pending                | 
-|  7 |Security review                   |   Y       | Pending                |
+Checklist for CFS API wip
+
+| Nr | API release assets  | alpha | release-candidate |  public-release<br>initial | public-release<br> stable | Status | Comments |
+|----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:----:|
+|  1 | API definition                               |   M   |         M         |    M    |    M   |   Y  |      |
+|  2 | Design guidelines from Commonalities applied |   O   |         M         |    M    |    M   |   Y  |      |
+|  3 | Guidelines from ICM applied                  |   O   |         M         |    M    |    M   |   Y  |      |
+|  4 | API versioning convention applied            |   M   |         M         |    M    |    M   |   Y  |      |
+|  5 | API documentation                            |   M   |         M         |    M    |    M   |   Y  |      |
+|  6 | User stories                                 |   O   |         O         |    O    |    M   |   Y  |      |
+|  7 | Basic API test cases & documentation         |   O   |         M         |    M    |    M   |   Y  |      |
+|  8 | Enhanced API test cases & documentation      |   O   |         O         |    O    |    M   |   N  |      |
+|  9 | Test result statement                        |   O   |         O         |    O    |    M   |   N  |      |
+| 10 | API release numbering convention applied     |   M   |         M         |    M    |    M   |   N  |      |
+| 11 | Change log updated                           |   M   |         M         |    M    |    M   |   N  |      |
+| 12 | Previous public-release was certified        |   O   |         O         |    O    |    M   |   N  |      |
+
