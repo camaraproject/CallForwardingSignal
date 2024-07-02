@@ -9,7 +9,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
   #
   # References to OAS spec schemas refer to schemas specifies in Call_Forwarding_Signal.yaml, version 0.1
   Background: Common call-forwarding-signal setup
-    Given the resource "/call-forwarding-signal/v0/unconditional-call-forwardings"                                                              |
+    Given the resource "/call-forwarding-signal/v0/unconditional-call-forwardings"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
