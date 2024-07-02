@@ -2,7 +2,6 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
-  # * List of device identifier types which are not supported, among: phoneNumber, networkAccessIdentifier, ipv4Address, ipv6Address
   #
   # Testing assets:
   # * A device object identified by a phone number for which unconditionnal call forwarding status could be retrieved
