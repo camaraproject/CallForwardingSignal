@@ -20,7 +20,9 @@ info:
     The CFS API can be invoked to detect if the unconditional
     call forwarding service is active. The CSF API can also be invoked to
     get the general status of the Call Forwarding Service (inactive,
-    conditional, unconditional).\
+    conditional, unconditional). If conditional call forwarding is active,
+    the differente type of settings are returned ('conditional_busy',
+    'conditional_unavailable', 'conditional_no_reply').\
     \
     **Example use cases:**\
     \
@@ -260,17 +262,26 @@ components:
            is active.
     CallForwardingSignal:
       description: resource containing the list of the Call
-       Forwarding Services active for the given phone number (PhoneNumber)
+       Forwarding Services active for the given phone number (PhoneNumber). The
+       possible states are, 'inactive' (no call forwarding service activated),
+       'unconditional' (call forwarded independently from the device status),
+       'conditional_busy' (call forwarded if the device is on an active call),
+       'conditional_unavailable' (call forwarded if the device is not available
+       on the network), 'conditional_no_reply' (call forwarded if the device
+       doesn't answer the incoming call).
       type: array
       items:
         type: string
         enum:
           - 'inactive'
           - 'unconditional'
-          - 'conditional'
+          - 'conditional_busy'
+          - 'conditional_unavailable'
+          - 'conditional_no_reply'
       example:
         - 'unconditional'
-        - 'conditional'
+        - 'conditional_busy'
+        - 'conditional_no_reply'
       minItems: 1
     ############################################################################
     #                                 Request                                  #
