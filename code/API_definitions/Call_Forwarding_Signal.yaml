@@ -10,7 +10,10 @@ info:
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
     information about the status of the Call Forwading Service on a specific
-    phone number.
+    phone number.The main scope of the CFS API is "anti Fraud" to avoid 
+    fraudster to use the Call Forwarding Service to carry on a scam. Other use
+    cases are anyway supported by the CFS API that also provides additional
+    endpoints to detect the general Call Forwarding Service settings.
     ## 1. Introduction
     The Call Forwarding Service is provided by the Network to a phone
     number. This service redirects the incoming call to that phone number
@@ -26,11 +29,14 @@ info:
     \
     **Example use cases:**\
     \
-    [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal/\
-    blob/main/documentation/API_documentation/CFS_UserStory_UseCase-1.md)\
+    [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal\
+    /discussions/3#discussioncomment-8694420)\
     \
-    [**Alert Interception**](https://github.com/camaraproject/\
-    CallForwardingSignal/discussions/3#discussioncomment-8701847)
+    [**Alert Interception**](https://github.com/camaraproject/CallForwarding\
+    Signal/discussions/3#discussioncomment-8701847)\
+    \
+    [**Call FWD Verification**](https://github.com/camaraproject/CallForwarding\
+    Signal/discussions/3#discussioncomment-8915595)
     ## 2. Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
     This resource is filled during the API invokation, by the API Consumer,
@@ -101,7 +107,7 @@ info:
     The API Consumer can also request the API Producer for the generic status of
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
-    services will be provided back via the CallForwardingSignal resource.
+    services will be provided back via the CallForwardingSignal resource.\
     ## 4.2 FAQ's
     (FAQs will be added in a later version of the documentation)
     ## 4.3 Release Notes
@@ -192,7 +198,9 @@ paths:
        service active on a phone number (PhoneNumber)
       description: This endpoint provides information about wich type of
        call forwarding service is active. More than one service can be
-       active, e.g. conditional and unconditional.
+       active, e.g. conditional and unconditional. This endpoit exceeds
+       the main scope of the CFS API, for this reason an error code 501
+       can be returned.
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -224,6 +232,8 @@ paths:
           $ref: "#/components/responses/Generic401"
         "403":
           $ref: "#/components/responses/Generic403"
+        "501":
+          $ref: "#/components/responses/Generic501"          
         "503":
           $ref: "#/components/responses/Generic503"
 ############################################################################
@@ -403,6 +413,24 @@ components:
             status: 500
             code: INTERNAL
             message: Server error
+    Generic501:
+      description: Not Implemented
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_501_NOT_IMPLEMENTED:
+              description: Service not implemented. The use of this code should
+               be avoided as far as possible to get the objective to reach 
+               aligned implementations
+              value:
+                status: 501
+                code: NOT_IMPLEMENTED
+                message: This functionality is not implemented yet.            
     Generic503:
       description: Service unavailable. Typically the server is down
       headers:
