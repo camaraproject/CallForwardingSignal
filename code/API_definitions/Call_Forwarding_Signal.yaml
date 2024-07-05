@@ -10,7 +10,7 @@ info:
     ## Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
     information about the status of the Call Forwading Service on a specific
-    phone number.The main scope of the CFS API is "anti Fraud" to avoid 
+    phone number.The main scope of the CFS API is "anti Fraud" to avoid
     fraudster to use the Call Forwarding Service to carry on a scam. Other use
     cases are anyway supported by the CFS API that also provides additional
     endpoints to detect the general Call Forwarding Service settings.
@@ -233,7 +233,7 @@ paths:
         "403":
           $ref: "#/components/responses/Generic403"
         "501":
-          $ref: "#/components/responses/Generic501"          
+          $ref: "#/components/responses/Generic501"
         "503":
           $ref: "#/components/responses/Generic503"
 ############################################################################
@@ -425,12 +425,12 @@ components:
           examples:
             GENERIC_501_NOT_IMPLEMENTED:
               description: Service not implemented. The use of this code should
-               be avoided as far as possible to get the objective to reach 
+               be avoided as far as possible to get the objective to reach
                aligned implementations
               value:
                 status: 501
                 code: NOT_IMPLEMENTED
-                message: This functionality is not implemented yet.            
+                message: This functionality is not implemented yet.
     Generic503:
       description: Service unavailable. Typically the server is down
       headers:
