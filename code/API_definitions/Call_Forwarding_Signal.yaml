@@ -35,8 +35,8 @@ info:
     [**Alert Interception**](https://github.com/camaraproject/CallForwarding\
     Signal/discussions/3#discussioncomment-8701847)\
     \
-    [**Call FWD Verification**](https://github.com/camaraproject/CallForwarding\
-    Signal/discussions/3#discussioncomment-8915595)
+    [**Call Forwading Verification**](https://github.com/camaraproject/\
+    CallForwarding\Signal/discussions/3#discussioncomment-8915595)
     ## 2. Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
     This resource is filled during the API invokation, by the API Consumer,
@@ -185,6 +185,12 @@ paths:
           $ref: "#/components/responses/Generic401"
         "403":
           $ref: "#/components/responses/Generic403"
+        "409":
+          $ref: "#/components/responses/Generic409"
+        "415":
+          $ref: "#/components/responses/Generic415"
+        "429":
+          $ref: "#/components/responses/Generic429"
         "503":
           $ref: "#/components/responses/Generic503"
   /call-forwardings:
@@ -400,6 +406,76 @@ components:
             code: CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
             message: Call forwarding check can't be done because the phone
              number is unknown
+    Generic409:
+      description: Conflict
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_409_ABORTED:
+              description: Concurrency of processes of the same nature/scope
+              value:
+                status: 409
+                code: ABORTED
+                message: Concurrency conflict.
+            GENERIC_409_ALREADY_EXISTS:
+              description: Trying to create an existing resource
+              value:
+                status: 409
+                code: ALREADY_EXISTS
+                message: The resource that a client tried to create already
+                 exists.
+            GENERIC_409_CONFLICT:
+              description: Duplication of an existing resource
+              value:
+                status: 409
+                code: CONFLICT
+                message: A specified resource duplicate entry found.
+    Generic415:
+      description: Unsupported Media Type
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_415_UNSUPPORTED_MEDIA_TYPE:
+              description: Payload format of the request is in an unsupported
+               format by the Server.
+              value:
+                status: 415
+                code: UNSUPPORTED_MEDIA_TYPE
+                message: The server refuses to accept the request because the
+                 payload format is in an unsupported format.
+    Generic429:
+      description: Too Many Requests
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_429_QUOTA_EXCEEDED:
+              description: Request is rejected due to exceeding a business quota
+               limit.
+              value:
+                status: 429
+                code: QUOTA_EXCEEDED
+                message: Either out of resource quota or reaching rate limiting.
+            GENERIC_429_TOO_MANY_REQUESTS:
+              description: API Server request limit is overpassed
+              value:
+                status: 429
+                code: TOO_MANY_REQUESTS
+                message: Either out of resource quota or reaching rate limiting.        
     Generic500:
       description: Server error
       headers:
