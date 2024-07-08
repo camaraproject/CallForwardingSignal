@@ -162,7 +162,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateCallForwardingSignal'
-        required: true
+        required: false
       responses:
         '200':
           description: OK.
@@ -215,7 +215,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateCallForwardingSignal'
-        required: true
+        required: false
       responses:
         '200':
           description: OK.
@@ -238,6 +238,12 @@ paths:
           $ref: "#/components/responses/Generic401"
         "403":
           $ref: "#/components/responses/Generic403"
+        "409":
+          $ref: "#/components/responses/Generic409"
+        "415":
+          $ref: "#/components/responses/Generic415"
+        "429":
+          $ref: "#/components/responses/Generic429"
         "501":
           $ref: "#/components/responses/Generic501"
         "503":
@@ -392,6 +398,12 @@ components:
                 code: INVALID_TOKEN_CONTEXT
                 message: Phone number cannot be deducted from access token
                  context
+            InvalidTokenMismatch:
+              value:
+                status: 403
+                code: INVALID_TOKEN_MISMATCH
+                message: PhoneNumber parameter doesn't match the value from the
+                 acces token context
     Generic404:
       description: The specified resource was not found
       headers:
