@@ -161,8 +161,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateCallForwardingSignal'
-        required: false
+              oneOf:
+                - $ref: '#/components/schemas/CreateCallForwardingSignal'
+                - {}
+        required: true
       responses:
         '200':
           description: OK.
@@ -214,8 +216,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateCallForwardingSignal'
-        required: false
+              oneOf:
+                - $ref: '#/components/schemas/CreateCallForwardingSignal'
+                - {}
+        required: true
       responses:
         '200':
           description: OK.
