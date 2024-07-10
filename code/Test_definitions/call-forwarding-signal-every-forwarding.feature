@@ -1,15 +1,15 @@
-Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-call-forwarding
+Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
   #
   # Testing assets:
-  # * A device object identified by a phone number for which unconditionnal call forwarding service status could be retrieved
-  # * A device object identified by a phone number for which unconditionnal call forwarding service status could not be retrieved
+  # * A device object identified by a phone number for which the call forwarding service status could be retrieved
+  # * A device object identified by a phone number for which the ucall forwarding service status could not be retrieved
   #
   # References to OAS spec schemas refer to schemas specifies in Call_Forwarding_Signal.yaml, version TBD
   Background: Common call-forwarding-signal setup
-    Given the resource "/call-forwarding-signal/vwip/unconditional-call-forwardings"
+    Given the resource "/call-forwarding-signal/vwip/call-forwardings"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
@@ -18,7 +18,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
   # Happy path scenarios
 
   # This first scenario serves as a minimum
-  @call_forwarding_signal_01_unconditional_generic_success_scenario
+  @call_forwarding_signal_01_generic_success_scenario
   Scenario: Common validations for any success scenario
     # Valid testing default request body compliant with the schema
     Given the request body property "$.phoneNumber" is set to a valid phone number supported by the service
@@ -28,18 +28,29 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     # The response has to comply with the generic response schema which is part of the spec
-    And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
+    And the response body complies with the OAS schema at "/components/schemas/CallForwardingSignal"
 
-  # Scenarios testing specific situations for the call forwarding signal
-  @call_forwarding_signal_02_unconditional_call_forwarding_check
-  Scenario: retrieve unconditional call forwarding settings for a given phone number
-    Given the request body property "$.phoneNumber" is set to a valid phone number for which unconditionnal call forwarding status could be retrieved
+  # Scenarios for the call forwarding service not active
+  @call_forwarding_signal_02_call_forwarding_check_not_active
+  Scenario: retrieve the call forwarding service settings for a given phone number with no forwarding configured
+    Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response body property "$.active" is one of: ["true", "false"]
+    And the response body is a string with the value "inactive"
+
+  # Scenarios for the call forwarding service active
+  @call_forwarding_signal_02_call_forwarding_check_active
+  Scenario: retrieve the call forwarding service settings for a given phone number with the call forwarding service configured with possibile different options (e.g. "on busy", "on no replay")
+    Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
+    And the request body is set to a valid request body
+    When the HTTP "POST" request is sent
+    Then the response status code is 200
+    And the response header "Content-Type" is "application/json"
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response body is an array of strings with the possibile values ["unconditional", "conditional_no_reply", "conditional_unavailable", "conditional_busy"]
 
   # Error path scenarios
 
@@ -131,6 +142,17 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
     Then the response status code is 429
     And the response property "$.status" is 429
     And the response property "$.code" is "TOO_MANY_REQUEST"
+    And the response property "$.message" contains a user friendly text
+ 
+ # Generic 501 error - not implemented
+ @call_forwarding_signal_501.not_implemented
+  Scenario: The endpoint operation is currently not supported by the APi Producer
+    Given the API Producer doen't offer general information on th call forwarding service status
+    And the endpoint is invoked
+    When the HTTP "POST" request is sent
+    Then the response status code is 501
+    And the response property "$.status" is 501
+    And the response property "$.code" is "NOT_IMPLEMENTED"
     And the response property "$.message" contains a user friendly text
 
  # Generic 503 error - service unavailable
