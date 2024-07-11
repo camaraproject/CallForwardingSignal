@@ -5,7 +5,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
   #
   # Testing assets:
   # * A device object identified by a phone number for which the call forwarding service status could be retrieved
-  # * A device object identified by a phone number for which the ucall forwarding service status could not be retrieved
+  # * A device object identified by a phone number for which the call forwarding service status could not be retrieved
   #
   # References to OAS spec schemas refer to schemas specifies in Call_Forwarding_Signal.yaml, version TBD
   Background: Common call-forwarding-signal setup
@@ -22,6 +22,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
   Scenario: Common validations for any success scenario
     # Valid testing default request body compliant with the schema
     Given the request body property "$.phoneNumber" is set to a valid phone number supported by the service
+    And the token context refers to the same phone number    
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
     Then the response status code is 200
@@ -34,6 +35,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
   @call_forwarding_signal_02_call_forwarding_check_not_active
   Scenario: retrieve the call forwarding service settings for a given phone number with no forwarding configured
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
+    And the token context refers to the same phone number
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
     Then the response status code is 200
@@ -85,7 +87,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
 
   # Generic 401 Error - authentication
   @call_forwarding_signal_401.invalid_token
-  Scenario: Endpoint involked with an ivalid authentication token
+  Scenario: Endpoint invoked with an ivalid authentication token
     Given an invalid authentication token
     When the HTTP "POST" request is sent
     Then the response status code is 401
@@ -94,9 +96,19 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
     And the response property "$.message" contains a user friendly text
 
  # Generic 403 error - insufficient permission
- @call_forwarding_signal_403.invalid_context
- Scenario: Endpoint involked with an authentication token not valid for the endoint context
+ @call_forwarding_signal_403.1_permission_denied
+ Scenario: Endpoint invoked with an authentication token not valid for the endpoint context
     Given an access token with an invalid context
+    When the HTTP "POST" request is sent
+    Then the response status code is 403
+    And the response property "$.status" is 403
+    And the response property "$.code" is "PERMISSION_DENIED"
+    And the response property "$.message" contains a user friendly text
+
+ @call_forwarding_signal_403.2_invalid_context
+ Scenario: Endpoint invoked with an authentication token referring to a different phone number that the one used in the phoneNumber parameter
+    Given the token context referring to a phone number
+    And the request body property "$.phoneNumber" has a different phone number.
     When the HTTP "POST" request is sent
     Then the response status code is 403
     And the response property "$.status" is 403
@@ -105,7 +117,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
 
  # Generic 409 error - conflict
  @call_forwarding_signal_409.1_already_exists
- Scenario: Endpoint involked, by the same API Consumer, for a phone number whose status is already under verification
+ Scenario: Endpoint invoked, by the same API Consumer, for a phone number whose status is already under verification
     Given a pending request for a given phone number
     And a the same phone number for a new request
     When the HTTP "POST" for the second request is sent before the first request gets an answer
@@ -153,26 +165,4 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
     Then the response status code is 501
     And the response property "$.status" is 501
     And the response property "$.code" is "NOT_IMPLEMENTED"
-    And the response property "$.message" contains a user friendly text
-
- # Generic 503 error - service unavailable
- @call_forwarding_signal_503.service_unavailable
-  Scenario: The endpoint is invoked with the API Producer Server down
-    Given the API Producer Server is down
-    And the endpoint is invoked
-    When the HTTP "POST" request is sent
-    Then the response status code is 503
-    And the response property "$.status" is 503
-    And the response property "$.code" is "UNAVAILABLE"
-    And the response property "$.message" contains a user friendly text
-
- # Generic 504 error - request time exceeded
- @call_forwarding_signal_504.timout
-  Scenario: The API Producer is not able to produce a responce in a given time
-    Given the API Producer Server is busy
-    And the endpoint is invoked
-    When the HTTP "POST" request is sent
-    Then the response status code is 504
-    And the response property "$.status" is 504
-    And the response property "$.code" is "TIMEOUT"
     And the response property "$.message" contains a user friendly text

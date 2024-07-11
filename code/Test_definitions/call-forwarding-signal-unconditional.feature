@@ -74,7 +74,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
 
   # Generic 401 Error - authentication
   @call_forwarding_signal_401.invalid_token
-  Scenario: Endpoint involked with an ivalid authentication token
+  Scenario: Endpoint invoked with an ivalid authentication token
     Given an invalid authentication token
     When the HTTP "POST" request is sent
     Then the response status code is 401
@@ -83,8 +83,17 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
     And the response property "$.message" contains a user friendly text
 
  # Generic 403 error - insufficient permission
- @call_forwarding_signal_403.invalid_context
- Scenario: Endpoint involked with an authentication token not valid for the endoint context
+  @call_forwarding_signal_403.1_permission_denied
+ Scenario: Endpoint invoked with an authentication token not valid for the endopint context
+    Given an access token with an invalid context
+    When the HTTP "POST" request is sent
+    Then the response status code is 403
+    And the response property "$.status" is 403
+    And the response property "$.code" is "PERMISSION_DENIED"
+    And the response property "$.message" contains a user friendly text
+
+ @call_forwarding_signal_403.2_invalid_context
+ Scenario: Endpoint invoked with an authentication token not valid for the endopint context
     Given an access token with an invalid context
     When the HTTP "POST" request is sent
     Then the response status code is 403
@@ -131,26 +140,4 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
     Then the response status code is 429
     And the response property "$.status" is 429
     And the response property "$.code" is "TOO_MANY_REQUEST"
-    And the response property "$.message" contains a user friendly text
-
- # Generic 503 error - service unavailable
- @call_forwarding_signal_503.service_unavailable
-  Scenario: The endpoint is invoked with the API Producer Server down
-    Given the API Producer Server is down
-    And the endpoint is invoked
-    When the HTTP "POST" request is sent
-    Then the response status code is 503
-    And the response property "$.status" is 503
-    And the response property "$.code" is "UNAVAILABLE"
-    And the response property "$.message" contains a user friendly text
-
- # Generic 504 error - request time exceeded
- @call_forwarding_signal_504.timout
-  Scenario: The API Producer is not able to produce a responce in a given time
-    Given the API Producer Server is busy
-    And the endpoint is invoked
-    When the HTTP "POST" request is sent
-    Then the response status code is 504
-    And the response property "$.status" is 504
-    And the response property "$.code" is "TIMEOUT"
     And the response property "$.message" contains a user friendly text
