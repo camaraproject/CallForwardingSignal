@@ -104,17 +104,6 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
 
   # Error path scenarios
 
- # Generic 404 error - unknown phone number
-  @call_forwarding_signal_03_unconditional_call_forwarding_for_unknown_phone_number
-  Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
-    Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding status could not be retrieved
-    And the request body is set to a valid request body
-    And "login_hint" is set to a valid phone number supported by the service with the same value as "$.phoneNumber", if valorised.
-    When the HTTP "POST" request is sent
-    Then the response status code is 404
-    And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
-    And the response property "$.message" contains a user friendly text
-
   # Generic 400 error - input error
   @call_forwarding_signal_400.1_no_request_body
   Scenario: Missing request body
@@ -163,6 +152,17 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
       And the response property "$.status" is 403
       And the response property "$.code" is "INVALID_TOKEN_CONTEXT"
       And the response property "$.message" contains a user friendly text
+ 
+ # Generic 404 error - unknown phone number
+  @call_forwarding_signal_03_unconditional_call_forwarding_for_unknown_phone_number
+  Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
+    Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding status could not be retrieved
+    And the request body is set to a valid request body
+    And "login_hint" is set to a valid phone number supported by the service with the same value as "$.phoneNumber", if valorised.
+    When the HTTP "POST" request is sent
+    Then the response status code is 404
+    And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
+    And the response property "$.message" contains a user friendly text
 
  # Generic 409 error - conflict
  @call_forwarding_signal_409.1_already_exists
