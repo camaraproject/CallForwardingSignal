@@ -7,29 +7,37 @@ info:
   title: Call Forwarding Signal API
   version: wip
   description: |
-    ## Overview
+    # Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
     information about the status of the Call Forwading Service on a specific
-    phone number.
-    ## 1. Introduction
+    phone number. The main scope of the CFS API is "anti Fraud" to avoid
+    fraudsters to use the Call Forwarding Service to carry on a scam. Other use
+    cases are anyway supported by the CFS API that also provides additional
+    endpoints to detect the general Call Forwarding Service settings.
+    # Introduction
     The Call Forwarding Service is provided by the Network to a phone
     number. This service redirects the incoming call to that phone number
-    to an alternative destination such another phone number or a voice mail
+    to an alternative destination such as another phone number or a voice mail
     system. There are two main types of call forwarding settings:
     unconditional and conditional.
     The CFS API can be invoked to detect if the unconditional
     call forwarding service is active. The CSF API can also be invoked to
     get the general status of the Call Forwarding Service (inactive,
-    conditional, unconditional).\
+    conditional, unconditional). If conditional call forwarding is active,
+    the differente type of settings are returned ('conditional_busy',
+    'conditional_unavailable', 'conditional_no_reply').\
     \
     **Example use cases:**\
     \
-    [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal/\
-    blob/main/documentation/API_documentation/CFS_UserStory_UseCase-1.md)\
+    [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal\
+    /discussions/3#discussioncomment-8694420)\
     \
-    [**Alert Interception**](https://github.com/camaraproject/\
-    CallForwardingSignal/discussions/3#discussioncomment-8701847)
-    ## 2. Quick Start
+    [**Alert Interception**](https://github.com/camaraproject/CallForwarding\
+    Signal/discussions/3#discussioncomment-8701847)\
+    \
+    [**Call Forwading Verification**](https://github.com/camaraproject/\
+    CallForwarding\Signal/discussions/3#discussioncomment-8915595)
+    # Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
     This resource is filled during the API invokation, by the API Consumer,
     with the phone number on which the Call Forwarding Service status must be
@@ -66,7 +74,7 @@ info:
     active on a specific phone number?
     - **call-forwardings**: Which is the status of the call forwarding for a
     specific phone number?
-    ## 3. Authorization and authentication
+    # Authorization and authentication
     CAMARA guidelines defines a set of authorization flows which can grant API
     clients access to the API functionality, as outlined in the document
     [CAMARA-API-access-and-user-consent.md](https:\
@@ -76,7 +84,14 @@ info:
     onboarding process, happening between the API Client and the
     Telco Operator exposing the API, taking into account the declared purpose
     for accessing the API, while also being subject to the prevailing legal
-    framework dictated by local legislation.
+    framework dictated by local legislation.\
+    Specifically, for the CFS API, the CIBA flow should be adopted. The CIBA
+    flow is described here:[CIBA Flow](https://github.com/camaraproject/\
+    IdentityAndConsentManagement/blob/main/documentation/\
+    CAMARA-Security-Interoperability.md\
+    #client-initiated-backchannel-authentication-flow). The "login_hint" must be
+    the user's phone number valorised as the parameter PhoneNumber, if used. If
+    a mismatch is detected, a 403 error is returned (`INVALID_TOKEN_CONTEXT`).
     \
     It is important to remark that in cases where personal user data is
     processed by the API, and users can exercise their rights through mechanisms
@@ -85,12 +100,33 @@ info:
     This measure ensures that the API remains in strict compliance with user
     privacy preferences and regulatory obligations,
     upholding the principles of transparency and user-centric data control.
-    ## 4. API Documentation
-    ## 4.1 Details
-    The CFS API is invoked by an API Consumer after the Consent Management flow
-    described in chapter 3.\
-    The API Consumer creates a resource (CreateCallForwardingSignal) containing
-    the phone number (PhoneNumber) to be checked.\
+    # Identifying the phone number from the access token
+    This specification defines the "phoneNumber" field as optional in API
+    requests because using a 3-legged access token the phone number can be
+    uniquely identified by the token.
+    ## Handling of phone number information:
+    ### Optional phone number object for 3-legged tokens:
+    When using a 3-legged access token, the phone number associated with the
+    access token must be considered as the phone number for the API request.
+    This means that the "phoneNumber" paramenter is not required in the request,
+    and if it is included it must identify the same phone number.
+    ### Validation mechanism:
+    - The server will extract the phone number identification from the access
+    token, if available.
+    - If the API request additionally includes a "phoneNumber" parameter when
+    using a 3-legged access token, the API will validate that the phone number
+    identifier provided matches the one associated with the access token.
+    - If there is a mismatch, the API will respond with a
+    403 `INVALID_TOKEN_CONTEXT` error, indicating that the device information
+    in the request does not match the token.
+    ### Error handling for unidentifiable devices:
+    - If the "phoneNumber" parameter is not included in the request and the
+    phone number information cannot be derived from the 3-legged access token,
+    the server will return a 422 `UNIDENTIFIABLE_DEVICE` error.
+    # API Documentation
+    ## Details
+    The CFS API is invoked by an API Consumer after the Consent Management
+    flow.\
     The API Consumer can request the API Producer for the status of the
     Unconditional Call Forwarding service using the
     unconditional-call-forwardings POST method. A boolean, with the information
@@ -99,10 +135,14 @@ info:
     The API Consumer can also request the API Producer for the generic status of
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
-    services will be provided back via the CallForwardingSignal resource.
-    ## 4.2 FAQ's
+    services will be provided back via the CallForwardingSignal resource.\
+    CFS API have to check the Call Forwarding
+    Service status can be optionally defined with resource
+    (CreateCallForwardingSignal) containing the phone number (PhoneNumber)
+    to be checked.
+    # FAQ's
     (FAQs will be added in a later version of the documentation)
-    ## 4.3 Release Notes
+    # Release Notes
     First draft for the CFS API.
   license:
     name: Apache 2.0
@@ -177,6 +217,14 @@ paths:
           $ref: "#/components/responses/Generic401"
         "403":
           $ref: "#/components/responses/Generic403"
+        "409":
+          $ref: "#/components/responses/Generic409"
+        "415":
+          $ref: "#/components/responses/Generic415"
+        "422":
+          $ref: "#/components/responses/Generic422"
+        "429":
+          $ref: "#/components/responses/Generic429"
         "503":
           $ref: "#/components/responses/Generic503"
   /call-forwardings:
@@ -190,7 +238,9 @@ paths:
        service active on a phone number (PhoneNumber)
       description: This endpoint provides information about wich type of
        call forwarding service is active. More than one service can be
-       active, e.g. conditional and unconditional.
+       active, e.g. conditional and unconditional. This endpoit exceeds
+       the main scope of the CFS API, for this reason an error code 501
+       can be returned.
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -222,6 +272,16 @@ paths:
           $ref: "#/components/responses/Generic401"
         "403":
           $ref: "#/components/responses/Generic403"
+        "409":
+          $ref: "#/components/responses/Generic409"
+        "415":
+          $ref: "#/components/responses/Generic415"
+        "422":
+          $ref: "#/components/responses/Generic422"
+        "429":
+          $ref: "#/components/responses/Generic429"
+        "501":
+          $ref: "#/components/responses/Generic501"
         "503":
           $ref: "#/components/responses/Generic503"
 ############################################################################
@@ -260,17 +320,26 @@ components:
            is active.
     CallForwardingSignal:
       description: resource containing the list of the Call
-       Forwarding Services active for the given phone number (PhoneNumber)
+       Forwarding Services active for the given phone number (PhoneNumber). The
+       possible states are, 'inactive' (no call forwarding service activated),
+       'unconditional' (call forwarded independently from the device status),
+       'conditional_busy' (call forwarded if the device is on an active call),
+       'conditional_unavailable' (call forwarded if the device is not available
+       on the network), 'conditional_no_reply' (call forwarded if the device
+       doesn't answer the incoming call).
       type: array
       items:
         type: string
         enum:
           - 'inactive'
           - 'unconditional'
-          - 'conditional'
+          - 'conditional_busy'
+          - 'conditional_unavailable'
+          - 'conditional_no_reply'
       example:
         - 'unconditional'
-        - 'conditional'
+        - 'conditional_busy'
+        - 'conditional_no_reply'
       minItems: 1
     ############################################################################
     #                                 Request                                  #
@@ -363,8 +432,8 @@ components:
               value:
                 status: 403
                 code: INVALID_TOKEN_CONTEXT
-                message: Phone number cannot be deducted from access token
-                 context
+                message: PhoneNumber parameter doesn't match the value from the
+                 access token context
     Generic404:
       description: The specified resource was not found
       headers:
@@ -379,6 +448,106 @@ components:
             code: CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
             message: Call forwarding check can't be done because the phone
              number is unknown
+    Generic409:
+      description: Conflict
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_409_ABORTED:
+              description: Concurrency of processes of the same nature/scope
+              value:
+                status: 409
+                code: ABORTED
+                message: Concurrency conflict.
+            GENERIC_409_ALREADY_EXISTS:
+              description: Trying to create an existing resource
+              value:
+                status: 409
+                code: ALREADY_EXISTS
+                message: The resource that a client tried to create already
+                 exists.
+            GENERIC_409_CONFLICT:
+              description: Duplication of an existing resource
+              value:
+                status: 409
+                code: CONFLICT
+                message: A specified resource duplicate entry found.
+    Generic415:
+      description: Unsupported Media Type
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_415_UNSUPPORTED_MEDIA_TYPE:
+              description: Payload format of the request is in an unsupported
+               format by the Server.
+              value:
+                status: 415
+                code: UNSUPPORTED_MEDIA_TYPE
+                message: The server refuses to accept the request because the
+                 payload format is in an unsupported format.
+    Generic422:
+      description: Unprocessable Content
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_422_DEVICE_IDENTIFIERS_MISMATCH:
+              description: Inconsistency between device identifiers not pointing
+               to the same device
+              value:
+                status: 422
+                code: DEVICE_IDENTIFIERS_MISMATCH
+                message: Provided device identifiers are not consistent.
+            GENERIC_422_DEVICE_NOT_APPLICABLE:
+              description: Service is not available for the provided device
+              value:
+                status: 422
+                code: DEVICE_NOT_APPLICABLE
+                message: The service is not available for the provided device.
+            GENERIC_422_UNIDENTIFIABLE_DEVICE:
+              description: phone number not available neither from "phoneNumber"
+               or from the access token.
+              value:
+                status: 422
+                code: UNIDENTIFIABLE_DEVICE
+                message: phone number not defined
+    Generic429:
+      description: Too Many Requests
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_429_QUOTA_EXCEEDED:
+              description: Request is rejected due to exceeding a business quota
+               limit.
+              value:
+                status: 429
+                code: QUOTA_EXCEEDED
+                message: Either out of resource quota or reaching rate limiting.
+            GENERIC_429_TOO_MANY_REQUESTS:
+              description: API Server request limit is overpassed
+              value:
+                status: 429
+                code: TOO_MANY_REQUESTS
+                message: Either out of resource quota or reaching rate limiting.
     Generic500:
       description: Server error
       headers:
@@ -392,6 +561,24 @@ components:
             status: 500
             code: INTERNAL
             message: Server error
+    Generic501:
+      description: Not Implemented
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorInfo"
+          examples:
+            GENERIC_501_NOT_IMPLEMENTED:
+              description: Service not implemented. The use of this code should
+               be avoided as far as possible to get the objective to reach
+               aligned implementations
+              value:
+                status: 501
+                code: NOT_IMPLEMENTED
+                message: This functionality is not implemented yet.
     Generic503:
       description: Service unavailable. Typically the server is down
       headers:
