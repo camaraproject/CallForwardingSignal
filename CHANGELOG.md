@@ -3,16 +3,18 @@
 
 ## Table of Contents
 
-- [v0.2.0-rc.1](#v0.2.0-rc.1)
+- **[r1.1](#r11)**
 
-# v0.2.0-rc.1
+# r1.1
 
-**This is the first alpha release of the CAMARA CallForwardingSignal API**
+**This is the first (pre) release candidate of the CAMARA CallForwardingSignal API**
+
+The version number for the YAML file is v0.2.0-rc.1
 
 - API definition **with inline documentation**:
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml)
 
 ## Please note:
 
