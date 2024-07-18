@@ -5,7 +5,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: wip
+  version: 0.2.0-alpha.1
   description: |
     # Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
@@ -156,7 +156,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/vwip"
+  - url: "{apiRoot}/call-forwarding-signal/v0.2alpha1"
     variables:
       apiRoot:
         default: http://localhost:9091
