@@ -1,7 +1,8 @@
 
 # API Readiness Checklist
 
-Checklist for CFS API wip
+Checklist for API call-forwarding-signal v0.2.0-rc.1 in r1.1
+
 
 | Nr | API release assets  | alpha | release-candidate |  public-release<br>initial | public-release<br> stable | Status | Comments |
 |----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:----:|
