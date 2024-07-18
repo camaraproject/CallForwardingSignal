@@ -3,22 +3,22 @@
 
 ## Table of Contents
 
-- [v0.2.0-alpha.1](#v0.2.0-alpha.1)
+- [v0.2.0-rc.1](#v0.2.0-rc.1)
 
-# v0.2.0-alpha.1
+# v0.2.0-rc.1
 
 **This is the first alpha release of the CAMARA CallForwardingSignal API**
 
 - API definition **with inline documentation**:
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/release-0.2.0-alpha.1/code/API_definitions/Call_Forwarding_Signal.yaml)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-alpha.1/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-alpha.1/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml)
 
 ## Please note:
 
 - This is an alpha version, there are bug fixes to be expected and incompatible changes in upcoming versions 
 - The release is suitable for implementers, but it is not recommended to use the API with customers in productive environments
-- Version numbers before v0.2.0-alpha.1 were used during the development of this version but not released
+- Version numbers before v0.2.0-rc.1 were used during the development of this version but not released
 
 ## What's New
 
@@ -34,4 +34,4 @@
 * @enlaichu
 * @chinaunicomyangfan
 
-**Full Changelog**: https://github.com/CallForwardingSignal/SimSwap/commits/v0.2.0-alpha.1
+**Full Changelog**: https://github.com/CallForwardingSignal/CallForwardingSignal/commits/r1.1
