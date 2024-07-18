@@ -5,7 +5,7 @@ openapi: 3.0.3
 ############################################################################
 info:
   title: Call Forwarding Signal API
-  version: 0.2.0-alpha.1
+  version: 0.2.0-rc.1
   description: |
     # Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
@@ -39,9 +39,10 @@ info:
     CallForwarding\Signal/discussions/3#discussioncomment-8915595)
     # Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
-    This resource is filled during the API invokation, by the API Consumer,
+    This resource can be filled during the API invokation, by the API Consumer,
     with the phone number on which the Call Forwarding Service status must be
-    verified.\
+    verified. Anyway the phone number is also detected, by the API Producer,
+    from the access token.\
     \
     Before starting to use the Call Forwarding API, the developer needs to know
     about the below specified details:\
@@ -51,9 +52,11 @@ info:
     [**https://tim-api.developer.tim.it/callforwardingsignal**](https://tim-api\
     .developer.tim.it/callforwarding\signal)\
     \
-    **PhoneNumber**
+    **phoneNumber**
     This is the end user phone number. The CFS API verifies if a call forwarding
-    service is active on this phone number.\
+    service is active on this phone number. Note: the value of this optional
+    parameter must match the value of the phone number retrieved from the access
+    token.\
     \
     **CreateCallForwardingSignal**
     This is the resource the API Consumer uses to define the phone number to
@@ -156,7 +159,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/v0.2alpha1"
+  - url: "{apiRoot}/call-forwarding-signal/v0.2rc1"
     variables:
       apiRoot:
         default: http://localhost:9091
