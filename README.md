@@ -29,9 +29,9 @@ Repository to describe, develop, document and test the Call Forwarding Signal AP
 * **The latest available release and version of CAMARA CallForwardingSignal API is v0.2.0-rc.1. This is the first (pre) relese candidate version of the API.** There are bug fixes to be expected and incompatible changes in upcoming releases. It is suitable for implementors, but it is not recommended to use the API with customers in productive environments.
 * Release v0.2.0-rc.1 of the API is available within the [release-0.2.0-rc.1 branch](https://github.com/camaraproject/CallForwardingSignal/tree/release-0.2.0-rc.1). The Release Tag is [r1.1](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r1.1).
 - API definition **with inline documentation**:
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-rc.1/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/release-0.2.0-alpha.1/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml)
 ## Contributorship and mailing list
 * To subscribe / unsubscribe to the mailing list of this Sub Project and thus be / resign as Contributor please visit <https://lists.camaraproject.org/g/sp-cfs>.
 * A message to all Contributors of this Sub Project can be sent using <sp-cfs@lists.camaraproject.org>.
