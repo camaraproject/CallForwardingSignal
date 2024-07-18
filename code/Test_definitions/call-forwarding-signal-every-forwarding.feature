@@ -42,20 +42,8 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response body is a string with the value "inactive"
 
-  #CFS inactive: phone number defined by phoneNumber and the CFS status for the phone number is known by the network. Login_hint not used to define the phone number
-  @call_forwarding_signal_03_call_forwarding_check_not_active_phoneNumber
-  Scenario: retrieve the call forwarding service settings for a given phone number with no forwarding configured. The endpoint is invoked with phoneNumber valorised and with login_hint not used to define the phone number
-    Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
-    And "login_hint" is not used to carry a phone number
-    And the request body is set to a valid request body
-    When the HTTP "POST" request is sent
-    Then the response status code is 200
-    And the response header "Content-Type" is "application/json"
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response body is a string with the value "inactive"
-
-  #CFS inactive: phone number defined by phoneNumber and the CFS status for the phone number is known by the network. Login_hint not used to define the phone number
-  @call_forwarding_signal_04_call_forwarding_check_not_active_login_hint
+  #CFS inactive: phone number defined by login_hint and the CFS status for the phone number is known by the network. phoneNumber not valorised
+  @call_forwarding_signal_03_call_forwarding_check_not_active_login_hint
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and login_hint is used to carry the phone number.
     Given the request body property "$.phoneNumber" is not valorised
     And "login_hint" is set to a valid phone number supported by the service
@@ -67,7 +55,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
     And the response body is a string with the value "inactive"
 
   #CFS active: phone number defined by phoneNumber and login_hint and the CFS status for the phone number is known by the network.
-  @call_forwarding_signal_05_call_forwarding_check_active_phoneNumber_login_hint
+  @call_forwarding_signal_04_call_forwarding_check_active_phoneNumber_login_hint
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked with phoneNumber valorised with the same value of login_hint
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
     And "login_hint" is valorised as "$.phoneNumber"
@@ -78,20 +66,8 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response body is an array of strings with the possibile values ["unconditional", "conditional_no_reply", "conditional_unavailable", "conditional_busy"]
 
-  #CFS active: phone number defined by phoneNumber and the CFS status for the phone number is known by the network. Login_hint not used to define the phone number
-  @call_forwarding_signal_06_call_forwarding_check_active_phoneNumber
-  Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked with phoneNumber valorised and with login_hint not used to define the phone number
-    Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
-    And "login_hint" is not used to carry a phone number
-    And the request body is set to a valid request body
-    When the HTTP "POST" request is sent
-    Then the response status code is 200
-    And the response header "Content-Type" is "application/json"
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response body is an array of strings with the possibile values ["unconditional", "conditional_no_reply", "conditional_unavailable", "conditional_busy"]
-
-  #CFS active: phone number defined by phoneNumber and the CFS status for the phone number is known by the network. Login_hint not used to define the phone number
-  @call_forwarding_signal_07_call_forwarding_check_active_login_hint
+  #CFS active: phone number defined by login_hint and the CFS status for the phone number is known by the network. phoneNumber not valorised
+  @call_forwarding_signal_05_call_forwarding_check_active_login_hint
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and login_hint is used to carry the phone number.
     Given the request body property "$.phoneNumber" is not valorised
     And "login_hint" is set to a valid phone number supported by the service
@@ -154,11 +130,21 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
       And the response property "$.message" contains a user friendly text
  
  # Generic 404 error - unknown phone number
-  @call_forwarding_signal_03_unconditional_call_forwarding_for_unknown_phone_number
+  @call_forwarding_signal_404.1_call_forwarding_for_unknown_phoneNumber
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding status could not be retrieved
     And the request body is set to a valid request body
     And "login_hint" is set to a valid phone number supported by the service with the same value as "$.phoneNumber", if valorised.
+    When the HTTP "POST" request is sent
+    Then the response status code is 404
+    And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
+    And the response property "$.message" contains a user friendly text
+
+  @call_forwarding_signal_404.2_call_forwarding_for_unknown_login_hint
+  Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
+    Given the request body property "$.phoneNumber" is not valorised
+    And the request body is set to a valid request body
+    And "login_hint" is set to a valid phone number supported by the service
     When the HTTP "POST" request is sent
     Then the response status code is 404
     And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"

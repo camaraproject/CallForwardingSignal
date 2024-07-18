@@ -43,21 +43,8 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
     And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
     And the response body property "$.active" is one of: ["true", "false"]
 
-  # phone number defined by phoneNumber and the CFS status for the phone number is known by the network. Login_hint not used to define the phone number
-  @call_forwarding_signal_03_unconditional_phoneNumber
-  Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked with phoneNumber valorised and with login_hint not used to define the phone number
-    Given the request body property "$.phoneNumber" is set to a valid phone number supported by the service
-    And the request body is set to a valid request body
-    And "login_hint" is not used to carry a phone number
-    When the HTTP "POST" request is sent
-    Then the response status code is 200
-    And the response header "Content-Type" is "application/json"
-    And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
-    And the response body property "$.active" is one of: ["true", "false"]
-
   # phone number defined by login_hint and the CFS status for the phone number is known by the network. phoneNumber not valorised
-  @call_forwarding_signal_04_unconditional_login_hint
+  @call_forwarding_signal_03_unconditional_login_hint
   Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked without a value for phoneNumber and login_hint is used to carry the phone number.
     Given the request body property "$.phoneNumber" is not valorised
     And the request body is set to a valid request body
@@ -120,11 +107,21 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-cal
       And the response property "$.message" contains a user friendly text
   
   # Generic 404 error - unknown phone number
-  @call_forwarding_signal_03_unconditional_call_forwarding_for_unknown_phone_number
+  @call_forwarding_signal_404.1_unconditional_call_forwarding_for_unknown_phoneNumber
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the unconditional call forwarding status could not be retrieved
     And the request body is set to a valid request body
-    And "login_hint" is set to a valid phone number supported by the service with the same value as "$.phoneNumber", if valorised.
+    And "login_hint" is set to a valid phone number supported by the service with the same value as "$.phoneNumber"
+    When the HTTP "POST" request is sent
+    Then the response status code is 404
+    And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
+    And the response property "$.message" contains a user friendly text
+
+  @call_forwarding_signal_404.2_unconditional_call_forwarding_for_unknown_login_hint
+  Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
+    Given the request body property "$.phoneNumber" is not valorised
+    And the request body is set to a valid request body
+    And "login_hint" is set to a valid phone number supported by the service
     When the HTTP "POST" request is sent
     Then the response status code is 404
     And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
