@@ -18,7 +18,7 @@ The version number for the YAML file is v0.2.0-rc.1
 
 ## Please note:
 
-- This is an alpha version, there are bug fixes to be expected and incompatible changes in upcoming versions 
+- This is an pre release candidate version, there are bug fixes to be expected and incompatible changes in upcoming versions 
 - The release is suitable for implementers, but it is not recommended to use the API with customers in productive environments
 - Version numbers before v0.2.0-rc.1 were used during the development of this version but not released
 
