@@ -26,7 +26,7 @@ The version number for the YAML file is v0.2.0-rc.1
 
 * Support for the following use cases: [Use Cases · camaraproject/CallForwardingSignal · Discussion #3 (github.com)](https://github.com/camaraproject/CallForwardingSignal/discussions/3)
 * Phone  number retrieved from 3-legs access token: [CAMARA Guidelines: Phone number identification with 3Legs · Issue #51 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/51)
-* Optional operation (unconditional-call-forwardings):  [Optional operations · Issue #37 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/37)
+* Optional operation (/call-forwardings):  [Optional operations · Issue #37 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/37)
 
 ## New Contributors
 * @FabrizioMoggio
