@@ -139,8 +139,6 @@ info:
     to be checked.
     # FAQ's
     (FAQs will be added in a later version of the documentation)
-    # Release Notes
-    First draft for the CFS API.
   # API version - Aligned to SemVer 2.0 according to CAMARA versioning guidelines
   version: wip
   # Name of the license and a URL to the license description
