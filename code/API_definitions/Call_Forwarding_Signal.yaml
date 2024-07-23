@@ -142,7 +142,7 @@ info:
     # Release Notes
     First draft for the CFS API.
   # API version - Aligned to SemVer 2.0 according to CAMARA versioning guidelines
-  version: 0.2.0-rc.1
+  version: wip
   # Name of the license and a URL to the license description
   license:
     name: Apache 2.0
@@ -158,7 +158,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/v0.2rc1"
+  - url: "{apiRoot}/call-forwarding-signal/vwip"
     variables:
       apiRoot:
         default: http://localhost:9091
