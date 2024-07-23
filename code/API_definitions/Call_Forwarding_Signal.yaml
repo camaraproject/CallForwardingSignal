@@ -143,7 +143,7 @@ info:
     First draft for the CFS API.
   # API version - Aligned to SemVer 2.0 according to CAMARA versioning guidelines
   version: 0.2.0-rc.1
-  # Name of the license and a URL to the license description  
+  # Name of the license and a URL to the license description
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
