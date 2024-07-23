@@ -4,8 +4,7 @@ openapi: 3.0.3
 #                                     API info                             #
 ############################################################################
 info:
-  title: Call Forwarding Signal API
-  version: 0.2.0-rc.1
+  title: Call Forwarding Signal
   description: |
     # Overview
     The Call Forwarding Signal (CFS) API provides the API Consumer with
@@ -147,9 +146,14 @@ info:
     (FAQs will be added in a later version of the documentation)
     # Release Notes
     First draft for the CFS API.
+  # API version - Aligned to SemVer 2.0 according to CAMARA versioning guidelines
+  version: 0.2.0-rc.1
+  # Name of the license and a URL to the license description  
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+  # CAMARA Commonalities version - x.y.z
+  x-camara-commonalities: 0.4.0
   contact:
     email: project-email@sample.com
 externalDocs:
