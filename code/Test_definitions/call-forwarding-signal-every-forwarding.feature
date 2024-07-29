@@ -8,7 +8,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation call-forwardings
   # * A device object identified by a phone number for which the call forwarding service status could not be retrieved
   #
   Background: Common call-forwarding-signal setup
-    Given the resource "/call-forwarding-signal/vwip/call-forwardings"
+    Given the path "/call-forwardings"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" is set to a UUID value
