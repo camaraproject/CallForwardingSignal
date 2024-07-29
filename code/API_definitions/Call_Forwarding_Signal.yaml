@@ -147,10 +147,8 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   # CAMARA Commonalities version - x.y.z
   x-camara-commonalities: 0.4.0
-  contact:
-    email: project-email@sample.com
 externalDocs:
-  description: Product documentation at Camara
+  description: Product documentation at CAMARA
   url: https://github.com/camaraproject/CallForwardingSignal
 ############################################################################
 #                                     Servers                              #
