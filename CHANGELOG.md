@@ -37,7 +37,7 @@ The version number for the YAML file is v0.2.0-rc.1
 * @enlaichu
 * @chinaunicomyangfan
 
-**Full Changelog**: https://github.com/CallForwardingSignal/CallForwardingSignal/commits/r1.1
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.1
 
 # r1.2-rc
 
@@ -71,5 +71,5 @@ The version number for the YAML file is v0.2.0-rc.2
 * @enlaichu
 * @chinaunicomyangfan
 
-**Full Changelog**: https://github.com/CallForwardingSignal/CallForwardingSignal/commits/r1.2
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.2
 
