@@ -1,4 +1,4 @@
-Feature: CAMARA Call Fowarwing Signal  API, v0.1.0 - Operation unconditional-call-forwarding
+Feature: CAMARA Call Fowarwing Signal  API, v0.2.0-rc.2 - Operation unconditional-call-forwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
