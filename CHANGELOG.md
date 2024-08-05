@@ -22,6 +22,7 @@ The version number for the YAML file is v0.2.0-rc.1
 - This pre-release concernes a release-candidate API version, there are bug fixes to be expected and incompatible changes in upcoming versions 
 - The release is suitable for implementers, but it is not recommended to use the API with customers in productive environments
 - Version numbers before v0.2.0-rc.1 were used during the development of this version but not released
+- The release scope is defined here: https://github.com/camaraproject/CallForwardingSignal/issues/49
 
 ## What's New
 
@@ -54,6 +55,7 @@ The version number for the YAML file is v0.2.0-rc.2
 
 - This pre-release concernes a release-candidate API version, there are bug fixes to be expected and incompatible changes in upcoming versions 
 - The release is suitable for implementers, but it is not recommended to use the API with customers in productive environments
+- The release scope is defined here: https://github.com/camaraproject/CallForwardingSignal/issues/72
 
 ## Changes compared with [r1.1-rc](#r11-rc)
 
@@ -62,6 +64,7 @@ The version number for the YAML file is v0.2.0-rc.2
 * Rename of the API Readiness Checklist: https://github.com/camaraproject/CallForwardingSignal/issues/79
 * Improvement of the user stories: https://github.com/camaraproject/CallForwardingSignal/issues/81
 * Removal of the version number in the ".feature" files in the "Background" section: https://github.com/camaraproject/CallForwardingSignal/issues/77
+* Commonalities version reported in the OAS file: https://github.com/camaraproject/CallForwardingSignal/issues/66
 
 ## New Contributors
 * @FabrizioMoggio
