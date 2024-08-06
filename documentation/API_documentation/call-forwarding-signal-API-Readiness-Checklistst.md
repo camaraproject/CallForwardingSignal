@@ -5,7 +5,7 @@ Checklist for API call-forwarding-signal v0.2.0-rc.2 in r1.2
 
 
 | Nr | API release assets  | alpha | release-candidate |  public-release<br>initial | public-release<br> stable | Status | Comments |
-|----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:----:|
+|----|----------------------------------------------|:-----:|:-----------------:|:-------:|:------:|:----:|:----|
 |  1 | API definition                               |   M   |         M         |    M    |    M   |   Y  | /code/API_definitions/Call_Forwarding_Signal.yaml |
 |  2 | Design guidelines from Commonalities applied |   O   |         M         |    M    |    M   |   Y  |      |
 |  3 | Guidelines from ICM applied                  |   O   |         M         |    M    |    M   |   Y  |      |
