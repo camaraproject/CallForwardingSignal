@@ -29,7 +29,7 @@ The API definition(s) are based on
 
 This is the second release candidate of the version 0.2.0. It contains mainly alignments with the Commonalities 0.4.0 and the Release Management Guidelines. 
 
-The release is suitable for implementers, but it is not recommended to use the API with customers in productive environments.
+The pre-release is suitable for implementers, but it is not recommended to use the API with customers in productive environments.
 
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.2/code/API_definitions/Call_Forwarding_Signal.yaml)
