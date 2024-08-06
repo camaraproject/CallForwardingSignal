@@ -139,14 +139,12 @@ info:
     to be checked.
     # FAQ's
     (FAQs will be added in a later version of the documentation)
-  # API version - Aligned to SemVer 2.0 according to CAMARA versioning guidelines
+
   version: wip
-  # Name of the license and a URL to the license description
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  # CAMARA Commonalities version - x.y.z
-  x-camara-commonalities: 0.4.0
+  x-camara-commonalities: 0.4.0-rc.2
 externalDocs:
   description: Product documentation at CAMARA
   url: https://github.com/camaraproject/CallForwardingSignal
@@ -154,11 +152,11 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/vwip"
+  - url: "{apiRoot}/call-forwarding-signal/v0.2.0-rc.2"
     variables:
       apiRoot:
         default: http://localhost:9091
-        description: API root for the Call Forwarding Signal API
+        description: API root, defined by the service provider, e.g. `api.example.com` or `api.example.com/somepath`
 ############################################################################
 #                                     Tags                                #
 ############################################################################
