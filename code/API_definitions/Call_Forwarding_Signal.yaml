@@ -72,31 +72,23 @@ info:
     - **call-forwardings**: Which is the status of the call forwarding for a
     specific phone number?
     # Authorization and authentication
-    CAMARA guidelines defines a set of authorization flows which can grant API
-    clients access to the API functionality, as outlined in the document
-    [CAMARA-API-access-and-user-consent.md](https:\
-    //github.com/camaraproject/IdentityAndConsentManagement/blob/main/\
-    documentation/CAMARA-API-access-and-user-consent.md).
+    The "Camara Security and Interoperability Profile" provides details on how
+    a client requests an access token. Please refer to Identify and Consent
+    Management (https://github.com/camaraproject/IdentityAndConsentManagement/)
+    for the released version of the Profile.\
+    \
     Which specific authorization flows are to be used will be determined during
-    onboarding process, happening between the API Client and the
-    Telco Operator exposing the API, taking into account the declared purpose
-    for accessing the API, while also being subject to the prevailing legal
-    framework dictated by local legislation.\
-    Specifically, for the CFS API, the CIBA flow should be adopted. The CIBA
-    flow is described here:[CIBA Flow](https://github.com/camaraproject/\
-    IdentityAndConsentManagement/blob/main/documentation/\
-    CAMARA-Security-Interoperability.md\
-    #client-initiated-backchannel-authentication-flow). The "login_hint" must be
-    the user's phone number valorised as the parameter PhoneNumber, if used. If
-    a mismatch is detected, a 403 error is returned (`INVALID_TOKEN_CONTEXT`).
+    onboarding process, happening between the API Client and the Telco Operator
+    exposing the API, taking into account the declared purpose for accessing the
+    API, while also being subject to the prevailing legal framework dictated by
+    local legislation.\
     \
     It is important to remark that in cases where personal user data is
     processed by the API, and users can exercise their rights through mechanisms
     such as opt-in and/or opt-out, the use of 3-legged access tokens becomes
-    mandatory.
-    This measure ensures that the API remains in strict compliance with user
-    privacy preferences and regulatory obligations,
-    upholding the principles of transparency and user-centric data control.
+    mandatory. This measure ensures that the API remains in strict compliance
+    with user privacy preferences and regulatory obligations, upholding the
+    principles of transparency and user-centric data control.
     # Identifying the phone number from the access token
     This specification defines the "phoneNumber" field as optional in API
     requests because using a 3-legged access token the phone number can be
