@@ -72,31 +72,23 @@ info:
     - **call-forwardings**: Which is the status of the call forwarding for a
     specific phone number?
     # Authorization and authentication
-    CAMARA guidelines defines a set of authorization flows which can grant API
-    clients access to the API functionality, as outlined in the document
-    [CAMARA-API-access-and-user-consent.md](https:\
-    //github.com/camaraproject/IdentityAndConsentManagement/blob/main/\
-    documentation/CAMARA-API-access-and-user-consent.md).
+    The "Camara Security and Interoperability Profile" provides details on how
+    a client requests an access token. Please refer to Identify and Consent
+    Management (https://github.com/camaraproject/IdentityAndConsentManagement/)
+    for the released version of the Profile.\
+    \
     Which specific authorization flows are to be used will be determined during
-    onboarding process, happening between the API Client and the
-    Telco Operator exposing the API, taking into account the declared purpose
-    for accessing the API, while also being subject to the prevailing legal
-    framework dictated by local legislation.\
-    Specifically, for the CFS API, the CIBA flow should be adopted. The CIBA
-    flow is described here:[CIBA Flow](https://github.com/camaraproject/\
-    IdentityAndConsentManagement/blob/main/documentation/\
-    CAMARA-Security-Interoperability.md\
-    #client-initiated-backchannel-authentication-flow). The "login_hint" must be
-    the user's phone number valorised as the parameter PhoneNumber, if used. If
-    a mismatch is detected, a 403 error is returned (`INVALID_TOKEN_CONTEXT`).
+    onboarding process, happening between the API Client and the Telco Operator
+    exposing the API, taking into account the declared purpose for accessing the
+    API, while also being subject to the prevailing legal framework dictated by
+    local legislation.\
     \
     It is important to remark that in cases where personal user data is
     processed by the API, and users can exercise their rights through mechanisms
     such as opt-in and/or opt-out, the use of 3-legged access tokens becomes
-    mandatory.
-    This measure ensures that the API remains in strict compliance with user
-    privacy preferences and regulatory obligations,
-    upholding the principles of transparency and user-centric data control.
+    mandatory. This measure ensures that the API remains in strict compliance
+    with user privacy preferences and regulatory obligations, upholding the
+    principles of transparency and user-centric data control.
     # Identifying the phone number from the access token
     This specification defines the "phoneNumber" field as optional in API
     requests because using a 3-legged access token the phone number can be
@@ -139,14 +131,12 @@ info:
     to be checked.
     # FAQ's
     (FAQs will be added in a later version of the documentation)
-  # API version - Aligned to SemVer 2.0 according to CAMARA versioning guidelines
-  version: wip
-  # Name of the license and a URL to the license description
+
+  version: 0.2.0-rc.2
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  # CAMARA Commonalities version - x.y.z
-  x-camara-commonalities: 0.4.0
+  x-camara-commonalities: 0.4.0-rc.2
 externalDocs:
   description: Product documentation at CAMARA
   url: https://github.com/camaraproject/CallForwardingSignal
@@ -154,11 +144,11 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/vwip"
+  - url: "{apiRoot}/call-forwarding-signal/v0.2rc2"
     variables:
       apiRoot:
         default: http://localhost:9091
-        description: API root for the Call Forwarding Signal API
+        description: API root, defined by the service provider, e.g. `api.example.com` or `api.example.com/somepath`
 ############################################################################
 #                                     Tags                                #
 ############################################################################
