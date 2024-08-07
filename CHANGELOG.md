@@ -41,6 +41,7 @@ The pre-release is suitable for implementers, but it is not recommended to use t
 ### Changed
 
 * Improvement of user stories by @FabrizioMoggio in https://github.com/camaraproject/CallForwardingSignal/pull/86
+* Aligned info.description Authorization and Authentication section with ICM 0.2.0 by @FabrizioMoggio in https://github.com/camaraproject/CallForwardingSignal/pull/91
 
 ### Fixed
 
