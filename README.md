@@ -26,7 +26,7 @@ Repository to describe, develop, document and test the Call Forwarding Signal AP
 ## Status and released versions
 
 * Note: Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until a new release is created. For example, changes may be reverted before a release is created. **For best results, use the latest available release**.
-* **The latest available version of CAMARA CallForwardingSignal API is v0.2.0.
+* **The latest available version of CAMARA CallForwardingSignal API is v0.2.0.**
 * The Release Tag is [r1.3](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r1.3).
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml)
