@@ -35,17 +35,15 @@ This is the first official release of the Call Forwarding Signal API, version 0.
   - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
   - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml)
 
-### Added
+Because this is the first official release, in the following there is a full list of the features supported by the API, including the features listed in the previous release candidates.
 
-### Changed
+## What's New
 
-### Fixed
+* Support for the following use cases: [Use Cases · camaraproject/CallForwardingSignal · Discussion #3 (github.com)](https://github.com/camaraproject/CallForwardingSignal/discussions/3)
+* Phone  number retrieved from 3-legs access token: [CAMARA Guidelines: Phone number identification with 3Legs · Issue #51 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/51)
+* Optional operation (/call-forwardings):  [Optional operations · Issue #37 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/37)
 
-* OAS file renamed by @FabrizioMoggio in https://github.com/camaraproject/CallForwardingSignal/pull/92
-
-### Removed
-
-**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r1.2...r1.3
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.3
   
 # r1.2-rc
 
