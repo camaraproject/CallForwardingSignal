@@ -3,6 +3,7 @@
 
 ## Table of Contents
 
+- **[r1.3](#r13)**
 - **[r1.2-rc](#r12-rc)**
 - **[r1.1-rc](#r11-rc)**
 
@@ -14,6 +15,36 @@ The below sections record the changes for each API version in each release as fo
 * for subsequent alpha or release-candidate API versions, the delta with respect to the previous pre-release
 * for a public API version, the consolidated changes since the release of the previous public API version
 
+# r1.3
+
+## Release Notes
+
+This release contains the definition and documentation of
+* call-forwarding-signal v0.2.0
+
+The API definition(s) are based on
+* Commonalities v0.4.0
+* Identity and Consent Management v0.2.0
+
+## call-forwarding-signal v0.2.0
+
+This is the first official release of the Call Forwarding Signal API, version 0.2.0. It contains mainly alignments with the Commonalities 0.4.0 and the Release Management Guidelines. 
+
+- API definition **with inline documentation**:
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml)
+
+Because this is the first official release, in the following there is a full list of the features supported by the API, including the features listed in the previous release candidates.
+
+## What's New
+
+* Support for the following use cases: [Use Cases · camaraproject/CallForwardingSignal · Discussion #3 (github.com)](https://github.com/camaraproject/CallForwardingSignal/discussions/3)
+* Phone  number retrieved from 3-legs access token: [CAMARA Guidelines: Phone number identification with 3Legs · Issue #51 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/51)
+* Optional operation (/call-forwardings):  [Optional operations · Issue #37 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/37)
+
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.3
+  
 # r1.2-rc
 
 ## Release Notes
@@ -60,9 +91,9 @@ The pre-release is suitable for implementers, but it is not recommended to use t
 The version number for the YAML file is v0.2.0-rc.1
 
 - API definition **with inline documentation**:
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.1/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/call-forwarding-signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.1/code/API_definitions/call-forwarding-signal.yaml)
 
 ## Please note:
 
@@ -86,6 +117,5 @@ The version number for the YAML file is v0.2.0-rc.1
 * @chinaunicomyangfan
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.1
-
 
 
