@@ -28,9 +28,9 @@ Repository to describe, develop, document and test the Call Forwarding Signal AP
 * **The latest available version of CAMARA CallForwardingSignal API is v0.2.0.**
 * The Release Tag is [r1.3](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r1.3).
 - API definition **with inline documentation**:
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.3/code/API_definitions/Call-Forwarding-Signal.yaml)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call-Forwarding-Signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call-Forwarding-Signal.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.3/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/call-forwarding-signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/call-forwarding-signal.yaml)
 ## Contributorship and mailing list
 * To subscribe / unsubscribe to the mailing list of this Sub Project and thus be / resign as Contributor please visit <https://lists.camaraproject.org/g/sp-cfs>.
 * A message to all Contributors of this Sub Project can be sent using <sp-cfs@lists.camaraproject.org>.
