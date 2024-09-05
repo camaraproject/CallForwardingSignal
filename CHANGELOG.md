@@ -31,9 +31,9 @@ The API definition(s) are based on
 This is the first official release of the Call Forwarding Signal API, version 0.2.0. It contains mainly alignments with the Commonalities 0.4.0 and the Release Management Guidelines. 
 
 - API definition **with inline documentation**:
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/Call_Forwarding_Signal.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.3/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/call-forwarding-signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r1.3/code/API_definitions/call-forwarding-signal.yaml)
 
 Because this is the first official release, in the following there is a full list of the features supported by the API, including the features listed in the previous release candidates.
 
