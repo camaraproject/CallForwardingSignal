@@ -1,4 +1,4 @@
-Feature: CAMARA Call Fowarwing Signal  API, v0.2.0-rc.2 - Operation unconditional-call-forwarding
+Feature: CAMARA Call Fowarwing Signal  API, v0.2.0 - Operation unconditional-call-forwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -129,7 +129,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.2.0-rc.2 - Operation unconditiona
 
   # Generic 409 error - conflict
   @call_forwarding_signal_409.1_already_exists
-  Scenario: Endpoint involked, by the same API Consumer, for a phone number whose status is already under verification
+  Scenario: Endpoint invoked, by the same API Consumer, for a phone number whose status is already under verification
       Given a pending request for a given phone number
       And a the same phone number for a new request
       When the HTTP "POST" for the second request is sent before the first request gets an answer
@@ -170,7 +170,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.2.0-rc.2 - Operation unconditiona
       And the response property "$.message" contains a user friendly text
 
   @call_forwarding_signal_429.2_too_many_requests
-    Scenario: The server is not able to handle a requst because of a lack of resources
+    Scenario: The server is not able to handle a request because of a lack of resources
       Given the number of endpoints calls from any APi Consumer is equal to the server limit
       And the endpoint is invoked
       When the HTTP "POST" request is sent

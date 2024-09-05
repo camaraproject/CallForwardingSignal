@@ -1,4 +1,4 @@
-Feature: CAMARA Call Fowarwing Signal  API, v0.2.0-rc.2 - Operation call-forwardings
+Feature: CAMARA Call Fowarwing Signal  API, v0.2.0 - Operation call-forwardings
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
