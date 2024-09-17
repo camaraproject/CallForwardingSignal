@@ -4,6 +4,7 @@
 <a href="https://github.com/camaraproject/CallForwardingSignal/graphs/contributors" title="Contributors"><img src="https://img.shields.io/github/contributors/camaraproject/CallForwardingSignal?style=plastic"></a>
 <a href="https://github.com/camaraproject/CallForwardingSignal" title="Repo Size"><img src="https://img.shields.io/github/repo-size/camaraproject/CallForwardingSignal?style=plastic"></a>
 <a href="https://github.com/camaraproject/CallForwardingSignal/blob/main/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=plastic"></a>
+<a href="https://github.com/camaraproject/CallForwardingSignal/releases/latest" title="Latest Release"><img src="https://img.shields.io/github/release/camaraproject/CallForwardingSignal?style=plastic"></a>
 
 # CallForwardingSignal
 Repository to describe, develop, document and test the Call Forwarding Signal API
