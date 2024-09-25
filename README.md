@@ -20,7 +20,7 @@ Repository to describe, develop, document and test the Call Forwarding Signal AP
 
 ## Meetings
 * Meetings are held virtually
-* Schedule: Tuesday 15h-16 CET, usually every two weeks. For the next meetings information, have a look on the API Wiki Page: https://wiki.camaraproject.org/display/CAM/CallForwardingSignal
+* Schedule: Monday 15h-16 CET, usually every two weeks. For the next meetings information, have a look on the [API Wiki Page](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14549020/CallForwardingSignal).
 
 ## Status and released versions
 
