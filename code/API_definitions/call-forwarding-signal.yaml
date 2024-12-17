@@ -24,7 +24,7 @@ info:
     get the general status of the Call Forwarding Service (inactive,
     conditional, unconditional). If conditional call forwarding is active,
     the differente type of settings are returned ('conditional_busy',
-    'conditional_unavailable', 'conditional_no_reply').\
+    'conditional_not_reachable', 'conditional_no_answer').\
     \
     **Example use cases:**\
     \
@@ -132,7 +132,7 @@ info:
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
-  version: 0.2.0
+  version: wip
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -226,7 +226,7 @@ paths:
        service active on a phone number (PhoneNumber)
       description: This endpoint provides information about wich type of
        call forwarding service is active. More than one service can be
-       active, e.g. conditional and unconditional. This endpoint exceeds
+       active, e.g. conditional and unconditional. This endpoit exceeds
        the main scope of the CFS API, for this reason an error code 501
        can be returned.
       operationId: retrieveCallForwarding
@@ -312,9 +312,9 @@ components:
        possible states are, 'inactive' (no call forwarding service activated),
        'unconditional' (call forwarded independently from the device status),
        'conditional_busy' (call forwarded if the device is on an active call),
-       'conditional_unavailable' (call forwarded if the device is not available
-       on the network), 'conditional_no_reply' (call forwarded if the device
-       doesn't answer the incoming call).
+       'conditional_not_reachable' (call forwarded if the device is not
+       reachable), 'conditional_no_answer' (call forwarded if the device doesn't
+       answer the incoming call).
       type: array
       items:
         type: string
@@ -322,12 +322,12 @@ components:
           - 'inactive'
           - 'unconditional'
           - 'conditional_busy'
-          - 'conditional_unavailable'
-          - 'conditional_no_reply'
+          - 'conditional_not_reachable'
+          - 'conditional_no_answer'
       example:
         - 'unconditional'
         - 'conditional_busy'
-        - 'conditional_no_reply'
+        - 'conditional_no_answer'
       minItems: 1
     ############################################################################
     #                                 Request                                  #
