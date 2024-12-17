@@ -144,7 +144,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/v0.2"
+  - url: "{apiRoot}/call-forwarding-signal/vwip"
     variables:
       apiRoot:
         default: http://localhost:9091
