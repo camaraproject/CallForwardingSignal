@@ -13,7 +13,7 @@ Checklist for API call-forwarding-signal v1.0.0 in r2.0
 |  5 | API documentation                            |   M   |         M         |    M    |    M   |   Y  | inline in YAML |
 |  6 | User stories                                 |   O   |         O         |    O    |    M   |   Y  | [link](/documentation/API_documentation/CFS_UserStory_UseCase-1.md) |
 |  7 | Basic API test cases & documentation         |   O   |         M         |    M    |    M   |   Y  | [call-forwarding-signal-every-forwarding](/code/Test_definitions/call-forwarding-signal-every-forwarding.feature), [call-forwarding-signal-unconditional](/code/Test_definitions/call-forwarding-signal-unconditional.feature) |
-|  8 | Enhanced API test cases & documentation      |   O   |         O         |    O    |    M   |   N  |      |
+|  8 | Enhanced API test cases & documentation      |   O   |         O         |    O    |    M   |   Y  | [call-forwarding-signal-every-forwarding](/code/Test_definitions/call-forwarding-signal-every-forwarding.feature), [call-forwarding-signal-unconditional](/code/Test_definitions/call-forwarding-signal-unconditional.feature) |
 |  9 | Test result statement                        |   O   |         O         |    O    |    M   |   N  |      |
 | 10 | API release numbering convention applied     |   M   |         M         |    M    |    M   |   Y  | r2.0 |
 | 11 | Change log updated                           |   M   |         M         |    M    |    M   |   Y  | [link](/CHANGELOG.md) |
