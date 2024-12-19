@@ -38,10 +38,10 @@ info:
     CallForwarding\Signal/discussions/3#discussioncomment-8915595)
     # Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
-    This resource can be filled during the API invokation, by the API Consumer,
-    with the phone number on which the Call Forwarding Service status must be
-    verified. Anyway the phone number is also detected, by the API Producer,
-    from the access token.\
+    This resource can be used, by the API Consumer, to specify the phone number
+    on which the Call Forwarding Service status must be verified, in case of
+    two-legged authentication. If three-legged authentication is used the phone
+    number is instead detected, by the API Producer, from the access token.\
     \
     Before starting to use the Call Forwarding API, the developer needs to know
     about the below specified details:\
@@ -49,7 +49,7 @@ info:
     **phoneNumber**
     This is the end user phone number. The CFS API verifies if a call forwarding
     service is active on this phone number. Note: the value of this optional
-    parameter must match the value of the phone number retrieved from the access
+    parameter and must be valorised only in case of two-legged authentication.
     token.\
     \
     **CreateCallForwardingSignal**
@@ -130,10 +130,6 @@ info:
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
     services will be provided back via the CallForwardingSignal resource.\
-    CFS API have to check the Call Forwarding
-    Service status can be optionally defined with resource
-    (CreateCallForwardingSignal) containing the phone number (PhoneNumber)
-    to be checked.
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
@@ -331,7 +327,8 @@ components:
     ############################################################################
     CreateCallForwardingSignal:
       description: resource containing the phone number (PhoneNumber) regarding
-       which the Call Forwarding Service must be checked
+       which the Call Forwarding Service must be checked. To be valorised only
+       in caso of two-legged authentication.
       type: object
       properties:
         phoneNumber:
@@ -536,7 +533,6 @@ components:
                       - MISSING_IDENTIFIER
                       - UNSUPPORTED_IDENTIFIER
                       - UNNECESSARY_IDENTIFIER
-                      - "{{SPECIFIC_CODE}}"
           examples:
             GENERIC_422_SERVICE_NOT_APPLICABLE:
               description: Service not applicable for the provided
@@ -553,7 +549,7 @@ components:
               value:
                 status: 422
                 code: MISSING_IDENTIFIER
-                message: The device cannot be identified.
+                message: The phone number cannot be identified.
             GENERIC_422_UNSUPPORTED_IDENTIFIER:
               description: None of the provided identifiers is
                 supported by the implementation
@@ -568,7 +564,7 @@ components:
               value:
                 status: 422
                 code: UNNECESSARY_IDENTIFIER
-                message: The device is already identified by the
+                message: The phone number is already identified by the
                   access token.
     Generic429:
       description: Too Many Requests
