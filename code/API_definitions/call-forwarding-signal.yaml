@@ -352,6 +352,7 @@ components:
     #                                 Responces                                #
     ############################################################################
     ErrorInfo:
+      description: error info template
       type: object
       required:
         - message
@@ -677,7 +678,7 @@ components:
                 usually related to maintenance process in the server side
               value:
                 status: 503
-                code: UNAVAILABLE
+                code: SERVICE_UNAVAILABLE
                 message: Service Unavailable.
     Generic504:
       description: Gateway Timeout
