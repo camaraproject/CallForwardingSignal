@@ -1,4 +1,4 @@
-Feature: CAMARA Call Fowarwing Signal  API, v0.2.0 - Operation unconditional-call-forwarding
+Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-call-forwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -17,12 +17,23 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.2.0 - Operation unconditional-cal
   # Happy path scenarios
 
   # This first scenario serves as a minimum
-  @call_forwarding_signal_01_unconditional_generic_success_scenario
-  Scenario: Common validations for any success scenario
+  @call_forwarding_signal_01_unconditional_generic_success_scenario_2-legs
+  Scenario: Common validations for any success scenario with 2-legs authentication
     # Valid testing default request body compliant with the schema
     Given the request body property "$.phoneNumber" is set to a valid phone number supported by the service
     And the request body is set to a valid request body
-    And "login_hint" is valorised as "$.phoneNumber"
+    When the HTTP "POST" request is sent
+    Then the response status code is 200
+    And the response header "Content-Type" is "application/json"
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    # The response has to comply with the generic response schema which is part of the spec
+    And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
+
+  @call_forwarding_signal_01.1_generic_success_scenario_3-legs
+  Scenario: Common validations for any success scenario with 3-legs authentication
+    # Valid testing default request body compliant with the schema
+    Given the request body is set to a valid request body
+    And the phone number is retrieved from "login_hint"
     When the HTTP "POST" request is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
@@ -30,12 +41,11 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.2.0 - Operation unconditional-cal
     # The response has to comply with the generic response schema which is part of the spec
     And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
   
-  # phone number defined by phoneNumber and login_hint and the CFS status for the phone number is known by the network.
-  @call_forwarding_signal_02_unconditional_phoneNumber_login_hint
-  Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked with phoneNumber valorised with the same value of login_hint
+  # phone number defined by phoneNumber (2-legs authentication) and the CFS status for the phone number is known by the network.
+  @call_forwarding_signal_02_unconditional_phoneNumber
+  Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked with phoneNumber properly valorised
     Given the request body property "$.phoneNumber" is set to a valid phone number supported by the service
     And the request body is set to a valid request body
-    And "login_hint" is valorised as "$.phoneNumber"
     When the HTTP "POST" request is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
@@ -148,14 +158,23 @@ Feature: CAMARA Call Fowarwing Signal  API, v0.2.0 - Operation unconditional-cal
       And the response property "$.message" contains a user friendly text
 
   # Generic 422 error - phone number unavailable
-  @call_forwarding_signal_422.phone_number_unavailable
-  Scenario: The "phoneNumber" parameter is not included in the request and the phone number information cannot be derived from the 3-legged access token
-    Given "login_hint" is not providing the phone number
-    And the request body property "$.phoneNumber" is not valorised
+  @call_forwarding_signal_422.phone_number_unavailable_2-legs
+  Scenario: The "phoneNumber" parameter is not included in the request
+    Given the request body property "$.phoneNumber" is not valorised
     When the HTTP "POST" request is sent
     Then the response status code is 422
     And the response property "$.status" is 422
-    And the response property "$.code" is "UNIDENTIFIABLE_DEVICE"
+    And the response property "$.code" is "MISSING_IDENTIFIER"
+    And the response property "$.message" contains a user friendly text
+
+  @call_forwarding_signal_422.1.phone_number_unnecessary_3-legs
+  Scenario: The "phoneNumber" parameter is included in the request
+    Given the request body property "$.phoneNumber" is valorised
+    And  "login_hint" is set to a properly formatted phone number
+    When the HTTP "POST" request is sent
+    Then the response status code is 422
+    And the response property "$.status" is 422
+    And the response property "$.code" is "UNNECESSARY_IDENTIFIER"
     And the response property "$.message" contains a user friendly text
 
   # Generic 429 error - too many requests
