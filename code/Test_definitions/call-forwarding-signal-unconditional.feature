@@ -121,7 +121,6 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-cal
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the unconditional call forwarding status could not be retrieved
     And the request body is set to a valid request body
-    And "login_hint" is set to a valid phone number supported by the service with the same value as "$.phoneNumber"
     When the HTTP "POST" request is sent
     Then the response status code is 404
     And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
@@ -136,26 +135,6 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-cal
     Then the response status code is 404
     And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
     And the response property "$.message" contains a user friendly text
-
-  # Generic 409 error - conflict
-  @call_forwarding_signal_409.1_already_exists
-  Scenario: Endpoint invoked, by the same API Consumer, for a phone number whose status is already under verification
-      Given a pending request for a given phone number
-      And a the same phone number for a new request
-      When the HTTP "POST" for the second request is sent before the first request gets an answer
-      Then the response status code is 409
-      And the response property "$.status" is 409
-      And the response property "$.code" is "ALREADY_EXISTS"
-
-  # Generic 415 error - phone number format
-  @call_forwarding_signal_415.wrong_phone_number_format
-    Scenario: The phone number is not properly formatted
-      Given "login_hint" is set to a not propertly formatted phone number
-      When the HTTP "POST" request is sent
-      Then the response status code is 415
-      And the response property "$.status" is 415
-      And the response property "$.code" is "UNSUPPORTED_MEDIA_TYPE"
-      And the response property "$.message" contains a user friendly text
 
   # Generic 422 error - phone number unavailable
   @call_forwarding_signal_422.phone_number_unavailable_2-legs
