@@ -52,9 +52,9 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response body is a string with the value "inactive"
 
-  #CFS inactive: phone number defined by login_hint (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not valorised
-  @call_forwarding_signal_03_call_forwarding_check_not_active_login_hint
-  Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and login_hint is used to carry the phone number.
+  #CFS inactive: phone number obtained from the access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not valorised
+  @call_forwarding_signal_03_call_forwarding_check_not_active_access_token
+  Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and access token is used to carry the phone number.
     Given the request body property "$.phoneNumber" is not valorised
     And The header "Authorization" is set to a valid access token identifying a phoneNumber
     And the request body is set to a valid request body
@@ -75,9 +75,9 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response body is an array of strings with the possibile values ["unconditional", "conditional_no_reply", "conditional_unavailable", "conditional_busy"]
 
-  #CFS active: phone number defined by login_hint (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not valorised
-  @call_forwarding_signal_05_call_forwarding_check_active_login_hint
-  Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and login_hint is used to carry the phone number.
+  #CFS active: phone number obtained from access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not valorised
+  @call_forwarding_signal_05_call_forwarding_check_active_acess_token
+  Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and access token is used to obtain the phone number.
     Given the request body property "$.phoneNumber" is not valorised
     And The header "Authorization" is set to a valid access token identifying a phoneNumber
     And the request body is set to a valid request body
@@ -148,7 +148,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
     And the response property "$.message" contains a user friendly text
 
-  @call_forwarding_signal_404.2_call_forwarding_for_unknown_login_hint
+  @call_forwarding_signal_404.2_call_forwarding_for_unknown_phoneNumber_from_access_token
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
     Given the request body property "$.phoneNumber" is not valorised
     And the request body is set to a valid request body
