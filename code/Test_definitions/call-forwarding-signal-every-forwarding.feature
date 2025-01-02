@@ -33,7 +33,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
   Scenario: Common validations for any success scenario with 3-legs authentication
     # Valid testing default request body compliant with the schema
     Given the request body is set to a valid request body
-    And the phone number is retrieved from "login_hint"
+    And The header "Authorization" is set to a valid access token identifying a phoneNumber
     When the HTTP "POST" request is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
@@ -56,7 +56,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
   @call_forwarding_signal_03_call_forwarding_check_not_active_login_hint
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and login_hint is used to carry the phone number.
     Given the request body property "$.phoneNumber" is not valorised
-    And "login_hint" is set to a valid phone number supported by the service
+    And The header "Authorization" is set to a valid access token identifying a phoneNumber
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
     Then the response status code is 200
@@ -79,7 +79,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
   @call_forwarding_signal_05_call_forwarding_check_active_login_hint
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and login_hint is used to carry the phone number.
     Given the request body property "$.phoneNumber" is not valorised
-    And "login_hint" is set to a valid phone number supported by the service
+    And The header "Authorization" is set to a valid access token identifying a phoneNumber
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
     Then the response status code is 200
@@ -129,9 +129,9 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response property "$.message" contains a user friendly text
 
  @call_forwarding_signal_403.2_invalid_context
-  Scenario: Endpoint invoked with "login_hint" different from phoneNumber
+  Scenario: Endpoint invoked with an access token invoking a different from phoneNumber in the body
       Given the request body property "$.phoneNumber" is set to a valid phone number
-      And "login_hint" is set to a different valid phone number 
+      And The header "Authorization" is set to a valid access token identifying another phoneNumber
       When the HTTP "POST" request is sent
       Then the response status code is 403
       And the response property "$.status" is 403
@@ -152,7 +152,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
     Given the request body property "$.phoneNumber" is not valorised
     And the request body is set to a valid request body
-    And "login_hint" is set to a valid phone number supported by the service
+    And The header "Authorization" is set to a valid access token identifying a phoneNumber unknown by the network
     When the HTTP "POST" request is sent
     Then the response status code is 404
     And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
@@ -171,7 +171,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
   @call_forwarding_signal_422.1.phone_number_unnecessary_3-legs
   Scenario: The "phoneNumber" parameter is included in the request
     Given the request body property "$.phoneNumber" is valorised
-    And  "login_hint" is set to a properly formatted phone number
+    And The header "Authorization" is set to a valid access token identifying a phoneNumber 
     When the HTTP "POST" request is sent
     Then the response status code is 422
     And the response property "$.status" is 422
