@@ -44,12 +44,12 @@ In the following there is the list of the modifications with respect to the prev
  * Call Forwarding Service "state" terminology updated: https://github.com/camaraproject/CallForwardingSignal/issues/111
  * Alignment with CAMARA Guidelines in info.description:  
 	 * https://github.com/camaraproject/CallForwardingSignal/issues/120
-	 *  https://github.com/camaraproject/CallForwardingSignal/issues/122
+	 * https://github.com/camaraproject/CallForwardingSignal/issues/122
 	 * https://github.com/camaraproject/CallForwardingSignal/issues/130
  * Enhancements and Alignments in Errors: https://github.com/camaraproject/CallForwardingSignal/issues/119
  * Align API-Testing with CAMARA Guidelines: 
 	 * https://github.com/camaraproject/CallForwardingSignal/issues/123
-	 *  https://github.com/camaraproject/CallForwardingSignal/issues/134
+	 * https://github.com/camaraproject/CallForwardingSignal/issues/134
 
 ### Fixed
 
