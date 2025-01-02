@@ -34,7 +34,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-cal
     # Valid testing default request body compliant with the schema
     Given the request body is set to a valid request body
     And the request body property "$.phoneNumber" is not valorised
-    And The header "Authorization" is set to a valid access token identifying a phoneNumber 
+    And The header "Authorization" is set to a valid access token identifying a phone number 
     When the HTTP "POST" request is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
@@ -59,7 +59,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-cal
   Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked without a value for phoneNumber and the phone number is retrieved from the access token.
     Given the request body property "$.phoneNumber" is not valorised
     And the request body is set to a valid request body
-    And The header "Authorization" is set to a valid access token identifying a phoneNumber
+    And The header "Authorization" is set to a valid access token identifying a phone number
     When the HTTP "POST" request is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
@@ -99,7 +99,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-cal
 
   # Generic 403 error - insufficient permission
   @call_forwarding_signal_403.1_permission_denied
-  Scenario: Endpoint invoked with an authentication token not valid for the endopint context
+  Scenario: Endpoint invoked with an authentication token not valid for the endpoint context
     Given an access token with an invalid context
     When the HTTP "POST" request is sent
     Then the response status code is 403
@@ -131,7 +131,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-cal
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
     Given the request body property "$.phoneNumber" is not valorised
     And the request body is set to a valid request body
-    And The header "Authorization" is set to a valid access token identifying a phoneNumber unknown by the network
+    And The header "Authorization" is set to a valid access token identifying a phone number unknown by the network
     When the HTTP "POST" request is sent
     Then the response status code is 404
     And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
@@ -150,7 +150,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation unconditional-cal
   @call_forwarding_signal_422.1.phone_number_unnecessary_3-legs
   Scenario: The "phoneNumber" parameter is included in the request
     Given the request body property "$.phoneNumber" is valorised
-    And  The header "Authorization" is set to a valid access token identifying a phoneNumber
+    And  The header "Authorization" is set to a valid access token identifying same phone number
     When the HTTP "POST" request is sent
     Then the response status code is 422
     And the response property "$.status" is 422
