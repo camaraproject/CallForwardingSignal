@@ -38,10 +38,10 @@ info:
     CallForwarding\Signal/discussions/3#discussioncomment-8915595)
     # Quick Start
     The CFS API is a REST API based on the CreateCallForwardingSignal resource.
-    This resource can be filled during the API invokation, by the API Consumer,
-    with the phone number on which the Call Forwarding Service status must be
-    verified. Anyway the phone number is also detected, by the API Producer,
-    from the access token.\
+    This resource can be used, by the API Consumer, to specify the phone number
+    on which the Call Forwarding Service status must be verified, in case of
+    two-legged authentication. If three-legged authentication is used the phone
+    number is instead detected, by the API Producer, from the access token.\
     \
     Before starting to use the Call Forwarding API, the developer needs to know
     about the below specified details:\
@@ -49,7 +49,7 @@ info:
     **phoneNumber**
     This is the end user phone number. The CFS API verifies if a call forwarding
     service is active on this phone number. Note: the value of this optional
-    parameter must match the value of the phone number retrieved from the access
+    parameter and must be valorised only in case of two-legged authentication.
     token.\
     \
     **CreateCallForwardingSignal**
@@ -73,45 +73,50 @@ info:
     specific phone number?
     # Authorization and authentication
     The "Camara Security and Interoperability Profile" provides details on how
-    a client requests an access token. Please refer to Identify and Consent
-    Management (https://github.com/camaraproject/IdentityAndConsentManagement/)
-    for the released version of the Profile.\
+    an API consumer requests an access token. Please refer to Identify and
+    Consent Management
+    (https://github.com/camaraproject/IdentityAndConsentManagement/)
+    for the released version of the profile.\
     \
-    Which specific authorization flows are to be used will be determined during
-    onboarding process, happening between the API Client and the Telco Operator
-    exposing the API, taking into account the declared purpose for accessing the
-    API, while also being subject to the prevailing legal framework dictated by
-    local legislation.\
+    The specific authorization flows to be used will be agreed upon during
+    the onboarding process, happening between the provider of the application
+    consuming the API and the operator's API exposure platform, taking into
+    account the declared purpose for accessing the API, whilst also being
+    subject to the prevailing legal framework dictated by local legislation.\
     \
-    It is important to remark that in cases where personal user data is
-    processed by the API, and users can exercise their rights through mechanisms
-    such as opt-in and/or opt-out, the use of 3-legged access tokens becomes
-    mandatory. This measure ensures that the API remains in strict compliance
-    with user privacy preferences and regulatory obligations, upholding the
-    principles of transparency and user-centric data control.
+    In cases where personal data is processed by the API and users can
+    exercise their rights through mechanisms such as opt-in and/or opt-out,
+    the use of three-legged access tokens is mandatory. This ensures that
+    the API remains in compliance with privacy regulations, upholding the
+    principles of transparency and user-centric privacy-by-design.
     # Identifying the phone number from the access token
-    This specification defines the "phoneNumber" field as optional in API
-    requests because using a 3-legged access token the phone number can be
-    uniquely identified by the token.
-    ## Handling of phone number information:
-    ### Optional phone number object for 3-legged tokens:
-    When using a 3-legged access token, the phone number associated with the
-    access token must be considered as the phone number for the API request.
-    This means that the "phoneNumber" paramenter is not required in the request,
-    and if it is included it must identify the same phone number.
-    ### Validation mechanism:
-    - The server will extract the phone number identification from the access
-    token, if available.
-    - If the API request additionally includes a "phoneNumber" parameter when
-    using a 3-legged access token, the API will validate that the phone number
-    identifier provided matches the one associated with the access token.
-    - If there is a mismatch, the API will respond with a
-    403 `INVALID_TOKEN_CONTEXT` error, indicating that the device information
-    in the request does not match the token.
-    ### Error handling for unidentifiable devices:
-    - If the "phoneNumber" parameter is not included in the request and the
-    phone number information cannot be derived from the 3-legged access token,
-    the server will return a 422 `UNIDENTIFIABLE_DEVICE` error.
+    This API requires the API consumer to identify a phone number as the
+    subject of the API as follows:
+    - When the API is invoked using a two-legged access token, the subject
+    will be identified from the optional `phoneNumber` object field, which
+    therefore MUST be provided.
+    - When a three-legged access token is used however, this optional
+    identifier MUST NOT be provided, as the subject will be uniquely
+    identified from the access token.
+
+    This approach simplifies API usage for API consumers using a
+    three-legged access token to invoke the API by relying on the
+    information that is associated with the access token and was
+    identified during the authentication process.
+
+    ## Error handling:
+
+    - If the subject cannot be identified from the access token and the
+    optional `phoneNumber` object field is not included in the request, then
+    the server will return an error with the
+    `422 MISSING_IDENTIFIER` error code.
+
+    - If the subject can be identified from the access token and the
+    optional `phoneNumber` object field is also included in the request, then
+    the server will return an error with the `422 UNNECESSARY_IDENTIFIER`
+    error code. This will be the case even if the same device is
+    identified by these two methods, as the server is unable to make
+    this comparison.
     # API Documentation
     ## Details
     The CFS API is invoked by an API Consumer after the Consent Management
@@ -125,10 +130,6 @@ info:
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
     services will be provided back via the CallForwardingSignal resource.\
-    CFS API have to check the Call Forwarding
-    Service status can be optionally defined with resource
-    (CreateCallForwardingSignal) containing the phone number (PhoneNumber)
-    to be checked.
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
@@ -197,24 +198,14 @@ paths:
           $ref: "#/components/responses/Generic400"
         '404':
           $ref: '#/components/responses/Generic404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '504':
-          $ref: '#/components/responses/Generic504'
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
           $ref: "#/components/responses/Generic403"
-        "409":
-          $ref: "#/components/responses/Generic409"
-        "415":
-          $ref: "#/components/responses/Generic415"
         "422":
           $ref: "#/components/responses/Generic422"
         "429":
           $ref: "#/components/responses/Generic429"
-        "503":
-          $ref: "#/components/responses/Generic503"
   /call-forwardings:
     post:
       tags:
@@ -252,26 +243,16 @@ paths:
           $ref: "#/components/responses/Generic400"
         '404':
           $ref: '#/components/responses/Generic404'
-        '500':
-          $ref: '#/components/responses/Generic500'
-        '504':
-          $ref: '#/components/responses/Generic504'
         "401":
           $ref: "#/components/responses/Generic401"
         "403":
           $ref: "#/components/responses/Generic403"
-        "409":
-          $ref: "#/components/responses/Generic409"
-        "415":
-          $ref: "#/components/responses/Generic415"
         "422":
           $ref: "#/components/responses/Generic422"
         "429":
           $ref: "#/components/responses/Generic429"
         "501":
           $ref: "#/components/responses/Generic501"
-        "503":
-          $ref: "#/components/responses/Generic503"
 ############################################################################
 #                                 Components                               #
 ############################################################################
@@ -334,7 +315,8 @@ components:
     ############################################################################
     CreateCallForwardingSignal:
       description: resource containing the phone number (PhoneNumber) regarding
-       which the Call Forwarding Service must be checked
+       which the Call Forwarding Service must be checked. To be valorised only
+       in caso of two-legged authentication.
       type: object
       properties:
         phoneNumber:
@@ -355,134 +337,168 @@ components:
     #                                 Responces                                #
     ############################################################################
     ErrorInfo:
-      description: error information
+      description: error info template
       type: object
       required:
+        - message
         - status
         - code
-        - message
       properties:
-        status:
-          type: integer
-          description: HTTP status code returned along with this error response
-        code:
-          type: string
-          description: Code given to this error
         message:
           type: string
-          description: Detailed error description
+          description: A human readable description of what the event represent
+        status:
+          type: integer
+          description: HTTP response status code
+        code:
+          type: string
+          description: Friendly Code to describe the error
   responses:
     Generic400:
-      description: Problem with the client request
+      description: Bad Request
       headers:
         x-correlator:
-          $ref: '#/components/headers/x-correlator'
+          $ref: "#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorInfo'
-          example:
-            status: 400
-            code: INVALID_ARGUMENT
-            message: Client specified an invalid argument, request body or query
-             param
-    Generic401:
-      description: Authentication problem with the client request
-      headers:
-        x-correlator:
-          $ref: '#/components/headers/x-correlator'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorInfo'
-          example:
-            status: 401
-            code: UNAUTHENTICATED
-            message: Request not authenticated due to missing, invalid, or
-             expired credentials
-    Generic403:
-      description: Client does not have sufficient permission
-      headers:
-        x-correlator:
-          $ref: '#/components/headers/x-correlator'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorInfo'
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 400
+                  code:
+                    enum:
+                      - INVALID_ARGUMENT
+                      - OUT_OF_RANGE
           examples:
-            PermissionDenied:
+            GENERIC_400_INVALID_ARGUMENT:
+              description: Invalid Argument. Generic Syntax Exception
+              value:
+                status: 400
+                code: INVALID_ARGUMENT
+                message: Client specified an invalid argument, request body or
+                  query param.
+            GENERIC_400_OUT_OF_RANGE:
+              description: Out of Range. Specific Syntax Exception used when a
+                given field has a pre-defined range or a invalid filter
+                criteria combination is requested
+              value:
+                status: 400
+                code: OUT_OF_RANGE
+                message: Client specified an invalid range.
+    Generic401:
+      description: Unauthorized
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 401
+                  code:
+                    enum:
+                      - UNAUTHENTICATED
+                      - AUTHENTICATION_REQUIRED
+          examples:
+            GENERIC_401_UNAUTHENTICATED:
+              description: Request cannot be authenticated
+              value:
+                status: 401
+                code: UNAUTHENTICATED
+                message: Request not authenticated due to missing, invalid, or
+                  expired credentials.
+            GENERIC_401_AUTHENTICATION_REQUIRED:
+              description: New authentication is needed, authentication is no
+                longer valid
+              value:
+                status: 401
+                code: AUTHENTICATION_REQUIRED
+                message: New authentication is required.
+    Generic403:
+      description: Forbidden
+      headers:
+        x-correlator:
+          $ref: "#/components/headers/x-correlator"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 403
+                  code:
+                    enum:
+                      - PERMISSION_DENIED
+                      - INVALID_TOKEN_CONTEXT
+          examples:
+            GENERIC_403_PERMISSION_DENIED:
+              description: Permission denied. OAuth2 token access does not have
+                the required scope or when the user fails operational security
               value:
                 status: 403
                 code: PERMISSION_DENIED
                 message: Client does not have sufficient permissions to perform
-                 this action
-            InvalidTokenContext:
+                  this action.
+            GENERIC_403_INVALID_TOKEN_CONTEXT:
+              description: Reflect some inconsistency between information in
+                some field of the API and the related OAuth2 Token
               value:
                 status: 403
                 code: INVALID_TOKEN_CONTEXT
-                message: PhoneNumber parameter doesn't match the value from the
-                 access token context
+                message: "phoneNumber is not consistent with access token."
     Generic404:
-      description: The specified resource was not found
-      headers:
-        x-correlator:
-          $ref: '#/components/headers/x-correlator'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorInfo'
-          example:
-            status: 404
-            code: CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
-            message: Call forwarding check can't be done because the phone
-             number is unknown
-    Generic409:
-      description: Conflict
+      description: Not found
       headers:
         x-correlator:
           $ref: "#/components/headers/x-correlator"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 404
+                  code:
+                    enum:
+                      - NOT_FOUND
+                      - IDENTIFIER_NOT_FOUND
+                      - CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
           examples:
-            GENERIC_409_ABORTED:
-              description: Concurrency of processes of the same nature/scope
+            GENERIC_404_NOT_FOUND:
+              description: Resource is not found
               value:
-                status: 409
-                code: ABORTED
-                message: Concurrency conflict.
-            GENERIC_409_ALREADY_EXISTS:
-              description: Trying to create an existing resource
+                status: 404
+                code: NOT_FOUND
+                message: The specified resource is not found.
+            GENERIC_404_IDENTIFIER_NOT_FOUND:
+              description: Some identifier cannot be matched to a device
               value:
-                status: 409
-                code: ALREADY_EXISTS
-                message: The resource that a client tried to create already
-                 exists.
-            GENERIC_409_CONFLICT:
-              description: Duplication of an existing resource
+                status: 404
+                code: IDENTIFIER_NOT_FOUND
+                message: Device identifier not found.
+            GENERIC_404_CALL_FORWARDING.UNKNOWN_PHONE_NUMBER:
+              description: Specific situation to highlight the
+                resource/concept not found
               value:
-                status: 409
-                code: CONFLICT
-                message: A specified resource duplicate entry found.
-    Generic415:
-      description: Unsupported Media Type
-      headers:
-        x-correlator:
-          $ref: "#/components/headers/x-correlator"
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ErrorInfo"
-          examples:
-            GENERIC_415_UNSUPPORTED_MEDIA_TYPE:
-              description: Payload format of the request is in an unsupported
-               format by the Server.
-              value:
-                status: 415
-                code: UNSUPPORTED_MEDIA_TYPE
-                message: The server refuses to accept the request because the
-                 payload format is in an unsupported format.
+                status: 404
+                code: CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
+                message: Call forwarding check can't be done because the
+                  phone number is unknown.
     Generic422:
       description: Unprocessable Content
       headers:
@@ -491,28 +507,44 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 422
+                  code:
+                    enum:
+                      - SERVICE_NOT_APPLICABLE
+                      - MISSING_IDENTIFIER
+                      - UNNECESSARY_IDENTIFIER
           examples:
-            GENERIC_422_DEVICE_IDENTIFIERS_MISMATCH:
-              description: Inconsistency between device identifiers not pointing
-               to the same device
+            GENERIC_422_SERVICE_NOT_APPLICABLE:
+              description: Service not applicable for the provided
+                identifier
               value:
                 status: 422
-                code: DEVICE_IDENTIFIERS_MISMATCH
-                message: Provided device identifiers are not consistent.
-            GENERIC_422_DEVICE_NOT_APPLICABLE:
-              description: Service is not available for the provided device
+                code: SERVICE_NOT_APPLICABLE
+                message: The service is not available for the
+                  provided identifier.
+            GENERIC_422_MISSING_IDENTIFIER:
+              description: An identifier is not included in the
+                request and the device or phone number identification
+                cannot be derived from the 3-legged access token
               value:
                 status: 422
-                code: DEVICE_NOT_APPLICABLE
-                message: The service is not available for the provided device.
-            GENERIC_422_UNIDENTIFIABLE_DEVICE:
-              description: phone number not available neither from "phoneNumber"
-               or from the access token.
+                code: MISSING_IDENTIFIER
+                message: The phone number cannot be identified.
+            GENERIC_422_UNNECESSARY_IDENTIFIER:
+              description: An explicit identifier is provided when
+                a device or phone number has already been identified
+                from the access token
               value:
                 status: 422
-                code: UNIDENTIFIABLE_DEVICE
-                message: phone number not defined
+                code: UNNECESSARY_IDENTIFIER
+                message: The phone number is already identified by the
+                  access token.
     Generic429:
       description: Too Many Requests
       headers:
@@ -521,11 +553,20 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 429
+                  code:
+                    enum:
+                      - QUOTA_EXCEEDED
+                      - TOO_MANY_REQUESTS
           examples:
             GENERIC_429_QUOTA_EXCEEDED:
-              description: Request is rejected due to exceeding a business quota
-               limit.
+              description: Request is rejected due to exceeding a business quota limit
               value:
                 status: 429
                 code: QUOTA_EXCEEDED
@@ -536,19 +577,6 @@ components:
                 status: 429
                 code: TOO_MANY_REQUESTS
                 message: Either out of resource quota or reaching rate limiting.
-    Generic500:
-      description: Server error
-      headers:
-        x-correlator:
-          $ref: '#/components/headers/x-correlator'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorInfo'
-          example:
-            status: 500
-            code: INTERNAL
-            message: Server error
     Generic501:
       description: Not Implemented
       headers:
@@ -557,40 +585,22 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorInfo"
+            allOf:
+              - $ref: "#/components/schemas/ErrorInfo"
+              - type: object
+                properties:
+                  status:
+                    enum:
+                      - 501
+                  code:
+                    enum:
+                      - NOT_IMPLEMENTED
           examples:
             GENERIC_501_NOT_IMPLEMENTED:
-              description: Service not implemented. The use of this code should
-               be avoided as far as possible to get the objective to reach
-               aligned implementations
+              description: Service not implemented. The use of this code
+                should be avoided as far as possible to get the objective
+                to reach aligned implementations
               value:
                 status: 501
                 code: NOT_IMPLEMENTED
                 message: This functionality is not implemented yet.
-    Generic503:
-      description: Service unavailable. Typically the server is down
-      headers:
-        x-correlator:
-          $ref: '#/components/headers/x-correlator'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorInfo'
-          example:
-            status: 503
-            code: UNAVAILABLE
-            message: Service unavailable
-    Generic504:
-      description: Request time exceeded. If it happens repeatedly, consider
-       reducing the request complexity
-      headers:
-        x-correlator:
-          $ref: '#/components/headers/x-correlator'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorInfo'
-          example:
-            status: 504
-            code: TIMEOUT
-            message: Request timeout exceeded. Try later
