@@ -100,7 +100,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response property "$.message" contains a user friendly text
 
   @call_forwarding_signal_400.2_empty_request_body
-  Scenario: Empty object as request body
+  Scenario: Empty object as request body with 2-legs authentication
     Given the request body is set to "{}"
     When the HTTP "POST" request is sent
     Then the response status code is 400
@@ -209,3 +209,4 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response property "$.status" is 501
     And the response property "$.code" is "NOT_IMPLEMENTED"
     And the response property "$.message" contains a user friendly text
+  
