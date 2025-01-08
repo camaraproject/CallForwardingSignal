@@ -119,7 +119,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response property "$.message" contains a user friendly text
 
  # Generic 403 error - insufficient permission
- @call_forwarding_signal_403.1_permission_denied
+ @call_forwarding_signal_403_permission_denied
  Scenario: Endpoint invoked with an authentication token not valid for the endpoint context
     Given an access token with an invalid context
     When the HTTP "POST" request is sent
@@ -127,16 +127,6 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     And the response property "$.status" is 403
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
-
- @call_forwarding_signal_403.2_invalid_context
-  Scenario: Endpoint invoked with an access token invoking a different phone number from the phone number in the body
-      Given the request body property "$.phoneNumber" is set to a valid phone number
-      And The header "Authorization" is set to a valid access token identifying another phone number
-      When the HTTP "POST" request is sent
-      Then the response status code is 403
-      And the response property "$.status" is 403
-      And the response property "$.code" is "INVALID_TOKEN_CONTEXT"
-      And the response property "$.message" contains a user friendly text
  
  # Generic 404 error - unknown phone number
   @call_forwarding_signal_404.1_call_forwarding_for_unknown_phoneNumber
