@@ -48,9 +48,11 @@ info:
     \
     **phoneNumber**
     This is the end user phone number. The CFS API verifies if a call forwarding
-    service is active on this phone number. Note: the value of this optional
-    parameter and must be valorised only in case of two-legged authentication.
-    token.\
+    service is active on this phone number. Note: this parameter must be
+    must be valorised only in case of two-legged authentication. In case of
+    three-legged authentication the phone number is retrived by the access
+    token.
+    \
     \
     **CreateCallForwardingSignal**
     This is the resource the API Consumer uses to define the phone number to
@@ -59,7 +61,7 @@ info:
     **UnconditionalCallForwardingSignal**
     This is the resource the API Consumer gets back, containing the information
     about the Unconditional Call Forwarding Service status for the given phone
-    number (PhoneNumber)\
+    number (PhoneNumber).\
     \
     **CallForwardingSignal**
     This is the resource the API Consumer gets back, containing the information
@@ -316,7 +318,8 @@ components:
     CreateCallForwardingSignal:
       description: resource containing the phone number (PhoneNumber) regarding
        which the Call Forwarding Service must be checked. To be valorised only
-       in caso of two-legged authentication.
+       in caso of two-legged authentication. If valorised with three-legged
+       authentication a 422-UNNECESSARY_IDENTIFIER error code is returned.
       type: object
       properties:
         phoneNumber:
@@ -441,7 +444,6 @@ components:
                   code:
                     enum:
                       - PERMISSION_DENIED
-                      - INVALID_TOKEN_CONTEXT
           examples:
             GENERIC_403_PERMISSION_DENIED:
               description: Permission denied. OAuth2 token access does not have
@@ -451,13 +453,6 @@ components:
                 code: PERMISSION_DENIED
                 message: Client does not have sufficient permissions to perform
                   this action.
-            GENERIC_403_INVALID_TOKEN_CONTEXT:
-              description: Reflect some inconsistency between information in
-                some field of the API and the related OAuth2 Token
-              value:
-                status: 403
-                code: INVALID_TOKEN_CONTEXT
-                message: "phoneNumber is not consistent with access token."
     Generic404:
       description: Not found
       headers:
