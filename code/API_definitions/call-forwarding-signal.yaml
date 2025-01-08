@@ -318,7 +318,7 @@ components:
     CreateCallForwardingSignal:
       description: resource containing the phone number (PhoneNumber) regarding
        which the Call Forwarding Service must be checked. To be valorised only
-       in caso of two-legged authentication. If valorised with three-legged
+       in case of two-legged authentication. If valorised with three-legged
        authentication a 422-UNNECESSARY_IDENTIFIER error code is returned.
       type: object
       properties:
