@@ -107,6 +107,15 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0-rc.1 - Operation call-forward
     And the response property "$.status" is 400
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
+    
+  @call_forwarding_signal_400.3_invalid_format
+  Scenario: phone number not properly formatted (with 2-legs authentication)
+    Given the request body has a not property formatted "$.phoneNumber"
+    When the HTTP "POST" request is sent
+    Then the response status code is 400
+    And the response property "$.status" is 400
+    And the response property "$.code" is "INVALID_ARGUMENT"
+    And the response property "$.message" contains a user friendly text
 
   # Generic 401 Error - authentication
   @call_forwarding_signal_401.invalid_token
