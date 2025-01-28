@@ -12,9 +12,10 @@
 
 The below sections record the changes for each API version in each release as follows:
 
-* for each first alpha or release-candidate API version, all changes since the release of the previous public API version
-* for subsequent alpha or release-candidate API versions, the delta with respect to the previous pre-release
-* for a public API version, the consolidated changes since the release of the previous public API version
+* for an alpha release, the delta with respect to the previous release
+* for the first release-candidate, all changes since the last public release
+* for subsequent release-candidate(s), only the delta to the previous release-candidate
+* for a public release, the consolidated changes since the previous public release
 
 # r2.1
 
@@ -53,7 +54,7 @@ In the following there is the list of the modifications with respect to the prev
 	 * https://github.com/camaraproject/CallForwardingSignal/pull/117
 	 * https://github.com/camaraproject/CallForwardingSignal/pull/121
 
-**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r2.1
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r1.3...r2.1
 
 # r1.3
 
@@ -83,7 +84,7 @@ Because this is the first official release, in the following there is a full lis
 * Phone  number retrieved from 3-legs access token: [CAMARA Guidelines: Phone number identification with 3Legs · Issue #51 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/51)
 * Optional operation (/call-forwardings):  [Optional operations · Issue #37 · camaraproject/CallForwardingSignal (github.com)](https://github.com/camaraproject/CallForwardingSignal/issues/37)
 
-**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.3
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r1.2...r1.3
   
 # r1.2
 
