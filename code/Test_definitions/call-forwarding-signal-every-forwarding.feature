@@ -1,4 +1,4 @@
-Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
+Feature: CAMARA Call Forwarding Signal  API, v0.3.0-rc.1 - Operation call-forwardings
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -110,7 +110,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
     
   @call_forwarding_signal_400.3_invalid_format
   Scenario: phone number not properly formatted (with 2-legs authentication)
-    Given the request body has a not property formatted "$.phoneNumber"
+    Given the request body has a not properly formatted "$.phoneNumber"
     When the HTTP "POST" request is sent
     Then the response status code is 400
     And the response property "$.status" is 400
@@ -119,7 +119,7 @@ Feature: CAMARA Call Fowarwing Signal  API, v1.0.0 - Operation call-forwardings
 
   # Generic 401 Error - authentication
   @call_forwarding_signal_401.invalid_token
-  Scenario: Endpoint invoked with an ivalid authentication token
+  Scenario: Endpoint invoked with an invalid authentication token
     Given an invalid authentication token
     When the HTTP "POST" request is sent
     Then the response status code is 401
