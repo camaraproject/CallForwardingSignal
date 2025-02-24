@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, v0.3.0-rc.1 - Operation call-forwardings
+Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
