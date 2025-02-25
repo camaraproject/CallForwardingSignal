@@ -31,7 +31,7 @@ The API definition(s) are based on
 
 ## call-forwarding-signal v0.3.0
 
-This is the second public release of the Call Forwarding Signal API, version v0.3.0. It contains mainly alignments with the Commonalities 0.5 and the Release Management Guidelines.  This version includes improvements from an actual implementation of the API certified by GSMA.
+This is the second public release of the Call Forwarding Signal API, version v0.3.0. It contains mainly alignments with the Commonalities 0.5 and the Release Management Guidelines.  This version includes improvements from an actual implementation of the API.
 
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r2.2/code/API_definitions/call-forwarding-signal.yaml)
@@ -44,12 +44,19 @@ In the following there is the list of the modifications with respect to the prev
 
 ### Changed
  * API Version for M4: https://github.com/camaraproject/CallForwardingSignal/pull/154
+ * Call Forwarding Service "state" terminology updated: https://github.com/camaraproject/CallForwardingSignal/pull/117
+ * Alignment with CAMARA Guidelines in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/121
+ * Enhancements and Alignments in Errors: https://github.com/camaraproject/CallForwardingSignal/pull/121
+ * Align API-Testing with CAMARA Guidelines: https://github.com/camaraproject/CallForwardingSignal/pull/121
 
 ### Fixed
 
 ### Removed
+ * Removed unused Error codes: 
+	 * https://github.com/camaraproject/CallForwardingSignal/pull/117
+	 * https://github.com/camaraproject/CallForwardingSignal/pull/121
 
-**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r2.1...r2.2
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r1.3...r2.2
 
 # r2.1
 
@@ -64,7 +71,7 @@ The API definition(s) are based on
 
 ## call-forwarding-signal v0.3.0-rc.1
 
-This is the second release of the Call Forwarding Signal API, version v0.3.0-rc.1. It contains mainly alignments with the Commonalities 0.5 and the Release Management Guidelines.  This version includes improvements from an actual implementation of the API certified by GSMA.
+This is a release candidate for the Call Forwarding Signal API, version v0.3.0-rc.1. It contains mainly alignments with the Commonalities 0.5 and the Release Management Guidelines.  This version includes improvements from an actual implementation of the API.
 
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r2.1/code/API_definitions/call-forwarding-signal.yaml)
@@ -103,7 +110,7 @@ The API definition(s) are based on
 
 ## call-forwarding-signal v0.2.0
 
-This is the first official release of the Call Forwarding Signal API, version 0.2.0. It contains mainly alignments with the Commonalities 0.4.0 and the Release Management Guidelines. 
+This is the first public release of the Call Forwarding Signal API, version 0.2.0. It contains mainly alignments with the Commonalities 0.4.0 and the Release Management Guidelines. 
 
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r1.3/code/API_definitions/call-forwarding-signal.yaml)
