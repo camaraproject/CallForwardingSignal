@@ -8,7 +8,7 @@
 <a href="https://github.com/camaraproject/Governance/blob/main/ProjectStructureAndRoles.md" title="Incubating API Repository"><img src="https://img.shields.io/badge/Incubating%20API%20Repository-green?style=plastic"></a>
 
 # CallForwardingSignal
-Incubated API Repository to evolve and maintain the definitions and documentation of Call Forwarding Signal Service API within the Sub Project CallForwardingSignal.
+Incubating API Repository to evolve and maintain the definitions and documentation of Call Forwarding Signal Service API within the Sub Project CallForwardingSignal.
 
 * API Repository wiki page: https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14549020/CallForwardingSignal
 * Sub Project home page: https://github.com/camaraproject/CallForwardingSignal 
