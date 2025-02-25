@@ -5,7 +5,7 @@
 <a href="https://github.com/camaraproject/CallForwardingSignal" title="Repo Size"><img src="https://img.shields.io/github/repo-size/camaraproject/CallForwardingSignal?style=plastic"></a>
 <a href="https://github.com/camaraproject/CallForwardingSignal/blob/main/LICENSE" title="License"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=plastic"></a>
 <a href="https://github.com/camaraproject/CallForwardingSignal/releases/latest" title="Latest Release"><img src="https://img.shields.io/github/release/camaraproject/CallForwardingSignal?style=plastic"></a>
-<a href="https://github.com/camaraproject/Governance/blob/main/ProjectStructureAndRoles.md" title="Incubated API Repository"><img src="https://img.shields.io/badge/Incubated%20API%20Repository-green?style=plastic"></a>
+<a href="https://github.com/camaraproject/Governance/blob/main/ProjectStructureAndRoles.md" title="Incubating API Repository"><img src="https://img.shields.io/badge/Incubating%20API%20Repository-green?style=plastic"></a>
 
 # CallForwardingSignal
 Incubated API Repository to evolve and maintain the definitions and documentation of Call Forwarding Signal Service API within the Sub Project CallForwardingSignal.
