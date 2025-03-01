@@ -466,7 +466,6 @@ components:
                     enum:
                       - NOT_FOUND
                       - IDENTIFIER_NOT_FOUND
-                      - CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
           examples:
             GENERIC_404_NOT_FOUND:
               description: Resource is not found
@@ -475,19 +474,12 @@ components:
                 code: NOT_FOUND
                 message: The specified resource is not found.
             GENERIC_404_IDENTIFIER_NOT_FOUND:
-              description: Some identifier cannot be matched to a device
+              description: Call forwarding check can't be done because the
+                  phone number is unknown.
               value:
                 status: 404
                 code: IDENTIFIER_NOT_FOUND
                 message: Device identifier not found.
-            GENERIC_404_CALL_FORWARDING.UNKNOWN_PHONE_NUMBER:
-              description: Specific situation to highlight the
-                resource/concept not found
-              value:
-                status: 404
-                code: CALL_FORWARDING.UNKNOWN_PHONE_NUMBER
-                message: Call forwarding check can't be done because the
-                  phone number is unknown.
     Generic422:
       description: Unprocessable Content
       headers:
