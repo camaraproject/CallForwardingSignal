@@ -43,11 +43,12 @@ In the following there is the list of the modifications with respect to the prev
 ### Added
 
 ### Changed
- * API Version for M4: https://github.com/camaraproject/CallForwardingSignal/pull/154
  * Call Forwarding Service "state" terminology updated: https://github.com/camaraproject/CallForwardingSignal/pull/117
- * Alignment with CAMARA Guidelines in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/121
+ * Alignment with CAMARA Guidelines in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/121, https://github.com/camaraproject/CallForwardingSignal/issues/158
  * Enhancements and Alignments in Errors: https://github.com/camaraproject/CallForwardingSignal/pull/121
  * Align API-Testing with CAMARA Guidelines: https://github.com/camaraproject/CallForwardingSignal/pull/121
+ * Changed error code 404: https://github.com/camaraproject/CallForwardingSignal/issues/160
+ * Alignement with Commonalities for x-correlator and Error 429: https://github.com/camaraproject/CallForwardingSignal/issues/159
 
 ### Fixed
 
