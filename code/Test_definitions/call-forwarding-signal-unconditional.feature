@@ -123,7 +123,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-ca
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
     Then the response status code is 404
-    And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
+    And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
     And the response property "$.message" contains a user friendly text
 
   @call_forwarding_signal_404.2_unconditional_call_forwarding_for_unknown_phone_number
@@ -133,7 +133,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-ca
     And The header "Authorization" is set to a valid access token identifying a phone number unknown by the network
     When the HTTP "POST" request is sent
     Then the response status code is 404
-    And the response property "$.code" is "CALL_FORWARDING.UNKNOWN_PHONE_NUMBER"
+    And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
     And the response property "$.message" contains a user friendly text
 
   # Generic 422 error - phone number unavailable
