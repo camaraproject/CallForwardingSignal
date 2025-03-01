@@ -80,11 +80,11 @@ info:
     (https://github.com/camaraproject/IdentityAndConsentManagement/)
     for the released version of the profile.\
     \
-    The specific authorization flows to be used will be agreed upon during
-    the onboarding process, happening between the provider of the application
-    consuming the API and the operator's API exposure platform, taking into
-    account the declared purpose for accessing the API, whilst also being
-    subject to the prevailing legal framework dictated by local legislation.\
+    The specific authorization flows to be used will be agreed upon during the
+    onboarding process, happening between the API consumer and the API
+    provider, taking into account the declared purpose for accessing the API,
+    whilst also being subject to the prevailing legal framework dictated by
+    local legislation.\
     \
     In cases where personal data is processed by the API and users can
     exercise their rights through mechanisms such as opt-in and/or opt-out,
@@ -271,11 +271,14 @@ components:
       description: Correlation id for the different services
       schema:
         type: string
+        pattern: ^[a-zA-Z0-9-]{0,55}$
+        example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
   headers:
     x-correlator:
       description: Correlation id for the different services
       schema:
         type: string
+        pattern: ^[a-zA-Z0-9-]{0,55}$
   ############################################################################
   #                                 Resources                                #
   ############################################################################
@@ -552,17 +555,19 @@ components:
                       - TOO_MANY_REQUESTS
           examples:
             GENERIC_429_QUOTA_EXCEEDED:
-              description: Request is rejected due to exceeding a business quota limit
+              description: Request is rejected due to exceeding a
+                business quota limit
               value:
                 status: 429
                 code: QUOTA_EXCEEDED
-                message: Either out of resource quota or reaching rate limiting.
+                message: Out of resource quota.
             GENERIC_429_TOO_MANY_REQUESTS:
-              description: API Server request limit is overpassed
+              description: Access to the API has been temporarily
+                blocked due to rate or spike arrest limits being reached
               value:
                 status: 429
                 code: TOO_MANY_REQUESTS
-                message: Either out of resource quota or reaching rate limiting.
+                message: Rate limit reached.
     Generic501:
       description: Not Implemented
       headers:
