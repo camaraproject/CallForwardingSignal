@@ -108,9 +108,9 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     And the response property "$.code" is "INVALID_ARGUMENT"
     And the response property "$.message" contains a user friendly text
     
-  @call_forwarding_signal_400.3_invalid_format
-  Scenario: phone number not properly formatted (with 2-legs authentication)
-    Given the request body has a not properly formatted "$.phoneNumber"
+  @call_forwarding_signal_400.3_C02.01_phone_number_not_schema_compliant
+  Scenario: Phone number value does not comply with the schema (with 2-legs authentication)
+    Given the request body property "$.phoneNumber" does not comply with the OAS schema at "/components/schemas/PhoneNumber"
     When the HTTP "POST" request is sent
     Then the response status code is 400
     And the response property "$.status" is 400
@@ -138,7 +138,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     And the response property "$.message" contains a user friendly text
  
  # Generic 404 error - unknown phone number
-  @call_forwarding_signal_404.1_call_forwarding_for_unknown_phoneNumber
+  @call_forwarding_signal_404.1_call_forwarding_for_unknown_phoneNumber_2-legs
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding status could not be retrieved
     And the request body is set to a valid request body
@@ -147,27 +147,28 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
     And the response property "$.message" contains a user friendly text
 
-  @call_forwarding_signal_404.2_call_forwarding_for_unknown_phoneNumber_from_access_token
-  Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
-    Given the request body property "$.phoneNumber" is not valorised
-    And the request body is set to a valid request body
-    And The header "Authorization" is set to a valid access token identifying a phone number unknown by the network
-    When the HTTP "POST" request is sent
-    Then the response status code is 404
-    And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
-    And the response property "$.message" contains a user friendly text
+  @call_forwarding_signal_404.2_call_forwarding_for_unknown_phoneNumber_from_access_token_3-legs_C02.02_phone_number_not_found
+  Scenario: Phone number not found
+      Given the header "Authorization" is set to a valid access token which does not identify a single phone number
+      And the request body property "$.phoneNumber" is compliant with the schema but does not identify a valid phone number
+      When the HTTP "POST" request is sent
+      Then the response status code is 404
+      And the response property "$.status" is 404
+      And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
+      And the response property "$.message" contains a user friendly text
 
   # Generic 422 error - phone number unavailable or unnecessary
-  @call_forwarding_signal_422.phone_number_unavailable_2-legs
-  Scenario: The "phoneNumber" parameter is not included in the request
-    Given the request body property "$.phoneNumber" is not valorised
-    When the HTTP "POST" request is sent
-    Then the response status code is 422
-    And the response property "$.status" is 422
-    And the response property "$.code" is "MISSING_IDENTIFIER"
-    And the response property "$.message" contains a user friendly text
+  @call_forwarding_signal_422.1_phone_number_unavailable_2-legs_C02.04_missing_phone_number
+  Scenario: Phone number not included and cannot be deducted from the access token
+      Given the header "Authorization" is set to a valid access token which does not identify a single phone number
+      And the request body property "$.phoneNumber" is not included
+      When the HTTP "POST" request is sent
+      Then the response status code is 422
+      And the response property "$.status" is 422
+      And the response property "$.code" is "MISSING_IDENTIFIER"
+        And the response property "$.message" contains a user friendly text
 
-  @call_forwarding_signal_422.1.phone_number_unnecessary_3-legs
+  @call_forwarding_signal_422.2_phone_number_unnecessary_3-legs_C02.03_unnecessary_phone_number
   Scenario: The "phoneNumber" parameter is included in the request
     Given the request body property "$.phoneNumber" is valorised
     And The header "Authorization" is set to a valid access token identifying same phone number 
@@ -176,6 +177,17 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     And the response property "$.status" is 422
     And the response property "$.code" is "UNNECESSARY_IDENTIFIER"
     And the response property "$.message" contains a user friendly text
+    
+  # When the service is only offered to certain type of subscriptions, e.g. IoT, , B2C, etc
+  @call_forwarding_signal_422.3_2-legs_C02.05_phone_number_not_supported
+  Scenario: Service not available for the phone number
+      Given that the service is not available for all phone numbers commercialized by the operator
+      And a valid phone number, identified by the token or provided in the request body, for which the service is not applicable
+      When the HTTP "POST" request is sent
+      Then the response status code is 422
+      And the response property "$.status" is 422
+      And the response property "$.code" is "SERVICE_NOT_APPLICABLE"
+        And the response property "$.message" contains a user friendly text
 
  # Generic 429 error - too many requests
  @call_forwarding_signal_429.1_quota_limit_exceeded
