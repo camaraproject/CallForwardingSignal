@@ -132,10 +132,20 @@ info:
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
     services will be provided back via the CallForwardingSignal resource.\
+    ## Additional CAMARA error responses
+    The list of error codes in this API specification is not exhaustive.
+    Therefore the API specification may not document some non-mandatory error
+    statuses as indicated in `CAMARA API Design Guidelines`.
+
+    Please refer to [CAMARA_common.yaml]({link_to_release}/CAMARA_common.yaml)
+    for a complete list of error responses.
+
+    As a specific rule, error `501 - NOT_IMPLEMENTED` can be only a possible
+    error response if it is explicitly documented in the API.
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
-  version: 0.3.0
+  version: wip
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -147,7 +157,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/v0.3"
+  - url: "{apiRoot}/call-forwarding-signal/vwip"
     variables:
       apiRoot:
         default: http://localhost:9091
@@ -271,14 +281,14 @@ components:
       description: Correlation id for the different services
       schema:
         type: string
-        pattern: ^[a-zA-Z0-9-]{0,55}$
+        pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
         example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
   headers:
     x-correlator:
       description: Correlation id for the different services
       schema:
         type: string
-        pattern: ^[a-zA-Z0-9-]{0,55}$
+        pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
   ############################################################################
   #                                 Resources                                #
   ############################################################################
@@ -404,22 +414,15 @@ components:
                   code:
                     enum:
                       - UNAUTHENTICATED
-                      - AUTHENTICATION_REQUIRED
           examples:
             GENERIC_401_UNAUTHENTICATED:
-              description: Request cannot be authenticated
+              description: Request cannot be authenticated and a new authentication
+                is required
               value:
                 status: 401
                 code: UNAUTHENTICATED
-                message: Request not authenticated due to missing, invalid, or
-                  expired credentials.
-            GENERIC_401_AUTHENTICATION_REQUIRED:
-              description: New authentication is needed, authentication is no
-                longer valid
-              value:
-                status: 401
-                code: AUTHENTICATION_REQUIRED
-                message: New authentication is required.
+                message: Request not authenticated due to missing, invalid, or expired
+                  credentials. A new authentication is required.
     Generic403:
       description: Forbidden
       headers:
