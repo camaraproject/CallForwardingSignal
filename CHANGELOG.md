@@ -3,6 +3,7 @@
 
 ## Table of Contents
 
+- **[r3.1](#r31)**
 - **[r2.2](#r22)**
 - **[r2.1](#r21)**
 - **[r1.3](#r13)**
@@ -18,6 +19,41 @@ The below sections record the changes for each API version in each release as fo
 * for subsequent release-candidate(s), only the delta to the previous release-candidate
 * for a public release, the consolidated changes since the previous public release
 
+# r3.1
+
+## Release Notes
+
+This release contains the definition and documentation of
+* call-forwarding-signal v0.4.0-alpha.1
+
+The API definition(s) are based on
+* Commonalities v0.6.0
+* Identity and Consent Management v0.4.0
+
+## call-forwarding-signal v0.4.0-alpha.1
+
+This is an alpha release for the CAMARA Meta Release Fall25 release of the Call Forwarding Signal API, version v0.4.0-alpha.1. It contains mainly alignments with the Commonalities v0.6.0.
+
+- API definition **with inline documentation**:
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r3.1/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.1/code/API_definitions/call-forwarding-signal.yaml&nocors)
+  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.1/code/API_definitions/call-forwarding-signal.yaml)
+
+In the following there is the list of the modifications with respect to the previous release.
+
+### Added
+
+### Changed
+ * x-correlator new format: https://github.com/camaraproject/CallForwardingSignal/pull/180
+ * Undocumented Errors note in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/180
+
+### Fixed
+
+### Removed
+ * Removed error 401: https://github.com/camaraproject/CallForwardingSignal/pull/180
+   
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r2.2...r3.1
+   
 # r2.2
 
 ## Release Notes
