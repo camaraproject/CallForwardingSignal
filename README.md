@@ -31,7 +31,7 @@ Incubating API Repository to evolve and maintain the definitions and documentati
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r2.2/code/API_definitions/call-forwarding-signal.yaml)
   - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r2.2/code/API_definitions/call-forwarding-signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r2.2/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r2.2/code/API_definitions/call-forwarding-signal.yaml)
 ## Contributing
 * Meetings are held virtually
   * Schedule: Monday 15h-16 CET, usually every two weeks. For the next meetings information, have a look on the [API Wiki Page](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14549020/CallForwardingSignal).
