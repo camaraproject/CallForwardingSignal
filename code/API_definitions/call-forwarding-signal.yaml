@@ -145,7 +145,7 @@ info:
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
-  version: wip
+  version: 0.4.0-alpha.1
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -157,7 +157,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/vwip"
+  - url: "{apiRoot}/call-forwarding-signal/v0.4alpha1"
     variables:
       apiRoot:
         default: http://localhost:9091
@@ -280,15 +280,12 @@ components:
       in: header
       description: Correlation id for the different services
       schema:
-        type: string
-        pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
-        example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
+        $ref: "#/components/schemas/XCorrelator"
   headers:
     x-correlator:
       description: Correlation id for the different services
       schema:
-        type: string
-        pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
+        $ref: "#/components/schemas/XCorrelator"
   ############################################################################
   #                                 Resources                                #
   ############################################################################
@@ -325,6 +322,10 @@ components:
         - 'conditional_busy'
         - 'conditional_no_answer'
       minItems: 1
+    XCorrelator:
+      type: string
+      pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
+      example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
     ############################################################################
     #                                 Request                                  #
     ############################################################################

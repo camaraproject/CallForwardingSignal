@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
+Feature: CAMARA Call Forwarding Signal  API, v0.4.0-alpha.1 - Operation call-forwardings
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -11,7 +11,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     Given the path "/call-forwardings"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" is set to a UUID value
+    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
     And the request body is set by default to a request body compliant with the schema
 
   # Happy path scenarios
@@ -43,7 +43,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
 
   #CFS inactive: phone number defined by phoneNumber (2-legs authentication) and the CFS status for the phone number is known by the network.
   @call_forwarding_signal_02_call_forwarding_check_not_active_phoneNumber
-  Scenario: retrieve the call forwarding service settings for a given phone number with no forwarding configured. The endpoint is invoked with phoneNumber properly valorised
+  Scenario: retrieve the call forwarding service settings for a given phone number with no forwarding configured. The endpoint is invoked with "$.phoneNumber" set to a proper value
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
@@ -52,10 +52,10 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response body is a string with the value "inactive"
 
-  #CFS inactive: phone number obtained from the access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not valorised
+  #CFS inactive: phone number obtained from the access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not set
   @call_forwarding_signal_03_call_forwarding_check_not_active_access_token
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and access token is used to carry the phone number.
-    Given the request body property "$.phoneNumber" is not valorised
+    Given the request body property "$.phoneNumber" is not set to a value
     And The header "Authorization" is set to a valid access token identifying a phone number
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
@@ -66,7 +66,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
 
   #CFS active: phone number defined by phoneNumber (2-legs authentication) and the CFS status for the phone number is known by the network.
   @call_forwarding_signal_04_call_forwarding_check_active_phoneNumber
-  Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked with phoneNumber properly valorised
+  Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked with "$.phoneNumber" set to a proper value
     Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding service status could be retrieved
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
@@ -75,10 +75,10 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     And the response header "x-correlator" has same value as the request header "x-correlator"
     And the response body is an array of strings with the possibile values ["unconditional", "conditional_no_reply", "conditional_unavailable", "conditional_busy"]
 
-  #CFS active: phone number obtained from access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not valorised
+  #CFS active: phone number obtained from access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not set
   @call_forwarding_signal_05_call_forwarding_check_active_acess_token
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and access token is used to obtain the phone number.
-    Given the request body property "$.phoneNumber" is not valorised
+    Given the request body property "$.phoneNumber" is not set to a value
     And The header "Authorization" is set to a valid access token identifying a phone number
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
@@ -170,7 +170,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
 
   @call_forwarding_signal_422.2_phone_number_unnecessary_3-legs_C02.03_unnecessary_phone_number
   Scenario: The "phoneNumber" parameter is included in the request
-    Given the request body property "$.phoneNumber" is valorised
+    Given the request body property "$.phoneNumber" is set to a proper value
     And The header "Authorization" is set to a valid access token identifying same phone number 
     When the HTTP "POST" request is sent
     Then the response status code is 422
@@ -220,4 +220,3 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation call-forwardings
     And the response property "$.status" is 501
     And the response property "$.code" is "NOT_IMPLEMENTED"
     And the response property "$.message" contains a user friendly text
-  
