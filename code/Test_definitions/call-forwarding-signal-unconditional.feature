@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-call-forwarding
+Feature: CAMARA Call Forwarding Signal  API, v0.4.0-alpha.1 - Operation unconditional-call-forwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -11,7 +11,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-ca
     Given the path "/unconditional-call-forwardings"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" is set to a UUID value
+    And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
     And the request body is set by default to a request body compliant with the schema
 
   # Happy path scenarios
@@ -33,7 +33,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-ca
   Scenario: Common validations for any success scenario with 3-legs authentication
     # Valid testing default request body compliant with the schema
     Given the request body is set to a valid request body
-    And the request body property "$.phoneNumber" is not valorised
+    And the request body property "$.phoneNumber" is not set to a value
     And The header "Authorization" is set to a valid access token identifying a phone number 
     When the HTTP "POST" request is sent
     Then the response status code is 200
@@ -44,7 +44,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-ca
   
   # phone number defined by phoneNumber (2-legs authentication) and the CFS status for the phone number is known by the network.
   @call_forwarding_signal_02_unconditional_phoneNumber
-  Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked with phoneNumber properly valorised
+  Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked with  "$.phoneNumber" set to a proper value
     Given the request body property "$.phoneNumber" is set to a valid phone number supported by the service
     And the request body is set to a valid request body
     When the HTTP "POST" request is sent
@@ -54,10 +54,10 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-ca
     And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
     And the response body property "$.active" is one of: ["true", "false"]
 
-  # phone number defined by access token and the CFS status for the phone number is known by the network. phoneNumber not valorised
+  # phone number defined by access token and the CFS status for the phone number is known by the network. phoneNumber not set
   @call_forwarding_signal_03_unconditional_access_token
   Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked without a value for phoneNumber and the phone number is retrieved from the access token.
-    Given the request body property "$.phoneNumber" is not valorised
+    Given the request body property "$.phoneNumber" is not set to a value
     And the request body is set to a valid request body
     And The header "Authorization" is set to a valid access token identifying a phone number
     When the HTTP "POST" request is sent
@@ -149,7 +149,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.3.0 - Operation unconditional-ca
 
   @call_forwarding_signal_422.2_phone_number_unnecessary_3-legs_C02.03_unnecessary_phone_number
   Scenario: The "phoneNumber" parameter is included in the request
-    Given the request body property "$.phoneNumber" is valorised
+    Given the request body property "$.phoneNumber" is set to a proper value
     And The header "Authorization" is set to a valid access token identifying same phone number 
     When the HTTP "POST" request is sent
     Then the response status code is 422
