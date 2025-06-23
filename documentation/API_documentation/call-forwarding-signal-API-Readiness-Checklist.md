@@ -1,7 +1,7 @@
 
 # API Readiness Checklist
 
-Checklist for API call-forwarding-signal v0.4.0-alpha.1 in r3.1
+Checklist for API call-forwarding-signal v0.4.0-rc.1 in r3.2
 
 
 | Nr | API release assets  | alpha | release-candidate |  initial<br>public | stable<br> public | Status | Reference information |
