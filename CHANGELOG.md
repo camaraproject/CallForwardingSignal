@@ -38,7 +38,7 @@ This is a release candidate for the CAMARA Meta Release Fall25 release of the Ca
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r3.2/code/API_definitions/call-forwarding-signal.yaml)
   - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.2/code/API_definitions/call-forwarding-signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.2/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.2/code/API_definitions/call-forwarding-signal.yaml)
 
 In the following there is the list of the modifications with respect to the previous release.
 
@@ -73,7 +73,7 @@ This is an alpha release for the CAMARA Meta Release Fall25 release of the Call 
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r3.1/code/API_definitions/call-forwarding-signal.yaml)
   - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.1/code/API_definitions/call-forwarding-signal.yaml&nocors)
-  - [View it on Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.1/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.1/code/API_definitions/call-forwarding-signal.yaml)
 
 In the following there is the list of the modifications with respect to the previous release.
 
