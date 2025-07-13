@@ -172,7 +172,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation uncondition
   @call_forwarding_signal_429.1_quota_limit_exceeded
     Scenario: The API Consumer exceeds the business quota limit
       Given the number of endpoints calls is equal to the business limit
-      And a new endpoint invokation is done
+      And a new endpoint invocation is done
       When the HTTP "POST" request is sent
       Then the response status code is 429
       And the response property "$.status" is 429
@@ -186,5 +186,5 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation uncondition
       When the HTTP "POST" request is sent
       Then the response status code is 429
       And the response property "$.status" is 429
-      And the response property "$.code" is "TOO_MANY_REQUEST"
+      And the response property "$.code" is "TOO_MANY_REQUESTS"
       And the response property "$.message" contains a user friendly text
