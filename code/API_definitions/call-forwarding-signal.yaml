@@ -23,7 +23,7 @@ info:
     call forwarding service is active. The CSF API can also be invoked to
     get the general status of the Call Forwarding Service (inactive,
     conditional, unconditional). If conditional call forwarding is active,
-    the differente type of settings are returned ('conditional_busy',
+    the different type of settings are returned ('conditional_busy',
     'conditional_not_reachable', 'conditional_no_answer').\
     \
     **Example use cases:**\
@@ -145,11 +145,11 @@ info:
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
-  version: 0.4.0-alpha.1
+  version: 0.4.0-rc.1
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  x-camara-commonalities: 0.5
+  x-camara-commonalities: 0.6
 externalDocs:
   description: Product documentation at CAMARA
   url: https://github.com/camaraproject/CallForwardingSignal
@@ -157,7 +157,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/v0.4alpha1"
+  - url: "{apiRoot}/call-forwarding-signal/v0.4rc1"
     variables:
       apiRoot:
         default: http://localhost:9091
@@ -186,7 +186,7 @@ paths:
       summary: Retrieve the information about the status of the
        unconditional call forwarding service on a phone number (PhoneNumber)
       description: This endpoint provides information about the status
-       of the unconditional call forwarding, beeing active or not.
+       of the unconditional call forwarding, being active or not.
       operationId: retrieveUnconditionalCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -227,7 +227,7 @@ paths:
             - 'call-forwarding-signal:call-forwardings:read'
       summary: Retrieve the information about the type of call forwarding
        service active on a phone number (PhoneNumber)
-      description: This endpoint provides information about wich type of
+      description: This endpoint provides information about which type of
        call forwarding service is active. More than one service can be
        active, e.g. conditional and unconditional. This endpoit exceeds
        the main scope of the CFS API, for this reason an error code 501

@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, v0.4.0-alpha.1 - Operation call-forwardings
+Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation call-forwardings
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -73,7 +73,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-alpha.1 - Operation call-for
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response body is an array of strings with the possibile values ["unconditional", "conditional_no_reply", "conditional_unavailable", "conditional_busy"]
+    And the response body is an array of strings with the possible values ["unconditional", "conditional_no_answer", "conditional_not_reachable", "conditional_busy"]
 
   #CFS active: phone number obtained from access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not set
   @call_forwarding_signal_05_call_forwarding_check_active_acess_token
@@ -85,7 +85,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-alpha.1 - Operation call-for
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response body is an array of strings with the possibile values ["unconditional", "conditional_no_reply", "conditional_unavailable", "conditional_busy"]
+    And the response body is an array of strings with the possible values ["unconditional", "conditional_no_answer", "conditional_not_reachable", "conditional_busy"]
 
   # Error path scenarios
 
@@ -193,7 +193,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-alpha.1 - Operation call-for
  @call_forwarding_signal_429.1_quota_limit_exceeded
   Scenario: The API Consumer exceeds the business quota limit
     Given the number of endpoints calls is equal to the business limit
-    And a new endpoint invokation is done
+    And a new endpoint invocation is done
     When the HTTP "POST" request is sent
     Then the response status code is 429
     And the response property "$.status" is 429
@@ -201,19 +201,19 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-alpha.1 - Operation call-for
     And the response property "$.message" contains a user friendly text
 
  @call_forwarding_signal_429.2_too_many_requests
-  Scenario: The server is not able to handle a requst because of a lack of resources
+  Scenario: The server is not able to handle a request because of a lack of resources
     Given the number of endpoints calls from any APi Consumer is equal to the server limit
     And the endpoint is invoked
     When the HTTP "POST" request is sent
     Then the response status code is 429
     And the response property "$.status" is 429
-    And the response property "$.code" is "TOO_MANY_REQUEST"
+    And the response property "$.code" is "TOO_MANY_REQUESTS"
     And the response property "$.message" contains a user friendly text
  
  # Generic 501 error - not implemented
  @call_forwarding_signal_501.not_implemented
   Scenario: The endpoint operation is currently not supported by the API Producer
-    Given the API Producer doesn't offer general information on th call forwarding service status
+    Given the API Producer doesn't offer general information on the call forwarding service status
     And the endpoint is invoked
     When the HTTP "POST" request is sent
     Then the response status code is 501
