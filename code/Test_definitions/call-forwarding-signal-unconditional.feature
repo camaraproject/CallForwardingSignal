@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation unconditional-call-forwarding
+Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation retrieveUnconditionalCallForwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
