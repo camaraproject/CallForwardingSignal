@@ -27,29 +27,26 @@ info:
     get the general status of the Call Forwarding Service (inactive,
     conditional, unconditional). If conditional call forwarding is active,
     the different type of settings are returned ('conditional_busy',
-    'conditional_not_reachable', 'conditional_no_answer').\
-    \
-    **Example use cases:**\
-    \
-    [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal\
-    /discussions/3#discussioncomment-8694420)\
-    \
-    [**Alert Interception**](https://github.com/camaraproject/CallForwarding\
-    Signal/discussions/3#discussioncomment-8701847)\
-    \
-    [**Call Forwarding Verification**](https://github.com/camaraproject/\
-    CallForwarding\Signal/discussions/3#discussioncomment-8915595)
+    'conditional_not_reachable', 'conditional_no_answer').
+
+    **Example use cases:**
+
+    [**Bank Frauds**](https://github.com/camaraproject/CallForwardingSignal/discussions/3#discussioncomment-8694420)
+  
+    [**Alert Interception**](https://github.com/camaraproject/CallForwardingSignal/discussions/3#discussioncomment-8701847)\
+
+    [**Call Forwarding Verification**](https://github.com/camaraproject/CallForwarding\Signal/discussions/3#discussioncomment-8915595)
     # Quick Start
     The Call Forwarding Signal API is a REST API based on the
     CreateCallForwardingSignal resource.
     This resource can be used, by the API Consumer, to specify the phone number
     on which the Call Forwarding Service status must be verified, in case of
     two-legged authentication. If three-legged authentication is used the phone
-    number is instead detected, by the API Producer, from the access token.\
-    \
+    number is instead detected, by the API Producer, from the access token.
+
     Before starting to use the Call Forwarding API, the developer needs to know
-    about the below specified details:\
-    \
+    about the below specified details:
+
     **phoneNumber**
     This is the end user phone number. The Call Forwarding Signal API verifies
     if a call forwarding
@@ -57,22 +54,21 @@ info:
     must be provided/valued only in case of two-legged authentication.
     In case of three-legged authentication the phone number is retrieved by
     the access token.
-    \
-    \
+
     **CreateCallForwardingSignal**
     This is the resource the API Consumer uses to define the phone number to
-    be verified about the status of the Network Call Forwarding service.\
-    \
+    be verified about the status of the Network Call Forwarding service.
+
     **UnconditionalCallForwardingSignal**
     This is the resource the API Consumer gets back, containing the information
     about the Unconditional Call Forwarding Service status for the given phone
-    number (PhoneNumber).\
-    \
+    number (PhoneNumber).
+
     **CallForwardingSignal**
     This is the resource the API Consumer gets back, containing the information
     about the general status of the Network Call Forwarding service for the
-    specified phone number.\
-    \
+    specified phone number.
+
     The Call Forwarding Signal API provides two endpoints fulfilling the
     following intents:
     - **unconditional-call-forwardings**: Is the unconditional call fwd service
@@ -84,14 +80,14 @@ info:
     an API consumer requests an access token. Please refer to Identity and
     Consent Management
     (https://github.com/camaraproject/IdentityAndConsentManagement/)
-    for the released version of the profile.\
-    \
+    for the released version of the profile.
+
     The specific authorization flows to be used will be agreed upon during the
     onboarding process, happening between the API consumer and the API
     provider, taking into account the declared purpose for accessing the API,
     whilst also being subject to the prevailing legal framework dictated by
-    local legislation.\
-    \
+    local legislation.
+
     In cases where personal data is processed by the API and users can
     exercise their rights through mechanisms such as opt-in and/or opt-out,
     the use of three-legged access tokens is mandatory. This ensures that
@@ -128,16 +124,18 @@ info:
     # API Documentation
     ## Details
     The Call Forwarding Signal API is invoked by an API Consumer after the
-    Consent Management flow.\
+    Consent Management flow.
+
     The API Consumer can request the API Producer for the status of the
     Unconditional Call Forwarding service using the
     unconditional-call-forwardings POST method. A boolean, with the information
     about the activation status of the call forwarding service, will be
-    provided back via the UnconditionalCallForwardingSignal resource.\
+    provided back via the UnconditionalCallForwardingSignal resource.
+
     The API Consumer can also request the API Producer for the generic status of
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
-    services will be provided back via the CallForwardingSignal resource.\
+    services will be provided back via the CallForwardingSignal resource.
     ## Additional CAMARA error responses
     The list of error codes in this API specification is not exhaustive.
     Therefore the API specification may not document some non-mandatory error
@@ -153,7 +151,7 @@ info:
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
-  version: 0.4.0-rc.1
+  version: wip
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -165,7 +163,7 @@ externalDocs:
 #                                     Servers                              #
 ############################################################################
 servers:
-  - url: "{apiRoot}/call-forwarding-signal/v0.4rc1"
+  - url: "{apiRoot}/call-forwarding-signal/vwip"
     variables:
       apiRoot:
         default: http://localhost:9091
