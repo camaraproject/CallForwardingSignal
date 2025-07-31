@@ -136,7 +136,7 @@ info:
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
     services will be provided back via the CallForwardingSignal resource.
-    ## Additional CAMARA error responses
+    # Additional CAMARA error responses
     The list of error codes in this API specification is not exhaustive.
     Therefore the API specification may not document some non-mandatory error
     statuses as indicated in `CAMARA API Design Guide`.
