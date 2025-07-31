@@ -7,20 +7,23 @@ info:
   title: Call Forwarding Signal
   description: |
     # Overview
-    The Call Forwarding Signal (CFS) API provides the API Consumer with
-    information about the status of the Call Forwading Service on a specific
-    phone number. The main scope of the CFS API is "anti Fraud" to avoid
-    fraudsters to use the Call Forwarding Service to carry on a scam. Other use
-    cases are anyway supported by the CFS API that also provides additional
-    endpoints to detect the general Call Forwarding Service settings.
+    The Call Forwarding Signal API provides the API Consumer with
+    information about the status of the Call Forwarding Service on a specific
+    phone number. The main scope of the Call Forwarding Signal API is "anti
+    Fraud" to avoid fraudsters to use the Call Forwarding Service to carry
+    on a scam. Other use cases are anyway supported by the Call Forwarding
+    Signal API that also
+    provides additional endpoints to detect the general Call Forwarding
+    Service settings.
     # Introduction
     The Call Forwarding Service is provided by the Network to a phone
     number. This service redirects the incoming call to that phone number
     to an alternative destination such as another phone number or a voice mail
     system. There are two main types of call forwarding settings:
     unconditional and conditional.
-    The CFS API can be invoked to detect if the unconditional
-    call forwarding service is active. The CSF API can also be invoked to
+    The Call Forwarding Signal API can be invoked to detect if the unconditional
+    call forwarding service is active. The Call Forwarding Signal API can also
+    be invoked to
     get the general status of the Call Forwarding Service (inactive,
     conditional, unconditional). If conditional call forwarding is active,
     the different type of settings are returned ('conditional_busy',
@@ -34,10 +37,11 @@ info:
     [**Alert Interception**](https://github.com/camaraproject/CallForwarding\
     Signal/discussions/3#discussioncomment-8701847)\
     \
-    [**Call Forwading Verification**](https://github.com/camaraproject/\
+    [**Call Forwarding Verification**](https://github.com/camaraproject/\
     CallForwarding\Signal/discussions/3#discussioncomment-8915595)
     # Quick Start
-    The CFS API is a REST API based on the CreateCallForwardingSignal resource.
+    The Call Forwarding Signal API is a REST API based on the
+    CreateCallForwardingSignal resource.
     This resource can be used, by the API Consumer, to specify the phone number
     on which the Call Forwarding Service status must be verified, in case of
     two-legged authentication. If three-legged authentication is used the phone
@@ -47,11 +51,12 @@ info:
     about the below specified details:\
     \
     **phoneNumber**
-    This is the end user phone number. The CFS API verifies if a call forwarding
+    This is the end user phone number. The Call Forwarding Signal API verifies
+    if a call forwarding
     service is active on this phone number. Note: this parameter must be
-    must be valorised only in case of two-legged authentication. In case of
-    three-legged authentication the phone number is retrived by the access
-    token.
+    must be provided/valued only in case of two-legged authentication.
+    In case of three-legged authentication the phone number is retrieved by
+    the access token.
     \
     \
     **CreateCallForwardingSignal**
@@ -68,14 +73,15 @@ info:
     about the general status of the Network Call Forwarding service for the
     specified phone number.\
     \
-    The CFS API provides two endpoints fulfilling the following intents:
+    The Call Forwarding Signal API provides two endpoints fulfilling the
+    following intents:
     - **unconditional-call-forwardings**: Is the unconditional call fwd service
     active on a specific phone number?
     - **call-forwardings**: Which is the status of the call forwarding for a
     specific phone number?
     # Authorization and authentication
-    The "Camara Security and Interoperability Profile" provides details on how
-    an API consumer requests an access token. Please refer to Identify and
+    The "Camara Security and Interoperability Profile" provides details of how
+    an API consumer requests an access token. Please refer to Identity and
     Consent Management
     (https://github.com/camaraproject/IdentityAndConsentManagement/)
     for the released version of the profile.\
@@ -121,8 +127,8 @@ info:
     this comparison.
     # API Documentation
     ## Details
-    The CFS API is invoked by an API Consumer after the Consent Management
-    flow.\
+    The Call Forwarding Signal API is invoked by an API Consumer after the
+    Consent Management flow.\
     The API Consumer can request the API Producer for the status of the
     Unconditional Call Forwarding service using the
     unconditional-call-forwardings POST method. A boolean, with the information
@@ -135,10 +141,12 @@ info:
     ## Additional CAMARA error responses
     The list of error codes in this API specification is not exhaustive.
     Therefore the API specification may not document some non-mandatory error
-    statuses as indicated in `CAMARA API Design Guidelines`.
+    statuses as indicated in `CAMARA API Design Guide`.
 
-    Please refer to [CAMARA_common.yaml]({link_to_release}/CAMARA_common.yaml)
-    for a complete list of error responses.
+    Please refer to the `CAMARA_common.yaml` of the Commonalities Release
+    associated to this API version for a complete list of error responses.
+    The applicable Commonalities Release can be identified in the
+    `API Readiness Checklist` document associated to this API version.
 
     As a specific rule, error `501 - NOT_IMPLEMENTED` can be only a possible
     error response if it is explicitly documented in the API.
@@ -229,9 +237,9 @@ paths:
        service active on a phone number (PhoneNumber)
       description: This endpoint provides information about which type of
        call forwarding service is active. More than one service can be
-       active, e.g. conditional and unconditional. This endpoit exceeds
-       the main scope of the CFS API, for this reason an error code 501
-       can be returned.
+       active, e.g. conditional and unconditional. This endpoint exceeds
+       the main scope of the Call Forwarding Signal API, for this reason
+       an error code 501 can be returned.
       operationId: retrieveCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
@@ -331,9 +339,10 @@ components:
     ############################################################################
     CreateCallForwardingSignal:
       description: resource containing the phone number (PhoneNumber) regarding
-       which the Call Forwarding Service must be checked. To be valorised only
-       in case of two-legged authentication. If valorised with three-legged
-       authentication a 422-UNNECESSARY_IDENTIFIER error code is returned.
+       which the Call Forwarding Service must be checked. To be provided/valued
+       only in case of two-legged authentication. If provided/valued with
+       three-legged authentication a 422-UNNECESSARY_IDENTIFIER error code is
+       returned.
       type: object
       properties:
         phoneNumber:
