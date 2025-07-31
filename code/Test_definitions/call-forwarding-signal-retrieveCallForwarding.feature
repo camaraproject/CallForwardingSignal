@@ -76,7 +76,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation retrieveCal
     And the response body is an array of strings with the possible values ["unconditional", "conditional_no_answer", "conditional_not_reachable", "conditional_busy"]
 
   #CFS active: phone number obtained from access token (3-legs authentication) and the CFS status for the phone number is known by the network. phoneNumber not set
-  @call_forwarding_signal_05_call_forwarding_check_active_acess_token
+  @call_forwarding_signal_05_call_forwarding_check_active_access_token
   Scenario: retrieve the call forwarding service settings for a given phone number with call forwarding configured. The endpoint is invoked without a value for phoneNumber and access token is used to obtain the phone number.
     Given the request body property "$.phoneNumber" is not set to a value
     And The header "Authorization" is set to a valid access token identifying a phone number
@@ -202,7 +202,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation retrieveCal
 
  @call_forwarding_signal_429.2_too_many_requests
   Scenario: The server is not able to handle a request because of a lack of resources
-    Given the number of endpoints calls from any APi Consumer is equal to the server limit
+    Given the number of endpoints calls from any API Consumer is equal to the server limit
     And the endpoint is invoked
     When the HTTP "POST" request is sent
     Then the response status code is 429

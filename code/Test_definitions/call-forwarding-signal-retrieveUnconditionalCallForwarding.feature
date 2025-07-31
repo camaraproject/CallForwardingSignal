@@ -181,7 +181,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation retrieveUnc
 
   @call_forwarding_signal_429.2_too_many_requests
     Scenario: The server is not able to handle a request because of a lack of resources
-      Given the number of endpoints calls from any APi Consumer is equal to the server limit
+      Given the number of endpoints calls from any API Consumer is equal to the server limit
       And the endpoint is invoked
       When the HTTP "POST" request is sent
       Then the response status code is 429
