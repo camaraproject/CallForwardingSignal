@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation retrieveUnconditionalCallForwarding
+Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditionalCallForwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -8,7 +8,7 @@ Feature: CAMARA Call Forwarding Signal  API, v0.4.0-rc.1 - Operation retrieveUnc
   # * A device object identified by a phone number for which unconditional call forwarding service (CFS) status could not be retrieved
   #
   Background: Common call-forwarding-signal setup
-    Given the path "/unconditional-call-forwardings"
+    Given the path "/call-forwarding-signal/vwip/unconditional-call-forwardings"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
