@@ -75,6 +75,21 @@ info:
     active on a specific phone number?
     - **call-forwardings**: Which is the status of the call forwarding for a
     specific phone number?
+    # API Documentation
+    ## Details
+    The Call Forwarding Signal API is invoked by an API Consumer after the
+    Consent Management flow.
+
+    The API Consumer can request the API Producer for the status of the
+    Unconditional Call Forwarding service using the
+    unconditional-call-forwardings POST method. A boolean, with the information
+    about the activation status of the call forwarding service, will be
+    provided back via the UnconditionalCallForwardingSignal resource.
+
+    The API Consumer can also request the API Producer for the generic status of
+    the Call Forwarding service using the call-forwardings POST method. An array
+    of strings with the information of the type of active call forwarding
+    services will be provided back via the CallForwardingSignal resource.
     # Authorization and authentication
     The "Camara Security and Interoperability Profile" provides details of how
     an API consumer requests an access token. Please refer to Identity and
@@ -107,7 +122,6 @@ info:
     three-legged access token to invoke the API by relying on the
     information that is associated with the access token and was
     identified during the authentication process.
-
     ## Error handling:
 
     - If the subject cannot be identified from the access token and the
@@ -121,21 +135,7 @@ info:
     error code. This will be the case even if the same device is
     identified by these two methods, as the server is unable to make
     this comparison.
-    # API Documentation
-    ## Details
-    The Call Forwarding Signal API is invoked by an API Consumer after the
-    Consent Management flow.
 
-    The API Consumer can request the API Producer for the status of the
-    Unconditional Call Forwarding service using the
-    unconditional-call-forwardings POST method. A boolean, with the information
-    about the activation status of the call forwarding service, will be
-    provided back via the UnconditionalCallForwardingSignal resource.
-
-    The API Consumer can also request the API Producer for the generic status of
-    the Call Forwarding service using the call-forwardings POST method. An array
-    of strings with the information of the type of active call forwarding
-    services will be provided back via the CallForwardingSignal resource.
     # Additional CAMARA error responses
     The list of error codes in this API specification is not exhaustive.
     Therefore the API specification may not document some non-mandatory error
