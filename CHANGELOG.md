@@ -51,7 +51,7 @@ In the following there is the list of the modifications with respect to the prev
 ### Fixed
 * fixed some typo: https://github.com/camaraproject/CallForwardingSignal/pull/190
 * Enum Value Mismatch Between API and Tests: https://github.com/camaraproject/CallForwardingSignal/pull/190
-* 
+
 ### Removed
  * Removed error 401: https://github.com/camaraproject/CallForwardingSignal/pull/180
    
@@ -308,5 +308,6 @@ The version number for the YAML file is v0.2.0-rc.1
 * @chinaunicomyangfan
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.1
+
 
 
