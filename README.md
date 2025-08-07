@@ -27,13 +27,11 @@ Incubating API Repository to evolve and maintain the definitions and documentati
 
 * Note: Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until a new release is created. For example, changes may be reverted before a release is created. **For best results, use the latest available release**.
 
-* **NEW**: Pre-release [r3.2](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r3.2) with call-forwarding-signal v0.4.0-rc.1 is available.
-
-* The latest public release is [r2.2](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r2.2) with call-forwarding-signal v0.3.0.
+* The latest public release is [r3.3](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r3.3) with call-forwarding-signal v0.4.0.
 - API definition **with inline documentation**:
-  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r2.2/code/API_definitions/call-forwarding-signal.yaml)
-  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r2.2/code/API_definitions/call-forwarding-signal.yaml&nocors)
-  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r2.2/code/API_definitions/call-forwarding-signal.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r3.3/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.3/code/API_definitions/call-forwarding-signal.yaml&nocors)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.3/code/API_definitions/call-forwarding-signal.yaml)
 ## Contributing
 * Meetings are held virtually
   * Schedule: Monday 15h-16 CET, usually every two weeks. For the next meetings information, have a look on the [API Wiki Page](https://lf-camaraproject.atlassian.net/wiki/spaces/CAM/pages/14549020/CallForwardingSignal).
