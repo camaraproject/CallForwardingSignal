@@ -7,6 +7,8 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
   # * A device object identified by a phone number for which unconditional call forwarding service (CFS) status could be retrieved
   # * A device object identified by a phone number for which unconditional call forwarding service (CFS) status could not be retrieved
   #
+  # References to OAS spec schemas refer to schemas specified in call-forwarding-signal.yaml, version wip
+  
   Background: Common call-forwarding-signal setup
     Given the path "/call-forwarding-signal/vwip/unconditional-call-forwardings"
     And the header "Content-Type" is set to "application/json"
