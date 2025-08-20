@@ -20,5 +20,4 @@ Checklist for API call-forwarding-signal v0.4.0 in r3.3
 | 12 | Previous public-release was certified        |   O   |         O         |    O    |    M   |   N  |      |
 | 13 | API description (for marketing)              |   O   |         O         |    M    |    M   |   Y  | [wiki link](https://lf-camaraproject.atlassian.net/wiki/x/uoDVB) |
 
-
-
+The documentation for the content of the checklist is here: see API Readiness Checklist section in the [API Release Process](https://lf-camaraproject.atlassian.net/wiki/x/jine).
