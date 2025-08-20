@@ -8,7 +8,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
   # * A device object identified by a phone number for which unconditional call forwarding service (CFS) status could not be retrieved
   #
   # References to OAS spec schemas refer to schemas specified in call-forwarding-signal.yaml, version wip
-  
+
   Background: Common call-forwarding-signal setup
     Given the path "/call-forwarding-signal/vwip/unconditional-call-forwardings"
     And the header "Content-Type" is set to "application/json"
@@ -36,14 +36,14 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
     # Valid testing default request body compliant with the schema
     Given the request body is set to a valid request body
     And the request body property "$.phoneNumber" is not set to a value
-    And The header "Authorization" is set to a valid access token identifying a phone number 
+    And The header "Authorization" is set to a valid access token identifying a phone number
     When the HTTP "POST" request is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     # The response has to comply with the generic response schema which is part of the spec
     And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
-  
+
   # phone number defined by phoneNumber (2-legs authentication) and the CFS status for the phone number is known by the network.
   @call_forwarding_signal_02_unconditional_phoneNumber
   Scenario: retrieve unconditional call forwarding settings for a given phone number. The endpoint is invoked with  "$.phoneNumber" set to a proper value
@@ -69,7 +69,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
     And the response body property "$.active" is one of: ["true", "false"]
 
   # Error path scenarios
-  
+
   # Generic 400 error - input error
   @call_forwarding_signal_400.1_no_request_body
   Scenario: Missing request body
@@ -117,7 +117,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
     And the response property "$.status" is 403
     And the response property "$.code" is "PERMISSION_DENIED"
     And the response property "$.message" contains a user friendly text
-  
+
   # Generic 404 error - unknown phone number
   @call_forwarding_signal_404.1_call_forwarding_for_unknown_phoneNumber_2-legs
   Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
@@ -130,29 +130,29 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
 
   @call_forwarding_signal_404.2_call_forwarding_for_unknown_phoneNumber_from_access_token_3-legs_C02.02_phone_number_not_found
   Scenario: Phone number not found
-      Given the header "Authorization" is set to a valid access token which does not identify a single phone number
-      And the request body property "$.phoneNumber" is compliant with the schema but does not identify a valid phone number
-      When the HTTP "POST" request is sent
-      Then the response status code is 404
-      And the response property "$.status" is 404
-      And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
-      And the response property "$.message" contains a user friendly text
+    Given the header "Authorization" is set to a valid access token which does not identify a single phone number
+    And the request body property "$.phoneNumber" is compliant with the schema but does not identify a valid phone number
+    When the HTTP "POST" request is sent
+    Then the response status code is 404
+    And the response property "$.status" is 404
+    And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
+    And the response property "$.message" contains a user friendly text
 
   # Generic 422 error - phone number unavailable
   @call_forwarding_signal_422.1_phone_number_unavailable_2-legs_C02.04_missing_phone_number
   Scenario: Phone number not included and cannot be deducted from the access token
-      Given the header "Authorization" is set to a valid access token which does not identify a single phone number
-      And the request body property "$.phoneNumber" is not included
-      When the HTTP "POST" request is sent
-      Then the response status code is 422
-      And the response property "$.status" is 422
-      And the response property "$.code" is "MISSING_IDENTIFIER"
-        And the response property "$.message" contains a user friendly text
+    Given the header "Authorization" is set to a valid access token which does not identify a single phone number
+    And the request body property "$.phoneNumber" is not included
+    When the HTTP "POST" request is sent
+    Then the response status code is 422
+    And the response property "$.status" is 422
+    And the response property "$.code" is "MISSING_IDENTIFIER"
+    And the response property "$.message" contains a user friendly text
 
   @call_forwarding_signal_422.2_phone_number_unnecessary_3-legs_C02.03_unnecessary_phone_number
   Scenario: The "phoneNumber" parameter is included in the request
     Given the request body property "$.phoneNumber" is set to a proper value
-    And The header "Authorization" is set to a valid access token identifying same phone number 
+    And The header "Authorization" is set to a valid access token identifying same phone number
     When the HTTP "POST" request is sent
     Then the response status code is 422
     And the response property "$.status" is 422
@@ -162,31 +162,31 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
   # When the service is only offered to certain type of subscriptions, e.g. IoT, , B2C, etc
   @call_forwarding_signal_422.3_2-legs_C02.05_phone_number_not_supported
   Scenario: Service not available for the phone number
-      Given that the service is not available for all phone numbers commercialized by the operator
-      And a valid phone number, identified by the token or provided in the request body, for which the service is not applicable
-      When the HTTP "POST" request is sent
-      Then the response status code is 422
-      And the response property "$.status" is 422
-      And the response property "$.code" is "SERVICE_NOT_APPLICABLE"
-        And the response property "$.message" contains a user friendly text
+    Given that the service is not available for all phone numbers commercialized by the operator
+    And a valid phone number, identified by the token or provided in the request body, for which the service is not applicable
+    When the HTTP "POST" request is sent
+    Then the response status code is 422
+    And the response property "$.status" is 422
+    And the response property "$.code" is "SERVICE_NOT_APPLICABLE"
+    And the response property "$.message" contains a user friendly text
 
   # Generic 429 error - too many requests
   @call_forwarding_signal_429.1_quota_limit_exceeded
-    Scenario: The API Consumer exceeds the business quota limit
-      Given the number of endpoints calls is equal to the business limit
-      And a new endpoint invocation is done
-      When the HTTP "POST" request is sent
-      Then the response status code is 429
-      And the response property "$.status" is 429
-      And the response property "$.code" is "QUOTA_EXCEEDED"
-      And the response property "$.message" contains a user friendly text
+  Scenario: The API Consumer exceeds the business quota limit
+    Given the number of endpoints calls is equal to the business limit
+    And a new endpoint invocation is done
+    When the HTTP "POST" request is sent
+    Then the response status code is 429
+    And the response property "$.status" is 429
+    And the response property "$.code" is "QUOTA_EXCEEDED"
+    And the response property "$.message" contains a user friendly text
 
   @call_forwarding_signal_429.2_too_many_requests
-    Scenario: The server is not able to handle a request because of a lack of resources
-      Given the number of endpoints calls from any API Consumer is equal to the server limit
-      And the endpoint is invoked
-      When the HTTP "POST" request is sent
-      Then the response status code is 429
-      And the response property "$.status" is 429
-      And the response property "$.code" is "TOO_MANY_REQUESTS"
-      And the response property "$.message" contains a user friendly text
+  Scenario: The server is not able to handle a request because of a lack of resources
+    Given the number of endpoints calls from any API Consumer is equal to the server limit
+    And the endpoint is invoked
+    When the HTTP "POST" request is sent
+    Then the response status code is 429
+    And the response property "$.status" is 429
+    And the response property "$.code" is "TOO_MANY_REQUESTS"
+    And the response property "$.message" contains a user friendly text
