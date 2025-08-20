@@ -173,7 +173,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveCallForwar
   @call_forwarding_signal_422.2_phone_number_unnecessary_3-legs_C02.03_unnecessary_phone_number
   Scenario: The "phoneNumber" parameter is included in the request
     Given the request body property "$.phoneNumber" is set to a proper value
-    And The header "Authorization" is set to a valid access token identifying same phone number 
+    And The header "Authorization" is set to a valid access token identifying same phone number
     When the HTTP "POST" request is sent
     Then the response status code is 422
     And the response property "$.status" is 422
