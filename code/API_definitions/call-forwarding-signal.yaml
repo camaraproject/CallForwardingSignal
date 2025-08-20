@@ -361,7 +361,6 @@ components:
     #                                 Responces                                #
     ############################################################################
     ErrorInfo:
-      description: error info template
       type: object
       required:
         - message
@@ -370,13 +369,13 @@ components:
       properties:
         message:
           type: string
-          description: A human readable description of what the event represent
+          description: A human-readable description of what the event represents
         status:
           type: integer
           description: HTTP response status code
         code:
           type: string
-          description: Friendly Code to describe the error
+          description: A human-readable code to describe the error
   responses:
     Generic400:
       description: Bad Request
