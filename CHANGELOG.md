@@ -3,6 +3,7 @@
 
 ## Table of Contents
 
+- **[r3.3](#r33)**
 - **[r3.2](#r32)**
 - **[r3.1](#r31)**
 - **[r2.2](#r22)**
@@ -19,6 +20,44 @@ The below sections record the changes for each API version in each release as fo
 * for the first release-candidate, all changes since the last public release
 * for subsequent release-candidate(s), only the delta to the previous release-candidate
 * for a public release, the consolidated changes since the previous public release
+
+# r3.3
+
+## Release Notes
+
+This release contains the definition and documentation of call-forwarding-signal v0.4.0
+
+The API definition(s) are based on
+* Commonalities v0.6.0
+* Identity and Consent Management v0.4.0
+
+## call-forwarding-signal v0.4.0
+
+This is a release candidate for the CAMARA Meta Release Fall25 release of the Call Forwarding Signal API, version v0.4.0. It is mainly an alignment with Commonalities v0.6.0.
+
+- API definition **with inline documentation**:
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r3.3/code/API_definitions/call-forwarding-signal.yaml)
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.3/code/API_definitions/call-forwarding-signal.yaml&nocors)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r3.3/code/API_definitions/call-forwarding-signal.yaml)
+
+In the following there is the list of the modifications with respect to the previous release.
+
+### Added
+
+### Changed
+ * x-correlator new format: https://github.com/camaraproject/CallForwardingSignal/pull/180, https://github.com/camaraproject/CallForwardingSignal/pull/186
+ * Undocumented Errors note in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/180
+
+### Fixed
+ * fixed some typo: https://github.com/camaraproject/CallForwardingSignal/pull/190
+ * Enum Value Mismatch Between API and Tests: https://github.com/camaraproject/CallForwardingSignal/pull/190
+ * ErrorInfo scheme updated: https://github.com/camaraproject/CallForwardingSignal/pull/201
+ * Updated schema context in test definition: https://github.com/camaraproject/CallForwardingSignal/pull/201
+
+### Removed
+ * Removed error 401: https://github.com/camaraproject/CallForwardingSignal/pull/180
+   
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r2.2...r3.3
 
 # r3.2
 
@@ -45,15 +84,14 @@ In the following there is the list of the modifications with respect to the prev
 ### Added
 
 ### Changed
- * x-correlator new format: https://github.com/camaraproject/CallForwardingSignal/pull/180, https://github.com/camaraproject/CallForwardingSignal/pull/186
- * Undocumented Errors note in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/180
 
 ### Fixed
-
+* fixed some typo: https://github.com/camaraproject/CallForwardingSignal/pull/190
+* Enum Value Mismatch Between API and Tests: https://github.com/camaraproject/CallForwardingSignal/pull/190
+  
 ### Removed
- * Removed error 401: https://github.com/camaraproject/CallForwardingSignal/pull/180
    
-**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r2.2...r3.2
+**Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r3.1...r3.2
 
 # r3.1
 
@@ -116,11 +154,12 @@ In the following there is the list of the modifications with respect to the prev
 
 ### Changed
  * Call Forwarding Service "state" terminology updated: https://github.com/camaraproject/CallForwardingSignal/pull/117
- * Alignment with CAMARA Guidelines in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/121, https://github.com/camaraproject/CallForwardingSignal/issues/158
+ * Alignment with CAMARA Guidelines in info.description: https://github.com/camaraproject/CallForwardingSignal/pull/121
  * Enhancements and Alignments in Errors: https://github.com/camaraproject/CallForwardingSignal/pull/121
  * Align API-Testing with CAMARA Guidelines: https://github.com/camaraproject/CallForwardingSignal/pull/121
- * Changed error code 404: https://github.com/camaraproject/CallForwardingSignal/issues/160
- * Alignement with Commonalities for x-correlator and Error 429: https://github.com/camaraproject/CallForwardingSignal/issues/159
+ * Authorization and authentication documentatiopn update: https://github.com/camaraproject/CallForwardingSignal/pull/154
+ * Changed error code 404: https://github.com/camaraproject/CallForwardingSignal/pull/154
+ * Alignement with Commonalities for x-correlator and Error 429: https://github.com/camaraproject/CallForwardingSignal/pull/154
 
 ### Fixed
 
@@ -272,4 +311,6 @@ The version number for the YAML file is v0.2.0-rc.1
 * @chinaunicomyangfan
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.1
+
+
 
