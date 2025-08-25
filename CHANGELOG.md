@@ -33,7 +33,7 @@ The API definition(s) are based on
 
 ## call-forwarding-signal v0.4.0
 
-This is a release candidate for the CAMARA Meta Release Fall25 release of the Call Forwarding Signal API, version v0.4.0. It is mainly an alignment with Commonalities v0.6.0.
+This is the third public release of the Call Forwarding Signal API, version v0.4.0. It is mainly an alignment with Commonalities v0.6.0.
 
 - API definition **with inline documentation**:
   - OpenAPI [YAML spec file](https://github.com/camaraproject/CallForwardingSignal/blob/r3.3/code/API_definitions/call-forwarding-signal.yaml)
@@ -311,6 +311,7 @@ The version number for the YAML file is v0.2.0-rc.1
 * @chinaunicomyangfan
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/commits/r1.1
+
 
 
 
