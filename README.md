@@ -16,9 +16,9 @@ Incubating API Repository to evolve and maintain the definitions and documentati
 ## Scope
 * Service APIs for “CallForwardingSignal” (see APIBacklog.md)  
 * It provides the API consumer with the ability to:  
-  * retrive information about the status of the Call Forwarding Service on a specific phone number.
-  * avoid frauds leveraging on the Call Forwarding Service.
- * The main scope of the CFS API is "anti Fraud" to avoid fraudsters to use the Call Forwarding Service to carry on a scam. Other use cases are anyway supported by the CFS API that also provides additional endpoints to detect the general Call Forwarding Service settings.
+  * retrieve information about the status of the Call Forwarding Service on a specific phone number.
+  * avoid fraud leveraging the Call Forwarding Service.
+ * The main scope of the Call Forwarding Signal API is anti fraud to avoid fraudsters to use the Call Forwarding Service to carry on a scam. Other use cases are anyway supported by the Call Forwarding Signal API that also provides additional endpoints to detect the general Call Forwarding Service settings.
 * Describe, develop, document and test the API 
 * Started: February 2024 
 * Incubating stage since: February 2025
