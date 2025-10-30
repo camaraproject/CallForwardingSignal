@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, v0.4.0 - Operation retrieveCallForwarding
+Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveCallForwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
