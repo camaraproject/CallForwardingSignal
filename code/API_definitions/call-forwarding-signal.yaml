@@ -90,64 +90,48 @@ info:
     the Call Forwarding service using the call-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
     services will be provided back via the CallForwardingSignal resource.
+    <!-- CAMARA:MANDATORY:authorization-and-authentication:BEGIN -->
     # Authorization and authentication
-    The "Camara Security and Interoperability Profile" provides details of how
-    an API consumer requests an access token. Please refer to Identity and
-    Consent Management
-    (https://github.com/camaraproject/IdentityAndConsentManagement/)
-    for the released version of the profile.
 
-    The specific authorization flows to be used will be agreed upon during the
-    onboarding process, happening between the API consumer and the API
-    provider, taking into account the declared purpose for accessing the API,
-    whilst also being subject to the prevailing legal framework dictated by
-    local legislation.
+    The "Camara Security and Interoperability Profile" provides details of how an API consumer requests an access token. Please refer to Identity and Consent Management (https://github.com/camaraproject/IdentityAndConsentManagement/) for the released version of the profile.
 
-    In cases where personal data is processed by the API and users can
-    exercise their rights through mechanisms such as opt-in and/or opt-out,
-    the use of three-legged access tokens is mandatory. This ensures that
-    the API remains in compliance with privacy regulations, upholding the
-    principles of transparency and user-centric privacy-by-design.
+    The specific authorization flows to be used will be agreed upon during the onboarding process, happening between the API consumer and the API provider, taking into account the declared purpose for accessing the API, whilst also being subject to the prevailing legal framework dictated by local legislation.
+
+    In cases where personal data is processed by the API and users can exercise their rights through mechanisms such as opt-in and/or opt-out, the use of three-legged access tokens is mandatory. This ensures that the API remains in compliance with privacy regulations, upholding the principles of transparency and user-centric privacy-by-design.
+    <!-- CAMARA:MANDATORY:authorization-and-authentication:END -->
+
+    <!-- CAMARA:MANDATORY:identifying-phone-number-from-access-token:BEGIN -->
     # Identifying the phone number from the access token
-    This API requires the API consumer to identify a phone number as the
-    subject of the API as follows:
-    - When the API is invoked using a two-legged access token, the subject
-    will be identified from the optional `phoneNumber` object field, which
-    therefore MUST be provided.
-    - When a three-legged access token is used however, this optional
-    identifier MUST NOT be provided, as the subject will be uniquely
-    identified from the access token.
 
-    This approach simplifies API usage for API consumers using a
-    three-legged access token to invoke the API by relying on the
-    information that is associated with the access token and was
-    identified during the authentication process.
+    This API requires the API consumer to identify a phone number as the subject of the API as follows:
+    - When the API is invoked using a two-legged access token, the subject will be identified from the optional `phoneNumber` field, which therefore MUST be provided.
+    - When a three-legged access token is used however, this optional identifier MUST NOT be provided, as the subject will be uniquely identified from the access token.
+
+    This approach simplifies API usage for API consumers using a three-legged access token to invoke the API by relying on the information that is associated with the access token and was identified during the authentication process.
+
     ## Error handling:
 
-    - If the subject cannot be identified from the access token and the
-    optional `phoneNumber` object field is not included in the request, then
-    the server will return an error with the
-    `422 MISSING_IDENTIFIER` error code.
+    - If the subject cannot be identified from the access token and the optional `phoneNumber` field is not included in the request, then the server will return an error with the `422 MISSING_IDENTIFIER` error code.
 
-    - If the subject can be identified from the access token and the
-    optional `phoneNumber` object field is also included in the request, then
-    the server will return an error with the `422 UNNECESSARY_IDENTIFIER`
-    error code. This will be the case even if the same device is
-    identified by these two methods, as the server is unable to make
-    this comparison.
+    - If the subject can be identified from the access token and the optional `phoneNumber` field is also included in the request, then the server will return an error with the `422 UNNECESSARY_IDENTIFIER` error code. This will be the case even if the same phone number is identified by these two methods, as the server is unable to make this comparison.
+    <!-- CAMARA:MANDATORY:identifying-phone-number-from-access-token:END -->
 
+    <!-- CAMARA:MANDATORY:additional-error-responses:BEGIN -->
     # Additional CAMARA error responses
-    The list of error codes in this API specification is not exhaustive.
-    Therefore the API specification may not document some non-mandatory error
-    statuses as indicated in `CAMARA API Design Guide`.
 
-    Please refer to the `CAMARA_common.yaml` of the Commonalities Release
-    associated to this API version for a complete list of error responses.
-    The applicable Commonalities Release can be identified in the
-    `API Readiness Checklist` document associated to this API version.
+    The list of error codes in this API specification is not exhaustive. Therefore the API specification MAY not document some non-mandatory error statuses as indicated in `CAMARA API Design Guide`.
 
-    As a specific rule, error `501 - NOT_IMPLEMENTED` can be only a possible
-    error response if it is explicitly documented in the API.
+    Please refer to the `CAMARA_common.yaml` of the Commonalities Release associated to this API version for a complete list of error responses. The applicable Commonalities Release can be identified in the `API Readiness Checklist` document associated to this API version.
+
+    As a specific rule, error `501 - NOT_IMPLEMENTED` can be only a possible error response if it is explicitly documented in the API.
+    <!-- CAMARA:MANDATORY:additional-error-responses:END -->
+
+    <!-- CAMARA:MANDATORY:request-body-strictness:BEGIN -->
+    # Request body strictness
+
+    This API rejects requests with JSON request bodies that contain properties not declared in this specification, at any nesting level. Unknown properties result in a `400 INVALID_ARGUMENT` response.
+    <!-- CAMARA:MANDATORY:request-body-strictness:END -->
+
     # FAQ's
     (FAQs will be added in a later version of the documentation)
 
@@ -172,10 +156,10 @@ servers:
 #                                     Tags                                #
 ############################################################################
 tags:
-  - name: Unconditional Call Forwarding information retrieval
+  - name: Unconditional Call Forwarding Information Retrieval
     description: Provides information on Unconditional Call Forwarding
      settings for the provided phone number (PhoneNumber)
-  - name: Call Forwarding information retrieval
+  - name: Call Forwarding Information Retrieval
     description: Provides information on Call Forwarding settings for the
      provided phone number (PhoneNumber).
 ############################################################################
@@ -185,7 +169,7 @@ paths:
   /unconditional-call-forwardings:
     post:
       tags:
-        - Unconditional Call Forwarding information retrieval
+        - Unconditional Call Forwarding Information Retrieval
       security:
         - openId:
             - 'call-forwarding-signal:unconditional-call-forwardings:read'
@@ -227,7 +211,7 @@ paths:
   /call-forwardings:
     post:
       tags:
-        - Call Forwarding information retrieval
+        - Call Forwarding Information Retrieval
       security:
         - openId:
             - 'call-forwarding-signal:call-forwardings:read'
@@ -317,6 +301,7 @@ components:
       type: array
       items:
         type: string
+        description: Type of call forwarding service active for the phone number.
         enum:
           - 'inactive'
           - 'unconditional'
@@ -328,10 +313,9 @@ components:
         - 'conditional_busy'
         - 'conditional_no_answer'
       minItems: 1
+      maxItems: 5
     XCorrelator:
-      type: string
-      pattern: ^[a-zA-Z0-9-_:;.\/<>{}]{0,256}$
-      example: "b4333c46-49c0-4f62-80d7-f0ef930f1c46"
+      $ref: "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
     ############################################################################
     #                                 Request                                  #
     ############################################################################
@@ -349,33 +333,12 @@ components:
     #                                 Types                                    #
     ############################################################################
     PhoneNumber:
-      description: A public identifier addressing a telephone subscription.
-       In mobile networks it corresponds to the MSISDN (Mobile Station
-       International Subscriber Directory Number). In order to be globally
-       unique it has to be formatted in international format, according to E.164
-       standard, prefixed with '+'.
-      type: string
-      pattern: '^\+[1-9][0-9]{4,14}$'
-      example: "+123456789"
+      $ref: "../common/CAMARA_common.yaml#/components/schemas/PhoneNumber"
     ############################################################################
     #                                 Responces                                #
     ############################################################################
     ErrorInfo:
-      type: object
-      required:
-        - status
-        - code
-        - message
-      properties:
-        status:
-          type: integer
-          description: HTTP response status code
-        code:
-          type: string
-          description: A human-readable code to describe the error
-        message:
-          type: string
-          description: A human-readable description of what the event represents
+      $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
   responses:
     Generic400:
       description: Bad Request
