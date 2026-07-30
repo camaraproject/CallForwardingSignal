@@ -29,7 +29,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     # The response has to comply with the generic response schema which is part of the spec
-    And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
+    And the response body complies with the OAS schema at "#/components/schemas/UnconditionalCallForwardingSignal"
 
   @call_forwarding_signal_01.1_generic_success_scenario_3-legs
   Scenario: Common validations for any success scenario with 3-legs authentication
@@ -42,7 +42,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
     # The response has to comply with the generic response schema which is part of the spec
-    And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
+    And the response body complies with the OAS schema at "#/components/schemas/UnconditionalCallForwardingSignal"
 
   # phone number defined by phoneNumber (2-legs authentication) and the CFS status for the phone number is known by the network.
   @call_forwarding_signal_02_unconditional_phoneNumber
@@ -53,7 +53,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response body complies with the OAS schema at "/components/schemas/UnconditionalCallForwardingSignal"
+    And the response body complies with the OAS schema at "#/components/schemas/UnconditionalCallForwardingSignal"
     And the response body property "$.active" is one of: ["true", "false"]
 
   # phone number defined by access token and the CFS status for the phone number is known by the network. phoneNumber not set
@@ -82,7 +82,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveUnconditio
 
   @call_forwarding_signal_400.3_C02.01_phone_number_not_schema_compliant
   Scenario: Phone number value does not comply with the schema (with 2-legs authentication)
-    Given the request body property "$.phoneNumber" does not comply with the OAS schema at "/components/schemas/PhoneNumber"
+    Given the request body property "$.phoneNumber" does not comply with the OAS schema at "#/components/schemas/PhoneNumber"
     When the HTTP "POST" request is sent
     Then the response status code is 400
     And the response property "$.status" is 400
