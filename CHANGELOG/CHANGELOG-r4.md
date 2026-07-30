@@ -74,15 +74,15 @@ Changes documented below are compared to version 0.4.0.
 
 ### Changed
 
-* N/A
+* Resolved CAMARA validation warnings (`info.description` aligned with templates, added `maxItems: 5` and description to `CallForwardingSignal` array, `XCorrelator`, `ErrorInfo`, and `PhoneNumber` schemas aligned with common definitions, tag names converted to Title Case) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/229
 
 ### Fixed
 
-* N/A
+* Corrected OAS schema refs and response body assertions in test definitions by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/230
 
 ### Removed
 
-* N/A
+* Removed conflicting 400.2 test case from .feature files by @mohdfarhanakram in https://github.com/camaraproject/CallForwardingSignal/pull/221
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r3.3...r4.1
 
