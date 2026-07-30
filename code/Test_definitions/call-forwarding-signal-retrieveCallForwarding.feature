@@ -1,4 +1,4 @@
-Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveCallForwarding
+Feature: CAMARA Call Forwarding Signal  API, v0.5.0-rc.1 - Operation retrieveCallForwarding
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -10,7 +10,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveCallForwar
   # References to OAS spec schemas refer to schemas specified in call-forwarding-signal.yaml, version vwip
 
   Background: Common call-forwarding-signal setup
-    Given the path "/call-forwarding-signal/vwip/call-forwardings"
+    Given the path "/call-forwarding-signal/v0.5rc1/call-forwardings"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "#/components/schemas/XCorrelator"
