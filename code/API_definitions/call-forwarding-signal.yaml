@@ -71,9 +71,9 @@ info:
 
     The Call Forwarding Signal API provides two endpoints fulfilling the
     following intents:
-    - **unconditional-call-forwardings**: Is the unconditional call fwd service
+    - **check-unconditional-forwarding**: Is the unconditional call fwd service
     active on a specific phone number?
-    - **call-forwardings**: Which is the status of the call forwarding for a
+    - **retrieve-forwardings**: Which is the status of the call forwarding for a
     specific phone number?
     # API Documentation
     ## Details
@@ -82,15 +82,16 @@ info:
 
     The API Consumer can request the API Producer for the status of the
     Unconditional Call Forwarding service using the
-    unconditional-call-forwardings POST method. A boolean, with the information
+    check-unconditional-forwarding POST method. A boolean, with the information
     about the activation status of the call forwarding service, will be
     provided back via the UnconditionalCallForwardingSignal resource.
 
     The API Consumer can also request the API Producer for the generic status of
-    the Call Forwarding service using the call-forwardings POST method. An array
+    the Call Forwarding service using the retrieve-forwardings POST method. An array
     of strings with the information of the type of active call forwarding
     services will be provided back via the CallForwardingSignal resource.
     <!-- CAMARA:MANDATORY:authorization-and-authentication:BEGIN -->
+
     # Authorization and authentication
 
     The "Camara Security and Interoperability Profile" provides details of how an API consumer requests an access token. Please refer to Identity and Consent Management (https://github.com/camaraproject/IdentityAndConsentManagement/) for the released version of the profile.
@@ -101,6 +102,7 @@ info:
     <!-- CAMARA:MANDATORY:authorization-and-authentication:END -->
 
     <!-- CAMARA:MANDATORY:identifying-phone-number-from-access-token:BEGIN -->
+
     # Identifying the phone number from the access token
 
     This API requires the API consumer to identify a phone number as the subject of the API as follows:
@@ -117,6 +119,7 @@ info:
     <!-- CAMARA:MANDATORY:identifying-phone-number-from-access-token:END -->
 
     <!-- CAMARA:MANDATORY:additional-error-responses:BEGIN -->
+
     # Additional CAMARA error responses
 
     The list of error codes in this API specification is not exhaustive. Therefore the API specification MAY not document some non-mandatory error statuses as indicated in `CAMARA API Design Guide`.
@@ -127,6 +130,7 @@ info:
     <!-- CAMARA:MANDATORY:additional-error-responses:END -->
 
     <!-- CAMARA:MANDATORY:request-body-strictness:BEGIN -->
+
     # Request body strictness
 
     This API rejects requests with JSON request bodies that contain properties not declared in this specification, at any nesting level. Unknown properties result in a `400 INVALID_ARGUMENT` response.
@@ -166,18 +170,18 @@ tags:
 #                                     Paths                                #
 ############################################################################
 paths:
-  /unconditional-call-forwardings:
+  /check-unconditional-forwarding:
     post:
       tags:
         - Unconditional Call Forwarding Information Retrieval
       security:
         - openId:
-            - 'call-forwarding-signal:unconditional-call-forwardings:read'
-      summary: Retrieve the information about the status of the
-       unconditional call forwarding service on a phone number (PhoneNumber)
-      description: This endpoint provides information about the status
-       of the unconditional call forwarding, being active or not.
-      operationId: retrieveUnconditionalCallForwarding
+            - 'call-forwarding-signal:unconditional-forwarding:check'
+      summary: Check the status of the unconditional call forwarding
+       service on a phone number (PhoneNumber)
+      description: This endpoint checks the status of the unconditional
+       call forwarding, being active or not.
+      operationId: checkUnconditionalCallForwarding
       parameters:
         - $ref: '#/components/parameters/x-correlator'
       requestBody:
@@ -208,13 +212,13 @@ paths:
           $ref: "#/components/responses/Generic422"
         "429":
           $ref: "#/components/responses/Generic429"
-  /call-forwardings:
+  /retrieve-forwardings:
     post:
       tags:
         - Call Forwarding Information Retrieval
       security:
         - openId:
-            - 'call-forwarding-signal:call-forwardings:read'
+            - 'call-forwarding-signal:forwardings:retrieve'
       summary: Retrieve the information about the type of call forwarding
        service active on a phone number (PhoneNumber)
       description: This endpoint provides information about which type of
@@ -222,7 +226,7 @@ paths:
        active, e.g. conditional and unconditional. This endpoint exceeds
        the main scope of the Call Forwarding Signal API, for this reason
        an error code 501 can be returned.
-      operationId: retrieveCallForwarding
+      operationId: retrieveCallForwardings
       parameters:
         - $ref: '#/components/parameters/x-correlator'
       requestBody:
