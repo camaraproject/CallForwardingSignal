@@ -35,17 +35,8 @@ The API definition(s) are based on
 <summary>Candidate changes (auto-generated from merged PRs)</summary>
 
 ## What's Changed
-* Revert to Wip by @FabrizioMoggio in https://github.com/camaraproject/CallForwardingSignal/pull/210
-* [bulk] Sync Release Information section (2025-12-12-001) by @hdamker-bot in https://github.com/camaraproject/CallForwardingSignal/pull/213
-* Revert to wip test files by @FabrizioMoggio in https://github.com/camaraproject/CallForwardingSignal/pull/214
-* [bulk] Add release-plan.yaml (2026-02-23-001) by @hdamker-bot in https://github.com/camaraproject/CallForwardingSignal/pull/217
-* fix: remove conflicting 400.2 test case from .feature files by @mohdfarhanakram in https://github.com/camaraproject/CallForwardingSignal/pull/221
-* [bulk] Enable release automation and validation by @camara-release-automation[bot] in https://github.com/camaraproject/CallForwardingSignal/pull/223
-* Release Plan update for Sync26 by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/225
-* Sync common files from Commonalities r4.3 by @camara-release-automation[bot] in https://github.com/camaraproject/CallForwardingSignal/pull/226
-* fix: resolve CAMARA validation warnings by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/229
-* fix: correct OAS schema refs and response body assertions in test definitions by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/230
-* fix: rename endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236
+
+
 
 ## New Contributors
 * @mohdfarhanakram made their first contribution in https://github.com/camaraproject/CallForwardingSignal/pull/221
@@ -67,7 +58,7 @@ Changes documented below are compared to version 0.4.0.
 
 ### Breaking changes
 
-* N/A
+* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236
 
 ### Added
 
@@ -75,15 +66,19 @@ Changes documented below are compared to version 0.4.0.
 
 ### Changed
 
-* N/A
+* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236
 
 ### Fixed
 
-* N/A
+* resolved CAMARA validation warnings by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/229
+* corrected OAS schema refs and response body assertions in test definitions by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/230
 
 ### Removed
 
-* N/A
+*  removed conflicting 400.2 test case from .feature files by @mohdfarhanakram in https://github.com/camaraproject/CallForwardingSignal/pull/221
+
+## New Contributors
+* @mohdfarhanakram made their first contribution in https://github.com/camaraproject/CallForwardingSignal/pull/221
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r3.3...r4.1
 
