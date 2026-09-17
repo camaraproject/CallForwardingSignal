@@ -58,7 +58,16 @@ Changes documented below are compared to version 0.4.0.
 
 ### Breaking changes
 
-* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236
+* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - changes applied:
+
+| | Old | New |
+|---|---|---|
+| Path | `POST /unconditional-call-forwardings` | `POST /check-unconditional-forwarding` |
+| operationId | `retrieveUnconditionalCallForwarding` | `checkUnconditionalCallForwarding` |
+| Scope | `call-forwarding-signal:unconditional-call-forwardings:read` | `call-forwarding-signal:unconditional-forwarding:check` |
+| Path | `POST /call-forwardings` | `POST /retrieve-forwardings` |
+| operationId | `retrieveCallForwarding` | `retrieveCallForwardings` |
+| Scope | `call-forwarding-signal:call-forwardings:read` | `call-forwarding-signal:forwardings:retrieve` |
 
 ### Added
 
@@ -66,7 +75,7 @@ Changes documented below are compared to version 0.4.0.
 
 ### Changed
 
-* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236
+* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - see **Breaking changes**
 
 ### Fixed
 
