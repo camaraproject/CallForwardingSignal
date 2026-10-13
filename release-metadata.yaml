@@ -1,0 +1,13 @@
+repository:
+  repository_name: CallForwardingSignal
+  release_tag: r4.2
+  release_type: pre-release-rc
+  release_date: null
+  src_commit_sha: d268e8ce34d96491c3e2a0941aed63f75e08cba9
+apis:
+- api_name: call-forwarding-signal
+  api_version: 0.5.0-rc.2
+  api_title: Call Forwarding Signal
+dependencies:
+  commonalities_release: r4.4 (0.9.0)
+  identity_consent_management_release: r4.2 (0.5.0)
