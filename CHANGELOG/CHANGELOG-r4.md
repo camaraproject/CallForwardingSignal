@@ -65,7 +65,7 @@ Changes documented below are compared to version 0.5.0-rc.1.
 
 ### Changed
 
-* N/A
+* Updated additional error responses mandatory text by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/242
 
 ### Fixed
 
