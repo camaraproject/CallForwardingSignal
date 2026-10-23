@@ -332,12 +332,7 @@ components:
       type: object
       properties:
         phoneNumber:
-          $ref: "#/components/schemas/PhoneNumber"
-    ############################################################################
-    #                                 Types                                    #
-    ############################################################################
-    PhoneNumber:
-      $ref: "../common/CAMARA_common.yaml#/components/schemas/PhoneNumber"
+          $ref: "../common/CAMARA_common.yaml#/components/schemas/PhoneNumber"
     ############################################################################
     #                                 Responces                                #
     ############################################################################
