@@ -183,7 +183,7 @@ paths:
        call forwarding, being active or not.
       operationId: checkUnconditionalCallForwarding
       parameters:
-        - $ref: '#/components/parameters/x-correlator'
+        - c
       requestBody:
         content:
           application/json:
@@ -195,7 +195,7 @@ paths:
           description: OK.
           headers:
             x-correlator:
-              $ref: '#/components/headers/x-correlator'
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -228,7 +228,7 @@ paths:
        an error code 501 can be returned.
       operationId: retrieveCallForwardings
       parameters:
-        - $ref: '#/components/parameters/x-correlator'
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       requestBody:
         content:
           application/json:
@@ -240,7 +240,7 @@ paths:
           description: OK.
           headers:
             x-correlator:
-              $ref: '#/components/headers/x-correlator'
+              $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
           content:
             application/json:
               schema:
@@ -265,21 +265,8 @@ paths:
 components:
   securitySchemes:
     openId:
-      description: to support Consent Management
-      type: openIdConnect
-      openIdConnectUrl: https://example.com/.well-known/openid-configuration
-  parameters:
-    x-correlator:
-      name: x-correlator
-      in: header
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
-  headers:
-    x-correlator:
-      description: Correlation id for the different services
-      schema:
-        $ref: "#/components/schemas/XCorrelator"
+      $ref: "../common/CAMARA_common.yaml#/components/securitySchemes/openId"
+
   ############################################################################
   #                                 Resources                                #
   ############################################################################
@@ -343,7 +330,7 @@ components:
       description: Bad Request
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -369,7 +356,7 @@ components:
       description: Unauthorized
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -396,7 +383,7 @@ components:
       description: Forbidden
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -423,7 +410,7 @@ components:
       description: Not found
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -456,7 +443,7 @@ components:
       description: Unprocessable Content
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -502,7 +489,7 @@ components:
       description: Too Many Requests
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
@@ -536,7 +523,7 @@ components:
       description: Not Implemented
       headers:
         x-correlator:
-          $ref: "#/components/headers/x-correlator"
+          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
       content:
         application/json:
           schema:
