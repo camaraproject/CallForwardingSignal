@@ -41,9 +41,9 @@ Incubating API Repository to evolve and maintain the definitions and documentati
 
 ### Upcoming Release Preview
 
-* Pre-release: [r4.1](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r4.1) (release candidate)
-  * **call-forwarding-signal 0.5.0-rc.1**
-  [[YAML]](https://github.com/camaraproject/CallForwardingSignal/blob/r4.1/code/API_definitions/call-forwarding-signal.yaml)  [[ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r4.1/code/API_definitions/call-forwarding-signal.yaml&nocors)  [[Swagger]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r4.1/code/API_definitions/call-forwarding-signal.yaml)
+* Pre-release: [r4.2](https://github.com/camaraproject/CallForwardingSignal/releases/tag/r4.2) (release candidate)
+  * **call-forwarding-signal 0.5.0-rc.2**
+  [[YAML]](https://github.com/camaraproject/CallForwardingSignal/blob/r4.2/code/API_definitions/call-forwarding-signal.yaml)  [[ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r4.2/code/API_definitions/call-forwarding-signal.yaml&nocors)  [[Swagger]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/CallForwardingSignal/r4.2/code/API_definitions/call-forwarding-signal.yaml)
 
 
 _The above section is automatically synchronized by CAMARA project-administration._
