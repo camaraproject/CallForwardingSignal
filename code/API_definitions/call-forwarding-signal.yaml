@@ -183,7 +183,7 @@ paths:
        call forwarding, being active or not.
       operationId: checkUnconditionalCallForwarding
       parameters:
-        - c
+        - $ref: "../common/CAMARA_common.yaml#/components/parameters/x-correlator"
       requestBody:
         content:
           application/json:
@@ -305,8 +305,7 @@ components:
         - 'conditional_no_answer'
       minItems: 1
       maxItems: 5
-    XCorrelator:
-      $ref: "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
+
     ############################################################################
     #                                 Request                                  #
     ############################################################################
