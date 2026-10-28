@@ -160,9 +160,9 @@ servers:
 #                                     Tags                                #
 ############################################################################
 tags:
-  - name: Unconditional Call Forwarding Information Retrieval
+  - name: Unconditional Call Forwarding Information Check
     description: Provides information on Unconditional Call Forwarding
-     settings for the provided phone number (PhoneNumber)
+     status for the provided phone number (PhoneNumber)
   - name: Call Forwarding Information Retrieval
     description: Provides information on Call Forwarding settings for the
      provided phone number (PhoneNumber).
@@ -173,7 +173,7 @@ paths:
   /check-unconditional-forwarding:
     post:
       tags:
-        - Unconditional Call Forwarding Information Retrieval
+        - Unconditional Call Forwarding Information Check
       security:
         - openId:
             - 'call-forwarding-signal:unconditional-forwarding:check'
