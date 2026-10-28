@@ -70,7 +70,9 @@ Changes documented below are compared to version 0.5.0-rc.1.
 
 ### Changed
 
-* N/A
+* Update additional error responses mandatory text by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/242
+* Refactor error response references in API definition - replacing PR#250 by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/252
+* Update common references in call-forwarding-signal.yaml -  replacing PR#251 by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/253
 
 ### Fixed
 
