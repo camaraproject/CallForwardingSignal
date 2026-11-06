@@ -203,7 +203,7 @@ paths:
         "400":
           $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequest400'
         '404':
-          $ref: '#/components/responses/Generic404'
+          $ref: "../common/CAMARA_common.yaml#/components/responses/IdentifierNotFound404"
         "401":
           $ref: "../common/CAMARA_common.yaml#/components/responses/Unauthenticated401"
         "403":
@@ -211,7 +211,7 @@ paths:
         "422":
           $ref: "../common/CAMARA_common.yaml#/components/responses/PhoneNumberIdentifier422"
         "429":
-          $ref: "#/components/responses/Generic429"
+          $ref: "#/components/responses/TooManyRequestsOrQuota429"
   /retrieve-forwardings:
     post:
       tags:
@@ -248,7 +248,7 @@ paths:
         "400":
           $ref: '../common/CAMARA_common.yaml#/components/responses/BadRequest400'
         '404':
-          $ref: '#/components/responses/Generic404'
+          $ref: "../common/CAMARA_common.yaml#/components/responses/IdentifierNotFound404"
         "401":
           $ref: "../common/CAMARA_common.yaml#/components/responses/Unauthenticated401"
         "403":
@@ -256,9 +256,9 @@ paths:
         "422":
           $ref: "../common/CAMARA_common.yaml#/components/responses/PhoneNumberIdentifier422"
         "429":
-          $ref: "#/components/responses/Generic429"
+          $ref: "#/components/responses/TooManyRequestsOrQuota429"
         "501":
-          $ref: "#/components/responses/Generic501"
+          $ref: "#/components/responses/NotImplemented501"
 ############################################################################
 #                                 Components                               #
 ############################################################################
@@ -325,40 +325,7 @@ components:
     ErrorInfo:
       $ref: "../common/CAMARA_common.yaml#/components/schemas/ErrorInfo"
   responses:
-    Generic404:
-      description: Not found
-      headers:
-        x-correlator:
-          $ref: "../common/CAMARA_common.yaml#/components/headers/x-correlator"
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: "#/components/schemas/ErrorInfo"
-              - type: object
-                properties:
-                  status:
-                    enum:
-                      - 404
-                  code:
-                    enum:
-                      - NOT_FOUND
-                      - IDENTIFIER_NOT_FOUND
-          examples:
-            GENERIC_404_NOT_FOUND:
-              description: Resource is not found
-              value:
-                status: 404
-                code: NOT_FOUND
-                message: The specified resource is not found.
-            GENERIC_404_IDENTIFIER_NOT_FOUND:
-              description: Call forwarding check can't be done because the
-                  phone number is unknown.
-              value:
-                status: 404
-                code: IDENTIFIER_NOT_FOUND
-                message: Device identifier not found.
-    Generic429:
+    TooManyRequestsOrQuota429:
       description: Too Many Requests
       headers:
         x-correlator:
@@ -379,20 +346,10 @@ components:
                       - TOO_MANY_REQUESTS
           examples:
             GENERIC_429_QUOTA_EXCEEDED:
-              description: Request is rejected due to exceeding a
-                business quota limit
-              value:
-                status: 429
-                code: QUOTA_EXCEEDED
-                message: Out of resource quota.
+              $ref: "../common/CAMARA_common.yaml#/components/examples/GENERIC_429_QUOTA_EXCEEDED"
             GENERIC_429_TOO_MANY_REQUESTS:
-              description: Access to the API has been temporarily
-                blocked due to rate or spike arrest limits being reached
-              value:
-                status: 429
-                code: TOO_MANY_REQUESTS
-                message: Rate limit reached.
-    Generic501:
+              $ref: "../common/CAMARA_common.yaml#/components/examples/GENERIC_429_TOO_MANY_REQUESTS"
+    NotImplemented501:
       description: Not Implemented
       headers:
         x-correlator:
@@ -412,10 +369,4 @@ components:
                       - NOT_IMPLEMENTED
           examples:
             GENERIC_501_NOT_IMPLEMENTED:
-              description: Service not implemented. The use of this code
-                should be avoided as far as possible to get the objective
-                to reach aligned implementations
-              value:
-                status: 501
-                code: NOT_IMPLEMENTED
-                message: This functionality is not implemented yet.
+              $ref: "../common/CAMARA_common.yaml#/components/examples/GENERIC_501_NOT_IMPLEMENTED"
