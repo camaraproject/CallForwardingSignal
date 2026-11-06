@@ -131,7 +131,6 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveCallForwar
     And the response property "$.message" contains a user friendly text
 
   # Generic 404 error - unknown phone number
-  
   @call_forwarding_signal_404.2_C02.02_phone_number_not_found
   Scenario: Phone number not found
     Given the header "Authorization" is set to a valid access token which does not identify a single phone number
