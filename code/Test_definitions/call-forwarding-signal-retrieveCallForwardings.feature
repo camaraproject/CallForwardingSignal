@@ -7,7 +7,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveCallForwar
   # * A device object identified by a phone number for which the call forwarding service status could be retrieved
   # * A device object identified by a phone number for which the call forwarding service status could not be retrieved
   #
-  # References to OAS spec schemas refer to schemas specified in call-forwarding-signal.yaml, version vwip
+  # References to OAS spec schemas refer to schemas specified in call-forwarding-signal.yaml
 
   Background: Common call-forwarding-signal setup
     Given the path "/call-forwarding-signal/vwip/retrieve-forwardings"
@@ -131,16 +131,7 @@ Feature: CAMARA Call Forwarding Signal  API, vwip - Operation retrieveCallForwar
     And the response property "$.message" contains a user friendly text
 
   # Generic 404 error - unknown phone number
-  @call_forwarding_signal_404.1_call_forwarding_for_unknown_phoneNumber_2-legs
-  Scenario: retrieve call forwarding signal on a properly formatted phone number unknown by the network
-    Given the request body property "$.phoneNumber" is set to a valid phone number for which the call forwarding status could not be retrieved
-    And the request body is set to a valid request body
-    When the HTTP "POST" request is sent
-    Then the response status code is 404
-    And the response property "$.code" is "IDENTIFIER_NOT_FOUND"
-    And the response property "$.message" contains a user friendly text
-
-  @call_forwarding_signal_404.2_call_forwarding_for_unknown_phoneNumber_from_access_token_3-legs_C02.02_phone_number_not_found
+  @call_forwarding_signal_404.2_C02.02_phone_number_not_found
   Scenario: Phone number not found
     Given the header "Authorization" is set to a valid access token which does not identify a single phone number
     And the request body property "$.phoneNumber" is compliant with the schema but does not identify a valid phone number

@@ -35,7 +35,7 @@ info:
 
     [**Alert Interception**](https://github.com/camaraproject/CallForwardingSignal/discussions/3#discussioncomment-8701847)
 
-    [**Call Forwarding Verification**](https://github.com/camaraproject/CallForwarding\Signal/discussions/3#discussioncomment-8915595)
+    [**Call Forwarding Verification**](https://github.com/camaraproject/CallForwardingSignal/discussions/3#discussioncomment-8915595)
     # Quick Start
     The Call Forwarding Signal API is a REST API based on the
     CreateCallForwardingSignal resource.
@@ -51,7 +51,7 @@ info:
     This is the end user phone number. The Call Forwarding Signal API verifies
     if a call forwarding
     service is active on this phone number. Note: this parameter must be
-    must be provided/valued only in case of two-legged authentication.
+    provided/valued only in case of two-legged authentication.
     In case of three-legged authentication the phone number is retrieved by
     the access token.
 
