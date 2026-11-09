@@ -81,7 +81,16 @@ Changes documented below are compared to version 0.4.0.
 
 ### Breaking changes
 
-* N/A
+* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - changes applied:
+
+| | Old | New |
+|---|---|---|
+| Path | `POST /unconditional-call-forwardings` | `POST /check-unconditional-forwarding` |
+| operationId | `retrieveUnconditionalCallForwarding` | `checkUnconditionalCallForwarding` |
+| Scope | `call-forwarding-signal:unconditional-call-forwardings:read` | `call-forwarding-signal:unconditional-forwarding:check` |
+| Path | `POST /call-forwardings` | `POST /retrieve-forwardings` |
+| operationId | `retrieveCallForwarding` | `retrieveCallForwardings` |
+| Scope | `call-forwarding-signal:call-forwardings:read` | `call-forwarding-signal:forwardings:retrieve` |
 
 ### Added
 
@@ -89,15 +98,22 @@ Changes documented below are compared to version 0.4.0.
 
 ### Changed
 
-* N/A
+* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - see **Breaking changes**
+* Update additional error responses mandatory text by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/242
+* Refactor error response references in API definition to use common definitions and examples by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/252
+* Renamed operation tag `Unconditional Call Forwarding Information Retrieval` to `Unconditional Call Forwarding Information Check` by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/252
+* Use of common references (phoneNumber, x-correlator, securitySchemes) in API definition by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/253
+* Align 404, 429 and 501 error responses with Commonalities r4.4 by @hdamker in https://github.com/camaraproject/CallForwardingSignal/pull/257
 
 ### Fixed
 
-* N/A
+* resolved CAMARA validation warnings by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/229
+* corrected OAS schema refs and response body assertions in test definitions by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/230
+* Minor corrections in API description and test definitions by @bigludo7 in https://github.com/camaraproject/CallForwardingSignal/pull/258
 
 ### Removed
 
-* N/A
+*  removed conflicting 400.2 test case from .feature files by @mohdfarhanakram in https://github.com/camaraproject/CallForwardingSignal/pull/221
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r3.3...r4.3
 
@@ -205,4 +221,3 @@ Changes documented below are compared to version 0.4.0.
 * @mohdfarhanakram made their first contribution in https://github.com/camaraproject/CallForwardingSignal/pull/221
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r3.3...r4.1
-
