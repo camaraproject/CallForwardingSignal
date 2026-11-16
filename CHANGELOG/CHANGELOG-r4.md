@@ -110,7 +110,7 @@ Changes documented below are compared to version 0.4.0.
 
 ### Removed
 
-*  removed conflicting 400.2 test case from .feature files by @mohdfarhanakram in https://github.com/camaraproject/CallForwardingSignal/pull/221
+* Removed conflicting 400.2 test case from .feature files by @mohdfarhanakram in https://github.com/camaraproject/CallForwardingSignal/pull/221
 
 **Full Changelog**: https://github.com/camaraproject/CallForwardingSignal/compare/r3.3...r4.3
 
