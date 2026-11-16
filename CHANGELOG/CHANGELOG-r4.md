@@ -81,7 +81,7 @@ Changes documented below are compared to version 0.4.0.
 
 ### Breaking changes
 
-* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - changes applied:
+* Renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - changes applied:
 
 | | Old | New |
 |---|---|---|
