@@ -98,7 +98,7 @@ Changes documented below are compared to version 0.4.0.
 
 ### Changed
 
-* renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - see **Breaking changes**
+* Renamed endpoints to comply with Commonalities r4.3 (issue #235) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/236 - see **Breaking changes**
 * Update additional error responses mandatory text by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/242
 * Refactor error response references in API definition to use common definitions and examples by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/252
 * Renamed operation tag `Unconditional Call Forwarding Information Retrieval` to `Unconditional Call Forwarding Information Check` by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/252
