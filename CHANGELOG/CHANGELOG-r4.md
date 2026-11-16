@@ -106,7 +106,6 @@ Changes documented below are compared to version 0.4.0.
 
 ### Fixed
 
-* resolved CAMARA validation warnings by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/229
 * corrected OAS schema refs and response body assertions in test definitions by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/230
 * Minor corrections in API description and test definitions by @bigludo7 in https://github.com/camaraproject/CallForwardingSignal/pull/258
 
