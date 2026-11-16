@@ -106,8 +106,7 @@ Changes documented below are compared to version 0.4.0.
 
 ### Fixed
 
-* corrected OAS schema refs and response body assertions in test definitions by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/230
-* Minor corrections in API description and test definitions by @bigludo7 in https://github.com/camaraproject/CallForwardingSignal/pull/258
+* Fixed the broken link to the Call Forwarding Verification use case and duplicated words in `info.description`, and corrected the test definitions (OAS schema references, response body assertions, duplicate 404 scenario and its tag) by @rartych in https://github.com/camaraproject/CallForwardingSignal/pull/230 and @bigludo7 in https://github.com/camaraproject/CallForwardingSignal/pull/258
 
 ### Removed
 
